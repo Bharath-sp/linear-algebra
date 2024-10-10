@@ -1,0 +1,239 @@
+= Properties of Vector Spaces =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Linear Combination ==
+Consider the Euclidean space stem:[(\mathbb{R}^n, + , \cdot)].
+
+Linear combination of two vectors stem:[\mathbf{v}] and stem:[\mathbf{v}] is a vector of the form stem:[a\mathbf{v} + b \mathbf{w}], where stem:[a,b \in \mathbb{R}]. By the axioms, we can prove that the resulting vector also belongs to the same vector space.
+
+* In the space with stem:[n=2], let's take a single vector stem:[\mathbf{v}] and form a set with all the possible linear combinations of this vector. stem:[S = \{\alpha \mathbf{v} \, | \, \alpha \in \mathbb{R}\}]. This set represents a line.
+
+* In the space with stem:[n=3], let's take two vectors stem:[\mathbf{v}_1 = [2,1,0\]^\top] and stem:[\mathbf{v}_2 = [1,2,0\]^\top] and form a set with all the possible linear combinations of these two vectors. stem:[S = \{\alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2  \, | \, \alpha_1, \alpha_2 \in \mathbb{R}\}]. This set represents the stem:[xy-] plane.
+
+== Linear Span ==
+Let stem:[\mathbf{v}_1, \dots, \mathbf{v}_n] be vectors. And let stem:[\alpha_1, \dots, \alpha_n] be scalars. Then stem:[\alpha_1 \mathbf{v}_1 + \dots + \alpha_n \mathbf{v}_n] is called linear combination of stem:[\mathbf{v}_1, \dots, \mathbf{v}_n].
+
+Now let's take a set stem:[S] with some number of vectors in it. The linear span of stem:[S] is the set of all possible linear combinations of the vectors in stem:[S]. If stem:[S = \{\mathbf{v}_1, \dots, \mathbf{v}_n\} \subseteq \mathbb{V}], then
+
+[stem]
+++++
+\text{LinearSpan}(S) = \{\alpha_1 \mathbf{v}_1 + \dots + \alpha_n \mathbf{v}_n: \alpha_1, \dots, \alpha_n \in \mathbb{R} \}
+++++
+
+Take a subset stem:[S] of vectors from stem:[\mathbb{V}] (Not necessarily to be a subspace), stem:[S] is a non-empty subset of stem:[\mathbb{V}]. Fix the vectors and vary the scalars.
+Put all the resulting vectors in a set. This set is called the linear span of the set stem:[S], denoted by stem:[L(S)].
+
+NOTE: The span of the empty set stem:[S] is defined to be stem:[\{\mathbf{0}\}].
+
+Linear span of a set is always closed under stem:[\+] and stem:[\cdot]. This follows directly from the definition. Then the triplet stem:[(L(S), +, \cdot)] forms a valid vector space. This space is a subset of the original vector space stem:[\mathbb{V}]. The operations stem:[+, \cdot] are the same as in the original space. Hence, it is called as a *subspace* of the original space.
+
+A set closed under linear combination (an operation which is a combination of stem:[+] and stem:[\cdot]) is called a linear set or linear variety. So the set stem:[L(S)] is a linear set.
+
+== Spanning Set ==
+We can have a set of vectors stem:[S] which has lesser number of vectors than the space stem:[\mathbb{V}]. But the linear span of stem:[S] gives us the set stem:[\mathbb{V}]. Such sets are called spanning sets. Given only these set of vectors, we can re-build our whole vector space stem:[\mathbb{V}]. For example,
+
+Let's take stem:[\mathbb{V}=\mathbb{R}^2] and stem:[S=\{(1,2), (2,1)\}]. Here stem:[S \ne \mathbb{V}]. But we can see stem:[L(S)= \mathbb{V}]. So the set stem:[S] is a spanning set. Such set spans the entire original vector space.
+
+IMPORTANT: Any superset of a spanning set is also a spanning set.
+
+== Linear Dependence ==
+A set stem:[S] of vectors stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n \}] from the vector space is said to be linearly dependent if there exists scalars stem:[\alpha_1, \dots, \alpha_n] (not all zero) such that stem:[\alpha_1 \mathbf{v}_1 + \dots + \alpha_n \mathbf{v}_n = \mathbf{0}].
+
+If the equation is satisfied only for stem:[\alpha_1 = \dots = \alpha_n = 0], then stem:[\mathbf{v}_1, \dots, \mathbf{v}_n] are called linearly independent vectors. More formally, a set of vectors is linearly independent iff
+
+[stem]
+++++
+\alpha_1 \mathbf{v}_1 + \dots + \alpha_n \mathbf{v}_n = \mathbf{0} \implies \alpha_i = 0 \forall i
+++++
+
+For example, the set stem:[\{(1,2), (2,1\}] is linearly independent. If the linear combination of these vectors has to be zero, then it should be the trivial linear combination, ie., all the stem:[\alpha_i]'s should be zero.
+
+From this definition of linear independence, we can come up with two ways of defining linear dependence.
+
+One way is that: when the set of vectors is dependent, we can write at least one of these vectors as a linear combination of other vectors. From the definition, when the set of vectors is dependent, there exists at least one stem:[\alpha_i \ne 0] such that stem:[\sum_j \alpha_j \mathbf{v}_j = \mathbf{0}]. Then,
+
+[stem]
+++++
+\begin{align*}
+\alpha_i \mathbf{v}_i & = - \sum_{j \ne i} \alpha_j \mathbf{v}_j \\
+\mathbf{v}_i & = - \sum_{j \ne i} \frac{\alpha_j}{\alpha_i} \mathbf{v}_j && \text{ as } \alpha_i \ne 0\\ 
+\end{align*}
+++++
+
+Another way to define linear dependence is that a vector in the vector space (any vector) will have multiple representations when expressed as linear combinations of vectors in stem:[S]. For example, say our set has three vectors stem:[(2,1), (1,2), (-1,1)]. Then a vector stem:[(1,1)] can be represented as:
+
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix} 
+1 \\ 
+1
+\end{bmatrix} & = \frac{1}{3}  \begin{bmatrix} 
+2 \\ 
+1
+\end{bmatrix} + \frac{1}{3}  \begin{bmatrix} 
+1 \\ 
+2
+\end{bmatrix} + 0 \begin{bmatrix} 
+-1 \\ 
+1
+\end{bmatrix} \\
+\\
+& = 0 \begin{bmatrix} 
+2 \\ 
+1
+\end{bmatrix} + \frac{2}{3}  \begin{bmatrix} 
+1 \\ 
+2
+\end{bmatrix} + \frac{-1}{3} \begin{bmatrix} 
+-1 \\ 
+1
+\end{bmatrix}
+\end{align*}
+++++
+
+and so on. In general, say we have a vector stem:[\mathbf{w}], which can be represented in two ways:
+
+[stem]
+++++
+\begin{align*}
+\mathbf{w} & = \lambda_1 \mathbf{v}_1 + \dots + \lambda_n \mathbf{v}_n \\
+\mathbf{w} & = \mu_1 \mathbf{v}_1 + \dots + \mu_n \mathbf{v}_n && \text{ not all } \lambda_i = \mu_i\\
+
+\iff & (\lambda_1 - \mu_1) \mathbf{v}_1 + \dots + (\lambda_n - \mu_n) \mathbf{v}_n = \mathbf{0} && \text{ not all } (\lambda_i - \mu_i) = 0 \\
+\iff & \rho_1 \mathbf{v}_1 + \dots + \rho_n \mathbf{v}_n = \mathbf{0} && \text{ not all } \rho_i = 0 \\
+\end{align*}
+++++
+
+Which is a contradiction to our definition of linear independence. Hence we can say that the set of vectors stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n \}] is linearly dependent.
+
+== Basis ==
+A spanning set which has linearly independent set of vectors gives the best efficiency of representing the original vector space stem:[\mathbb{V}]. Such sets are called as basis of stem:[\mathbb{V}]. Consider a subset of stem:[\mathbb{V}], say stem:[S = \{\mathbf{v}_1, \dots, \mathbf{v}_n \} ] of vectors. The set stem:[S] is said to be basis of stem:[\mathbb{V}] if it has the following two properties:
+
+* stem:[S] spans stem:[\mathbb{V}], i.e, stem:[S] is a spanning set.
+* stem:[S] is linearly independent.
+
+*Examples:*
+
+Consider stem:[\mathbb{V} = \mathbb{R}^2].
+
+* The set of vectors stem:[\{(1,2), (2,1), (-1,1)\}] is a spanning set, but not linearly independent. Hence the set is not a basis.
+* The set of vectors stem:[\{(1,2), (2,1)\}] is a spanning set, and linearly independent. Hence the set is a basis of stem:[\mathbb{V}].
+* The set of vectors stem:[\{(1,0), (0,1)\}] is a spanning set, and linearly independent. Hence this set is also a basis of stem:[\mathbb{V}].
+
+There can be many basis for a vector space stem:[\mathbb{V}].
+
+== Dimension of a Vector Space ==
+
+*Theorem 1:* Any spanning set (with linearly dependent or independent vectors) will always have equal or more number of elements than any basis, i.e., size of the spanning set is stem:[\geq] to the size of the basis set.
+
+Say the spanning set has stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_p\}] and basis set has stem:[\{\mathbf{b}_1, \dots, \mathbf{b}_q\}] (none of the vectors are common). Now we need to show that stem:[p \geq q].
+
+*Theorem 2:* Any basis of a vector space will have the same cardinality, i.e., the same number of elements.
+
+Proof:
+
+Take two bases stem:[B_1] and stem:[B_2] of the vector space. A basis is a spanning set with linearly independent vectors. From theorem 1, we can say that
+
+* stem:[B_1] is a spanning set so it has equal or more number of elements than stem:[B_2].
+* stem:[B_2] is also a spanning set so it has equal or more number of elements than stem:[B_1].
+
+This proves that stem:[B_1] and stem:[B_2] should have the same number of elements.
+
+*How to construct a basis:*
+
+Say we have a linearly dependent set of vectors, stem:[D]. This means, there exists at least one vector stem:[\mathbf{d}_i \in D] which can be written as linear combinations of others. So we can say that stem:[\mathbf{d}_i \in \text{LinearSpan}(D \setminus \{\mathbf{d}_i\})].
+
+And we note that stem:[\text{LinearSpan}(D) = \text{LinearSpan}(D \setminus \{\mathbf{d}_i\})].
+
+* Start with a (finite) spanning set. Let's us remove redundant element one by one from this spanning set such that the span doesn't change. If we have stem:[\mathbf{0}], we can remove it. We can remove a vector (any vetor) which can be written as linear combinations of others.
+* On doing this, we stop at a point where all the vectors in our spanning set will be linearly independent.
+* The set where we stop forms the basis of the given vector space.
+
+The common cardinality of all such bases is called as the *dimensionality* of the vector space.
+
+[NOTE]
+====
+The dimensionality of zero set stem:[\{\mathbf{0}\}] is 0.
+
+A vector by itself doesn't have a dimension. A subspace/space has a dimension. For instance, stem:[\mathbb{R}^3] has dimension 3 because we can find in it a linearly independent set with three elements, but no larger linearly independent set.
+
+What's the largest linearly independent set in stem:[\{\mathbf{0}\}]? The only subsets in it are the empty set and the whole set. But any set containing the zero vector is linearly dependent; conversely, the empty set is certainly linearly independent (because we can't find a zero linear combination with non zero coefficients out of its elements). So the only linearly independent set in stem:[\{\mathbf{0}\}] is the empty set that has zero elements.
+====
+
+If the basis has finite number of elements, then it is a finite-dimensional vector space. If there is no spanning set with finite number of elements, then it is called infinite-dimensional vector space.
+
+*Examples:*
+
+image::.\images\linear_span.png[align='center', 800, 400]
+
+Left side:
+
+What is the dimensionality of the linear span of these two vectors?
+
+Given a set of two vectors stem:[\{(2,1,0), (1,2,0)\}]. Linear span of these vectors gives the whole stem:[xy-]plane. What is the dimensionality of this plane? The vectors in the given set span the plane, hence it is a spanning set of the stem:[xy-]plane. The vectors are also linearly independent. Hence the set forms the basis of the stem:[\mathbb{R}^2] space (the stem:[xy-]plane). Hence, the dimensionality of the linear span of these vectors is 2.
+
+Right side:
+
+What is the dimensionality of this set? The set stem:[S] consists of vectors inside the disk (points on the boundary are excluded).
+
+Here we cannot define the dimensionality. Dimensionlity is defined only for linear sets. This set is not a linear set. If we take any two points in set, and do linear combination of them, the result may lie outside the set, i.e., the set is not closed under linear combinations. We define the dimensionality of such sets based on linear set.
+
+[stem]
+++++
+dim(S) = dim{(\text{LinearSpan(S))}}
+++++
+
+The linear span of the vectors in set stem:[S] gives the entire stem:[\mathbb{R}^2]. The dimensionality of stem:[\mathbb{R}^2] is 2. Therefore, the dimensionality of set stem:[S] is 2.
+
+== Partitions of a Space ==
+Say we have a vector space stem:[\mathbb{V}], which can be written as stem:[\mathbb{V}=\mathbb{V}_1 + \mathbb{V}_2].
+
+Here stem:[\mathbb{V}, \mathbb{V}_1, \mathbb{V}_2] are all linear sets, and stem:[+] denotes the set addition. The set addition stem:[\mathbb{V}_1 + \mathbb{V}_2] is defined as the set of all vectors stem:[\{v_1 + v_2 \, | \, \forall v_1 \in \mathbb{V}_1, v_2 \in \mathbb{V}_2\}], i.e, we add the elements of stem:[\mathbb{V}_1] with the elements of stem:[\mathbb{V}_2] - all possible pair-wise vector addition.
+
+For example, we can write stem:[\mathbb{R}^2] (which is a set of all possible points in stem:[\mathbb{R}^2]) as addition of two linear sets.
+
+[stem]
+++++
+\begin{align*}
+\mathbb{V}_1 & = \left\{ \lambda \begin{bmatrix} 
+1 \\ 
+0 \\
+0
+\end{bmatrix} \, \big| \, \lambda \in \mathbb{R} \right\}  \\
+\\
+\mathbb{V}_2 & = \left\{ \lambda \begin{bmatrix} 
+0 \\ 
+1 \\
+0
+\end{bmatrix} + \mu \begin{bmatrix} 
+0 \\ 
+0 \\
+1
+\end{bmatrix} \, \big| \, \lambda, \mu \in \mathbb{R} \right\}  \\
+\end{align*}
+++++
+
+image::.\images\partitions_r3.png[align='center', 600, 400]
+
+By adding elements in these two sets, we can get any vector in stem:[\mathbb{R}^3]. The sets stem:[\mathbb{V}_1] and stem:[\mathbb{V}_2] forms a partition of stem:[\mathbb{R}^3], i.e, their intersection is stem:[\{\mathbf{0}\}] (the additive identity vector) and they together form the entire stem:[\mathbb{R}^3]. For such sets, we can see that
+
+[stem]
+++++
+dim(\mathbb{V}) = dim(\mathbb{V}_1) + dim(\mathbb{V}_2)
+++++
+
+NOTE: The sets stem:[\mathbb{V}_1] and stem:[\mathbb{V}_2] are in some sense complementary to each other, i.e., their intersection is just stem:[\{\mathbf{0}\}]. This complementary is in linear combination sense.
+
+In general, when we have two sets stem:[\mathbb{V}_1] and stem:[\mathbb{V}_2] whose intersection is not just stem:[\{\mathbf{0}\}] but some non-empty set. In such cases,
+
+[stem]
+++++
+dim(\mathbb{V}) = dim(\mathbb{V}_1) + dim(\mathbb{V}_2) - dim(\mathbb{V}_1 \cap \mathbb{V}_2)
+++++
+
