@@ -7,19 +7,19 @@
 :toc:
 
 == What is a Vector Space? ==
-We will define a vector space to be a set stem:[V] with an addition stem:[+] and a scalar multiplication stem:[\cdot] on stem:[V].
+We will define a vector space to be a set stem:[V] with a vector addition stem:[+] and a scalar multiplication stem:[\cdot] on stem:[V].
 
-* An addition on a set stem:[V] is a binary operator that assigns an element stem:[\mathbf{v} + \mathbf{w} \in V] to each pair of elements stem:[\mathbf{v}, \mathbf{w} \in V].
+* A vector addition on a set stem:[V] is a binary operator that assigns an element stem:[\mathbf{v} + \mathbf{w} \in V] to each pair of elements stem:[\mathbf{v}, \mathbf{w} \in V].
 * A scalar multiplication on a set stem:[V] is a unary operator that takes as input an element in stem:[V] and a scalar in the field and gives an element in stem:[V], i.e., it gives an element stem:[\lambda \mathbf{v} \in V] to each stem:[\lambda] in the field and each stem:[\mathbf{v} \in V].
 
-A vector space is a set stem:[V] along with an addition on stem:[V] and a scalar multiplication on stem:[V] such that the following properties hold:
+A vector space is closed under vector addition and scalar multiplication. A vector space is a set stem:[V] along with a vector addition and a scalar multiplication on stem:[V] such that the following properties hold:
 
 . Commutativity: stem:[\mathbf{v} + \mathbf{w} = \mathbf{w} + \mathbf{v}] for all stem:[\mathbf{v}, \mathbf{w} \in V].
 . Associativity: stem:[\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}] and stem:[(ab) \cdot v = a \cdot (b \cdot v)] for all  stem:[\mathbf{u}, \mathbf{v}, \mathbf{w} \in V] and all stem:[a,b] in the field.
 . Existence of additive identity: There exists an element stem:[\mathbf{0} \in V] such that stem:[\mathbf{v} + \mathbf{0} = \mathbf{v}] for all stem:[\mathbf{v} \in V].
 . Existence of additive inverse: For every stem:[\mathbf{v} \in V], there exists stem:[\mathbf{w} \in V] such that stem:[\mathbf{v} + \mathbf{w} = \mathbf{0}].
 . Existence of multiplicative identity: stem:[1 \cdot \mathbf{v} = \mathbf{v}] for all stem:[\mathbf{v} \in V].
-. Distributive properties: stem:[a(\mathbf{v} + \mathbf{w}) = a\mathbf{v} + b \mathbf{w}] and stem:[(a+b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}] for all stem:[a,b] in the field and for all stem:[\mathbf{v}, \mathbf{w} \in V].
+. Distributive properties: stem:[a \cdot (\mathbf{v} + \mathbf{w}) = a \cdot \mathbf{v} + b \cdot \mathbf{w}] and stem:[(a+b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}] for all stem:[a,b] in the field and for all stem:[\mathbf{v}, \mathbf{w} \in V].
 
 *Formal Definition:*
 
@@ -106,7 +106,7 @@ stem:[(-1) \cdot \mathbf{v}] when added to stem:[\mathbf{v}] gives stem:[\mathbf
 
 *Example 01:*
 
-Consider stem:[V] to be a set of all points in stem:[\mathbb{R}^n] (stem:[n] is given). Let stem:[+] be 'usual' vectorial addition. stem:[\cdot] be 'usual' scalar multiplication. Then stem:[\mathbb{V} = (\mathbb{R}^n, + , \cdot)] is a vector space. This space is known as *Euclidean space*.
+Consider stem:[V] to be a set of all points in stem:[\mathbb{R}^n] (stem:[n] is given). Let stem:[+] be 'usual' vectorial addition (component-wise addition). stem:[\cdot] be 'usual' scalar multiplication (component-wise multiplication). Then stem:[\mathbb{V} = (\mathbb{R}^n, + , \cdot)] is a vector space. This space is known as *Euclidean space*.
 
 In this space, a vector means Euclidean vector. The additive identity element is the zero vector, which is denoted by stem:[\mathbf{0}].
 
@@ -148,7 +148,7 @@ Consider stem:[V] to be a set of all polynomial functions on stem:[\mathbb{R}]. 
 
 stem:[V' \subseteq V], where stem:[V'] is the set of all polynomial functions on stem:[\mathbb{R}]. stem:[V] is the set of all real valued functions on stem:[\mathbb{R}].
 
-*Example 05:*
+*Example 05:* A set of random variables can be seen as a vector space.
 
 Consider stem:[V] to be a set of all random variables (which are from a defined probability space). Call it stem:[V]. One way of defining the operators is as follows: stem:[+] is 'usual' way to add two random variables, stem:[\cdot] is 'usual' way of scaling a random variable. Again stem:[(V, + , \cdot)] is a vector space.
 

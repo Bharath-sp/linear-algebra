@@ -1,0 +1,121 @@
+= Gram-Schmidt Orthogonalization =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Procedure ==
+Gram-Schmidt method allows us to inductively transform any basis stem:[\{ \mathbf{b}_1,\dots,\mathbf{b}_n \}] of an stem:[n-] dimensional
+vector space stem:[\mathbb{V}] into an orthogonal/orthonormal basis stem:[\{ \mathbf{u}_1,\dots,\mathbf{u}_n \}] of stem:[\mathbb{V}]. Such a basis always exists and stem:[\text{span}(\{\mathbf{b}_1,\dots,\mathbf{b}_n\} ) = \text{span}(\{\mathbf{u}_1,\dots,\mathbf{u}_n\} )].
+
+
+The Gram-Schmidt Orthogonalization method iteratively constructs an orthogonal basis stem:[\{ \mathbf{u}_1,\dots,\mathbf{u}_n \}] from any basis stem:[\{ \mathbf{b}_1,\dots,\mathbf{b}_n \}] of stem:[\mathbb{V}] as follows
+
+. Let stem:[\mathbf{u}_1 := \mathbf{b}_1 ]. 
++
+Here we see that stem:[\text{span}(\{\mathbf{b}_1\}) = \{\alpha \mathbf{b}_1 \, | \, \lambda \in \mathbb{R}\} = \{\alpha \mathbf{u}_1 \, | \, \lambda \in \mathbb{R}\} = \text{span}(\{\mathbf{u}_1\})].
+
+. Then let stem:[\mathbf{u}_2 := \mathbf{b}_2 - \pi_{\text{span}(\{\mathbf{u}_1\})} (\mathbf{b}_2)]. We know that this projection is given as,
++
+[stem]
+++++
+\pi_{\text{span}(\{\mathbf{u}_1\})} (\mathbf{b}_2) = \frac{\langle \mathbf{b}_2, \mathbf{u}_1 \rangle}{\| \mathbf{u}_1 \|^2} \mathbf{u}_1
+++++
++
+On Substituting it to the equation, we see that stem:[\mathbf{b}_2] is just a linear combination of stem:[\{\mathbf{u}_1, \mathbf{u}_2\}].
++
+[stem]
+++++
+\begin{align*}
+\text{span}(\{\mathbf{b}_1, \mathbf{b}_2\}) & = \{\lambda_1 \mathbf{b}_1 + \lambda_2 \mathbf{b}_2 \, | \, \lambda_1, \lambda_2 \in \mathbb{R} \} \\
+& = \{\lambda_1 \mathbf{u}_1 + \lambda_2 (\alpha_1 \mathbf{u}_1 + \alpha_2 \mathbf{u}_2) \, | \, \lambda_1, \lambda_2 \in \mathbb{R} \} \\
+& = \{\beta_1 \mathbf{u}_1 + \beta_2 \mathbf{u}_2 \, | \, \beta_1, \beta_2 \in \mathbb{R} \} \\
+& = \text{span}(\{\mathbf{u}_1, \mathbf{u}_2\})
+\end{align*}
+++++
++
+From our previous theorem, we know that stem:[\mathbf{u}_2] will be orthogonal to stem:[\mathbf{u}_1].
+
+. Let stem:[\mathbf{u}_k := \mathbf{b}_k - \pi_{ \text{span}(\{\mathbf{u}_1, \dots, \mathbf{u}_{k-1}\}) } (\mathbf{b}_k ), \hspace{1cm} k=3,\dots, n] and we get
++
+* stem:[\text{span}(\{\mathbf{b}_1, \dots, \mathbf{b}_k\}) = \text{span}(\{\mathbf{u}_1, \dots, \mathbf{u}_k\}) ].
+* stem:[\mathbf{u}_k] is orthogonal to the space spanned by stem:[\{\mathbf{u}_1, \dots, \mathbf{u}_{k-1}\}].
+
+At the end of this procedure, we get a set of vectors stem:[\{ \mathbf{u}_1,\dots,\mathbf{u}_n \}], whose
+
+* stem:[\text{span}(\{\mathbf{u}_1, \dots, \mathbf{u}_n\}) = \text{span}(\{\mathbf{b}_1, \dots, \mathbf{b}_n\}) ], which means the set of vectors spans the same space as stem:[\mathbb{V}] because stem:[\{ \mathbf{b}_1,\dots,\mathbf{b}_n \}] spans stem:[\mathbb{V}].
+* stem:[\{ \mathbf{u}_1,\dots,\mathbf{u}_n \}] are orthogonal sets of vectors, which also implies that they are linearly independent.
+
+As the set stem:[\{ \mathbf{u}_1,\dots,\mathbf{u}_n \}] spans stem:[\mathbb{V}] and they are linearly independent, they form a basis of stem:[\mathbb{V}]. This is an orthogonal basis of stem:[V].
+
+NOTE: If we normalize the stem:[\textbf{u}_k], we obtain an *orthonormal basis* where stem:[\| \textbf{u}_k \| =1] for stem:[k=1,\dots,n].
+
+== Example ==
+Let's consider the Euclidean vector space. Consider a basis stem:[\{\mathbf{b}_1, \mathbf{b}_2\}] of stem:[\mathbb{R}^2], where
+
+[stem]
+++++
+\mathbf{b}_1 = \begin{bmatrix} 2\\ 0 \end{bmatrix}, 
+\mathbf{b}_2 = \begin{bmatrix} 1\\ 1 \end{bmatrix}
+++++
+
+Using the Gram-Schmidt method, we construct an orthogonal basis stem:[\{\textbf{u}_1, \textbf{u}_2\}] of stem:[\mathbb{R}^2] as follows
+
+[stem]
+++++
+\begin{align*}
+\textbf{u}_1 & := \textbf{b}_1 = \begin{bmatrix} 2\\ 0 \end{bmatrix} \\
+\textbf{u}_2 & := \textbf{b}_2 - \pi_{\text{span}(\{\textbf{u}_1\})} (\textbf{b}_2 ) 
+= \textbf{b}_2 - \frac{\textbf{u}_1 \textbf{u}_1^T}{\|\textbf{u}_1\|^{2}} \textbf{b}_2
+= \begin{bmatrix} 1\\ 1 \end{bmatrix} - \begin{bmatrix} 1 & 0\\ 0 & 0 \end{bmatrix} \begin{bmatrix} 1\\ 1 \end{bmatrix}
+= \begin{bmatrix} 0\\ 1 \end{bmatrix}
+\end{align*}
+++++
+
+image::.\images\gram_schmidt.png[align='center']
+
+So the orthogonal basis stem:[\{\textbf{u}_1, \textbf{u}_2\}] of stem:[\mathbb{R}^2] is 
+
+[stem]
+++++
+\textbf{u}_1 = \begin{bmatrix} 2\\ 0 \end{bmatrix}, 
+\textbf{u}_2 = \begin{bmatrix} 0\\ 1 \end{bmatrix}
+++++
+
+== Code in Python ==
+[source,python]
+----
+import numpy as np
+
+def proj_n_onto_m(base, x):
+    B=np.array(base).T
+    BTB = B.T.dot(B)
+    BTx = B.T.dot(x)
+    _lambda = np.linalg.solve(BTB, BTx)
+    proj_point = B.dot(_lambda)
+    return(proj_point)
+
+def gram_schmidt_ortho(given_basis):
+    given_basis_np = np.array(given_basis)
+    ortho_basis =np.empty(given_basis_np.shape)
+    ortho_basis[0] = given_basis_np[0]
+
+    for i in range(1, len(given_basis)):
+        ortho_basis[i] = given_basis_np[i] - proj_n_onto_m(ortho_basis[0:i], given_basis_np[i] )
+    print('Orthogonal Basis:', '\n', ortho_basis)
+    
+if __name__=='__main__':
+    given_basis=[[2,0], [1,1]]
+    gram_schmidt_ortho(given_basis)
+    
+----
+
+=== Sample Output ===
+[source]
+----
+Orthogonal Basis: 
+ [[2. 0.]
+ [0. 1.]]
+----

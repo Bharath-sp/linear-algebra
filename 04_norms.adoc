@@ -1,0 +1,207 @@
+= Norms =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Introduction ==
+In machine learning, we use vectors/matrices to represent data/images/sound, etc. Norm is the generalization of the notion of length (that we have for scalars) to vectors, matrices and tensors. It is a way of measuring the length or size of vectors, matrices, or tensors. Norms serve two purposes:
+
+. To estimate how big/small a vector/Matrix is.
+
++
+For scalar, we have a single number by which we can get how big the thing is. Absolute value of the scalar tells us the size for a scalar. (Note: we use single bar for scalar |5| to measure its size). For vector, we don't have a single number. So we define it through norm.
+
+. To estimate how close one tensor is to another: (that is how big the difference between two tensors is)
+
++
+Difference between two vectors is also a vector. Measuring the size of that vector tells us how close the two vectors are. Norm of the difference vector gives how close the vector stem:[\textbf{v}_1] is to the vector stem:[\textbf{v}_2].
+
+image::.\images\norm_close.png[align='center', 300, 300]
+
+
+== Formal Definition ==
+A norm of a vector in an inner product space stem:[\mathbb{V}] (can be any inner product space) is a real valued function from a vector to a non-negative scalar, denoted by the double bar symbol. stem:[ \|. \|: \mathbb{V} \rightarrow \mathbb{R}^+] such that:
+
+. Non-negativity: stem:[ \| \mathbf{v} \| \geq 0 \hspace{5mm} \forall \mathbf{v} \in \mathbb{V}].
+. Positive definiteness: stem:[ \| \mathbf{v} \| =0 \text{ iff } \mathbf{v} = \textbf{0}].
+. stem:[ \| \alpha \mathbf{v} \| = |\alpha| \| \mathbf{v} \| \hspace{5mm} \forall \mathbf{v} \in \mathbb{V} \text{ and } \alpha \in \mathbb{R}].
+. stem:[ \| \mathbf{v} + \mathbf{w} \| \leq \| \mathbf{v} \| + \| \mathbf{w} \|  \hspace{5mm} \forall \mathbf{ v, w} \in \mathbb{V}].
+
++ 
+Triangle inequality property: Length of the vector stem:[(\mathbf{v} + \mathbf{w})] should always be less than the sum of the length of individual vectors. The shortest distance between any 2 points is a straight line.
++
+NOTE: stem:[ \| \mathbf{v} \|] is read as norm of a vector stem:[\mathbf{v}].
++
+In a Euclidean space stem:[(\mathbb{R}^n, +, \cdot)], we see that
++
+image::.\images\norm_addition.png[align='center', 300, 300]
+
+Any function that satisfies all the three properties is said to be a norm. We can derive many different functions that satisfy these properties. 
+
+=== Default Norm ===
+A very common definition of norm of a vector is the square root of the inner product. Every inner product gives raise to this norm, and it is called as induced norm. This function always satisfies the above 4 properties.
+
+[stem]
+++++
+\| \mathbf{v} \| \equiv \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle}
+++++
+
+*Theorem:* Inner product induced norm is indeed a norm. Let's verify the properties.
+
+. Non-negativity: stem:[ \| \mathbf{v} \| \geq 0]. By definition, stem:[\| \mathbf{v} \| = \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle} \geq 0] because stem:[\langle \mathbf{v}, \mathbf{v} \rangle \geq 0] (from the non-negativity property of inner product).
+
+. Positive definiteness: stem:[ \| \mathbf{v} \| =0 \text{ iff } \mathbf{v} = \textbf{0}]. We know that stem:[\sqrt{\langle \mathbf{v}, \mathbf{v} \rangle} = 0 \iff \langle \mathbf{v}, \mathbf{v} \rangle = 0 \iff \mathbf{v} = \textbf{0}] (from the positive definiteness property of inner product).
+
+. stem:[ \| \alpha \mathbf{v} \| = |\alpha| \| \mathbf{v} \|]. We write,
++
+[stem]
+\begin{align*}
+\| \alpha \mathbf{v} \| = \sqrt{\langle \alpha \mathbf{v}, \alpha \mathbf{v} \rangle} & =  \sqrt{\alpha \langle \mathbf{v}, \alpha \mathbf{v} \rangle} \\
+& = \sqrt{\alpha \langle \mathbf{v}, \alpha \mathbf{v} \rangle} \\
+& = \sqrt{\alpha \langle  \alpha \mathbf{v}, \mathbf{v} \rangle} (\text{ by symmetry})\\
+& = \sqrt{ \alpha^2 \langle \mathbf{v}, \mathbf{v} \rangle} = |\alpha| \| \mathbf{v} \| \\
+\end{align*}
+
+. stem:[ \| \mathbf{v} + \mathbf{w} \| \leq \| \mathbf{v} \| + \| \mathbf{w} \| ]. We write stem:[ \| \mathbf{v} + \mathbf{w} \| = \sqrt{\langle \mathbf{v} + \mathbf{w}, \mathbf{v} + \mathbf{w} \rangle}].
++
+[stem]
+\begin{align*}
+& = \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle + \langle \mathbf{w}, \mathbf{w} \rangle + 2 \langle \mathbf{v}, \mathbf{w} \rangle} \\
+& \leq  \sqrt{ \|\mathbf{v}\|^2 + \|\mathbf{w}\|^2 + 2 \|\mathbf{v}\| \|\mathbf{w}\| } \\
+& = \sqrt{ ( \|\mathbf{v}\| + \|\mathbf{w}\|)^2 } = \|\mathbf{v}\| + \|\mathbf{w}\|
+\end{align*}
++
+Above we used the property that stem:[\langle \mathbf{v}, \mathbf{w} \rangle \leq \|\mathbf{v}\| \|\mathbf{w}\|]. This is known as *Cauchy-Schwartz inequality*.
+
+=== Cauchy-Schwartz Inequality ===
+Cauchy-Schwartz Inequality gives an upper bound on the inner product between two vectors in an inner product space in terms of the product of the vector norms.
+
+[stem]
+++++
+|\langle \mathbf{v}, \mathbf{w} \rangle| \leq \|\mathbf{v}\| \|\mathbf{w}\|
+++++
+
+This inequality is an equality if and only if one of stem:[\mathbf{v}, \mathbf{w}] is a scalar multiple of the other.
+
+*Proof:*
+Let's look at the following inner product. We know that the inner product is stem:[\geq 0] from the non-negativity property of inner product.
+
+[stem]
+\begin{align*}
+& \langle \alpha \cdot \mathbf{v} + \mathbf{w}, \alpha \cdot \mathbf{v} + \mathbf{w} \rangle \geq 0 && \forall \alpha \in \mathbb{R}, \mathbf{v}, \mathbf{w} \in \mathbb{V} \\
+& \alpha^2 \langle \mathbf{v}, \mathbf{v} \rangle + \langle \mathbf{w}, \mathbf{w} \rangle + 2\alpha \langle \mathbf{v}, \mathbf{w} \rangle \geq 0 && \forall \alpha \in \mathbb{R}, \mathbf{v}, \mathbf{w} \in \mathbb{V} \\
+\end{align*}
+
+This is a quadratic in stem:[\alpha], which is always stem:[\geq 0]. The leading coefficient, i.e., the coefficient of stem:[\alpha^2] is non-negative. So the parabola opens upwards. Since it is always stem:[\geq 0], it can either have a single root or no roots. Then the discriminant will be stem:[\leq 0].
+
+[stem]
+\begin{align*}
+& \left( 2 \langle \mathbf{v}, \mathbf{w} \rangle \right)^2 - 4 \langle \mathbf{v}, \mathbf{v} \rangle \langle \mathbf{w}, \mathbf{w} \rangle \leq 0 \\
+& \langle \mathbf{v}, \mathbf{w} \rangle^2  \leq \langle \mathbf{v}, \mathbf{v} \rangle \langle \mathbf{w}, \mathbf{w} \rangle \\
+& \sqrt{\langle \mathbf{v}, \mathbf{w} \rangle^2}  \leq \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle} \sqrt{\langle \mathbf{w}, \mathbf{w} \rangle} \\
+& |\langle \mathbf{v}, \mathbf{w} \rangle| \leq \|\mathbf{v}\| \|\mathbf{w}\|
+\end{align*}
+
+Then we have stem:[- \|\mathbf{v}\| \|\mathbf{w}\| \leq \langle \mathbf{v}, \mathbf{w} \rangle \leq \|\mathbf{v}\| \|\mathbf{w}\|].
+
+== Euclidean Space Norms ==
+Let's consider the Euclidean inner product space stem:[(\mathbb{R}^n, +, \cdot, \langle \cdot, \cdot \rangle)], where the inner product is the dot product. Let's define some of the norms on this space.
+
+=== stem:[L^0] norm ===
+Let stem:[\textbf{x}] be a vector in stem:[ \mathbb{R}^n]. Then stem:[L^0] norm of the vector stem:[\| \textbf{x} \|_0] is the number of non-zero elements of stem:[\textbf{x}]. If stem:[\textbf{x} = [1,2,0,0,3,0,0,4\] ], then stem:[\| \textbf{x} \|_0 = 4].
+
+This is actually not a norm because it doesn't hold the second property. stem:[ \| \alpha \textbf{x} \|_0 \ne |\alpha| \| \textbf{x} \|_0] for stem:[\alpha] other than 1 and -1. When stem:[\alpha = 2], stem:[\| \alpha \textbf{x} \|_0 = \| (2,4,0,0,6,0,0,8)  \|_0 = 4]. But stem:[|\alpha| \| \textbf{x} \|_0 = 2 * 4 =8].
+
+This norm is more likely to be interpreted as a measure of sparsity. And it is very important in compressed sensing in ML.
+
+=== stem:[L^1] norm ===
+Let stem:[\textbf{x}] be a vector in stem:[ \mathbb{R}^n]. Then stem:[L^1] norm of the vector stem:[\| \textbf{x} \|_1] is
+
+[stem]
+++++
+\| \textbf{x} \|_1 = \sum \limits_{i=1}^n |x_i| = |x_1| + |x_2| + \dots + |x_n|
+++++
+
+Also called as Manhattan norm.
+
+=== stem:[L^2] norm ===
+Let stem:[\textbf{x}] be a vector in stem:[ \mathbb{R}^n]. Then stem:[L^2] norm of the vector stem:[\| \textbf{x} \|_2] is
+
+[stem]
+++++
+\| \textbf{x} \|_2 = \sqrt{\sum \limits_{i=1}^n x_i^2} = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2}
+++++
+
+Also called as Euclidean norm. The stem:[L^2] norm is equal to the square root of the dot product of the vector with itself. stem:[\| \textbf{x} \|_2 = \sqrt{\textbf{x.x}}]. As we are working with an inner product space with inner product as dot product, it is well-defined.
+
+The stem:[L^2] norm defines the length or magnitude of the vector (i.e.,) this can also be considered as the distance between zero vector and the point where the vector stem:[\textbf{x}] sits.
+
+=== stem:[L^p] norm ===
+Let stem:[\textbf{x}] be a vector in stem:[ \mathbb{R}^n]. Then stem:[L^p] norm of the vector stem:[\| \textbf{x} \|_p] is
+
+[stem]
+++++
+\| \textbf{x} \|_p = \left( \sum \limits_{i=1}^n |x_i|^p \right) ^ \frac{1}{p} = \left(|x_1|^p + |x_2|^p + \dots + |x_n|^p \right) ^ \frac{1}{p}
+++++
+
+This definition is valid for stem:[p \geq 1]. This can be seen as the generalization of the stem:[L^1] and stem:[L^2] norm.
+
+=== Max Norm ===
+Also called as stem:[\infty-] norm. Let stem:[\textbf{x}] be a vector in stem:[ \mathbb{R}^n]. Then stem:[\infty-] norm of the vector stem:[\| \textbf{x} \|_{\infty}] is
+
+[stem]
+++++
+\| \textbf{x} \|_{\infty} = \text{max}(|x_1|, |x_2|, \dots, |x_n|)
+++++
+
+The max norm can be seen as a limit of stem:[p-] norm as stem:[p \to \infty].
+
+As stem:[p \to \infty], the largest component becomes very high and all others become very very small. And when we take power of stem:[\frac{1}{p}]  with a large value of stem:[p], the result will be close to the maximum term. As stem:[p \to \infty], the result be the maximum term. Hence the name max norm (or) infinity norm.
+
+*Example*
+
+Let stem:[\textbf{x}= (1,0,-2)]. Then,
+
+. stem:[\| \textbf{x} \|_0 = 2]
+. stem:[\| \textbf{x} \|_1 = 3]
+. stem:[\| \textbf{x} \|_2 = \sqrt{1 + 0 + 4} = \sqrt{5}]
+. stem:[\| \textbf{x} \|_{\infty} = 2]
+
+=== Geometrical Interpretation ===
+The concept of unit circle (the set of all vectors of norm 1) is different in different norms:
+
+* For the 1-norm, the unit circle is a square. 
+* For the 2-norm (Euclidean norm), it is the well-known unit circle.
+* For the infinity norm, it is a different square.
+
+Take all the vectors for which the L1 norm is 1. Then the shape would be as below (the first graph). Similarly, plotting all the vectors having stem:[L^2], Max norm equal to 1:
+
+image::.\images\norm_geometric.png[align='center']
+
+Due to the definition of the norm, the unit circle must be convex and centrally symmetric. Hence all the norms are convex (i.e.,) all the unit circles form convex sets.So in real finite dimensional vector spaces, any symmetric about all the axes, compact, convex region centered at the origin defines a norm. An example of a shape which is NOT a norm:
+
+image::.\images\invalid_norm.png[align='center', 300, 150]
+
+== Matrix Norms ==
+The idea of norm is true for vectors, matrices and tensors. Here we extend the idea of norms to matrices. All the three properties remains the same. Instead of stem:[\textbf{x}] as a vector, we will consider it as a matrix stem:[\textbf{X}]. We can define all the norms (stem:[L^1], stem:[L^2], stem:[\infty-] norm). But the most common norm used in machine learning is Frobenius norm, stem:[\| \textbf{X} \|_F].
+
+Let stem:[\textbf{X}] be a matrix in stem:[\mathbb{R}^{ m \times n}]. Then the Frobenius norm stem:[\| \textbf{X} \|_F] is:
+
+[stem]
+++++
+\| \textbf{X} \|_F = \sqrt{\sum_{i,j} a_{ij}^2 } \text{ where } i=1,2,\dots,m, j=1,2,\dots,n
+++++
+
+== Random Variables Norms ==
+Let's take an inner product space of random variables, where the inner product is defined as stem:[\langle X, Y \rangle := \mathbb{E}[XY\]]. Then the norm of a random variable can be given by stem:[\| X \| = \sqrt{\mathbb{E}[X^2\]}].
+
+When we are taking about the zero mean random variables space, this is nothing but the standard deviation of stem:[X]. Standard deviation is a valid norm in the vector space of random variables.
+
+
+
+
+
+

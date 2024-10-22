@@ -9,9 +9,7 @@
 == Dot Product ==
 Dot product is the other fundamental structure over and top of vector spaces, which kind of defines the ultimate structure of Euclidean spaces.
 
-Consider the Euclidean space stem:[(\mathbb{R}^n, + , \cdot)], where stem:[n] is given.
-
-The dot product of any two vectors stem:[\mathbf{v}] and stem:[\mathbf{w}] is defined as
+Consider the Euclidean space stem:[(\mathbb{R}^n, + , \cdot)], where stem:[n] is given. The dot product of any two vectors stem:[\mathbf{v}] and stem:[\mathbf{w}] is defined as
 
 [stem]
 ++++
@@ -28,24 +26,32 @@ Dot product satisfy the following fundamental properties:
 The notion of dot product can be extended to abstract vector spaces also. Generalization of dot product is inner product.
 
 == Inner Product ==
-This is a binary operator which takes two *vectors* and gives back a *scalar*. It is represented as stem:[<\cdot, \cdot>: \mathbb{V} \times \mathbb{V} \rightarrow \mathbb{R}]. All the above properties should hold. Any operator which takes two vectors and outputs a scalar and satisfies all the above properties is called as inner product.
+Inner Product is defined on a vector space. Inner Product is a binary operator which takes two *vectors* and gives back a *scalar*. It is represented as stem:[\langle \cdot, \cdot \rangle: \mathbb{V} \times \mathbb{V} \rightarrow \mathbb{R}]. All the above properties should hold. Any operator which takes two vectors and outputs a scalar and satisfies all the above properties is called as inner product.
 
-=== Examples ===
+. Non-negativity: stem:[\langle \mathbf{v}, \mathbf{v} \rangle \geq 0 \, \forall \mathbf{v} \in \mathbb{V}].
+. Positive-definiteness: stem:[\langle \mathbf{v}, \mathbf{v} \rangle =0] if and only if stem:[ \mathbf{v} =\mathbf{0}].
+. Symmetry:  stem:[\langle \mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{w}, \mathbf{v} \rangle].
+. Linearity: stem:[\langle \alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v}, \mathbf{w} \rangle = \langle \alpha \cdot \mathbf{u}, \mathbf{w} \rangle + \langle \beta \cdot \mathbf{v}, \mathbf{w} \rangle = \alpha \langle \mathbf{u}, \mathbf{w} \rangle + \beta \langle \mathbf{v}, \mathbf{w} \rangle \hspace{1cm}] for all stem:[\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{V}, \alpha, \beta \in \mathbb{R}].
+
+The vector space along with the inner product, stem:[(\mathbb{V}, +, \cdot, \langle \cdot, \cdot \rangle)] is called as *inner product space*.
+
+== Examples ==
 Example 01: Dot product is an inner product.
 
-Example 02: Consider the Euclidean space stem:[(\mathbb{R}^n, + , \cdot)]. Let's define an inner product as
+=== Example 02 ===
+Consider the Euclidean space stem:[(\mathbb{R}^n, + , \cdot)]. Let's define an inner product as
 
 [stem]
 ++++
-<\mathbf{v}, \mathbf{w}> := \sum_{i=1}^n v_i w_i d_i  \hspace{1cm} \text{ where } d_i > 0 \in \mathbb{R} \, \forall i
+\langle \mathbf{v}, \mathbf{w} \rangle := \sum_{i=1}^n v_i w_i d_i  \hspace{1cm} \text{ where } d_i > 0 \in \mathbb{R} \, \forall i
 ++++
 
 This inner product is also a function of stem:[\mathbf{d}], which should be given. It can be seen that this inner product satisfies all the above properties. For a given stem:[\mathbf{d}],
 
-* stem:[<\mathbf{v}, \mathbf{v}>_{\mathbf{d}} = \sum_{i=1}^n v_i v_i d_i = \sum_{i=1}^n v^2_i d_i \geq 0] as all the terms are positive.
-* stem:[<\mathbf{v}, \mathbf{v}>_{\mathbf{d}} = 0 \iff \sum_{i=1}^n v_i^2 d_i = 0 \iff v_i^2 d_i =0 \, \forall i \iff v_i^2 = 0 \, \forall i \iff \mathbf{v} =\mathbf{0}].
-* stem:[<\mathbf{v}, \mathbf{w}>_{\mathbf{d}} = \sum_{i=1}^n v_i w_i d_i = \sum_{i=1}^n w_i v_i d_i = <\mathbf{w}, \mathbf{v}>_{\mathbf{d}}].
-* stem:[<\alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v}, \mathbf{w}>_{\mathbf{d}} = \sum_i (\alpha u_i + \beta v_i) w_i d_i = \alpha \sum_i u_i w_i d_i + \beta \sum_i v_i w_i d_i = \alpha <\mathbf{u}, \mathbf{w}>_{\mathbf{d}} + \beta <\mathbf{v}, \mathbf{w}>_{\mathbf{d}}].
+* stem:[\langle \mathbf{v}, \mathbf{v} \rangle_{\mathbf{d}} = \sum_{i=1}^n v_i v_i d_i = \sum_{i=1}^n v^2_i d_i \geq 0] as all the terms are positive.
+* stem:[\langle \mathbf{v}, \mathbf{v} \rangle_{\mathbf{d}} = 0 \iff \sum_{i=1}^n v_i^2 d_i = 0 \iff v_i^2 d_i =0 \, \forall i \iff v_i^2 = 0 \, \forall i \iff \mathbf{v} =\mathbf{0}].
+* stem:[\langle \mathbf{v}, \mathbf{w} \rangle_{\mathbf{d}} = \sum_{i=1}^n v_i w_i d_i = \sum_{i=1}^n w_i v_i d_i = \langle \mathbf{w}, \mathbf{v} \rangle_{\mathbf{d}}].
+* stem:[\langle \alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v}, \mathbf{w} \rangle_{\mathbf{d}} = \sum_i (\alpha u_i + \beta v_i) w_i d_i = \alpha \sum_i u_i w_i d_i + \beta \sum_i v_i w_i d_i = \alpha \langle \mathbf{u}, \mathbf{w} \rangle_{\mathbf{d}} + \beta \langle \mathbf{v}, \mathbf{w} \rangle_{\mathbf{d}}].
 
 
 Hence, it is a valid inner product. For example, let's take stem:[\mathbf{d} = (1,4)^\top].
@@ -56,23 +62,23 @@ So the inner product that we defined is the usual dot product in a transformed s
 
 [stem]
 ++++
-<\mathbf{v}, \mathbf{w}>_{\mathbf{D}} = \sum_{i=1}^n v_i w_i d_i = \mathbf{v}^\top \mathbf{D} \mathbf{w}
+\langle \mathbf{v}, \mathbf{w} \rangle_{\mathbf{D}} = \sum_{i=1}^n v_i w_i d_i = \mathbf{v}^\top \mathbf{D} \mathbf{w}
 ++++
 
 Where stem:[\mathbf{D}] is a diagonal matrix with elements stem:[d_1, \dots, d_n].
 
-== Positive Definite Matrix ==
-In general, we can make an inner product with any matrix stem:[\mathbf{P}] that satisfy the mentioned properties, stem:[<\mathbf{v}, \mathbf{w}>_{\mathbf{P}} := \mathbf{v}^\top \mathbf{P} \mathbf{w}].
+=== Positive Definite Matrix ===
+In general, we can make an inner product with any matrix stem:[\mathbf{P}] that satisfy the mentioned properties, stem:[\langle \mathbf{v}, \mathbf{w} \rangle_{\mathbf{P}} := \mathbf{v}^\top \mathbf{P} \mathbf{w}].
 
 For this to be an inner product, matrix stem:[\mathbf{P}] should be chosen in such a way that it satisfies:
 
-* stem:[<\mathbf{v}, \mathbf{v}>_{\mathbf{P}} =  \mathbf{v}^\top \mathbf{P} \mathbf{v} \geq 0 \, \forall \mathbf{v} \in \mathbb{V}].
+* stem:[\langle \mathbf{v}, \mathbf{v} \rangle_{\mathbf{P}} =  \mathbf{v}^\top \mathbf{P} \mathbf{v} \geq 0 \, \forall \mathbf{v} \in \mathbb{V}].
 
-* stem:[<\mathbf{v}, \mathbf{v}>_{\mathbf{P}} =0  \iff \mathbf{v} =\mathbf{0}]. This is the same as saying, stem:[\mathbf{v}^\top \mathbf{P} \mathbf{v} =0 \iff \mathbf{v} =\mathbf{0}]. Contrapositive of this is: if stem:[\mathbf{v} \ne \mathbf{0}], then stem:[\mathbf{v}^\top \mathbf{P} \mathbf{v} \ne 0 ].
+* stem:[\langle \mathbf{v}, \mathbf{v} \rangle_{\mathbf{P}} =0  \iff \mathbf{v} =\mathbf{0}]. This is the same as saying, stem:[\mathbf{v}^\top \mathbf{P} \mathbf{v} =0 \iff \mathbf{v} =\mathbf{0}]. Contrapositive of this is: if stem:[\mathbf{v} \ne \mathbf{0}], then stem:[\mathbf{v}^\top \mathbf{P} \mathbf{v} \ne 0 ].
 
-* Symmetry: stem:[<\mathbf{v}, \mathbf{w}>_{\mathbf{P}}  = <\mathbf{w}, \mathbf{v}>_{\mathbf{P}}] for all stem:[\mathbf{v}, \mathbf{w}]. This is the same as saying, stem:[\mathbf{v}^\top \mathbf{P} \mathbf{w} = \mathbf{w}^\top \mathbf{P} \mathbf{v}]. A number is transpose of itself, hence stem:[\mathbf{v}^\top \mathbf{P} \mathbf{w} = \mathbf{v}^\top \mathbf{P}^\top \mathbf{w}]  for all stem:[\mathbf{v}, \mathbf{w}]. Hence stem:[\mathbf{P} = \mathbf{P}^\top].
+* Symmetry: stem:[\langle \mathbf{v}, \mathbf{w} \rangle_{\mathbf{P}}  = \langle \mathbf{w}, \mathbf{v} \rangle_{\mathbf{P}}] for all stem:[\mathbf{v}, \mathbf{w}]. This is the same as saying, stem:[\mathbf{v}^\top \mathbf{P} \mathbf{w} = \mathbf{w}^\top \mathbf{P} \mathbf{v}]. A number is transpose of itself, hence stem:[\mathbf{v}^\top \mathbf{P} \mathbf{w} = \mathbf{v}^\top \mathbf{P}^\top \mathbf{w}]  for all stem:[\mathbf{v}, \mathbf{w}]. Hence stem:[\mathbf{P} = \mathbf{P}^\top].
 
-* stem:[<\alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v}, \mathbf{w}>_{\mathbf{P}} = (\alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v})^\top {\mathbf{P}} \mathbf{w} =  \alpha \mathbf{u}\top \mathbf{P} \mathbf{v} + \beta \mathbf{v}\top \mathbf{P} \mathbf{v} = \alpha <\mathbf{u}, \mathbf{w}>_{\mathbf{P}} + \beta <\mathbf{v}, \mathbf{w}>_{\mathbf{P}}]. This is true for any matrix stem:[\mathbf{P}].
+* stem:[\langle \alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v}, \mathbf{w} \rangle_{\mathbf{P}} = (\alpha \cdot \mathbf{u} + \beta \cdot \mathbf{v})^\top {\mathbf{P}} \mathbf{w} =  \alpha \mathbf{u}\top \mathbf{P} \mathbf{v} + \beta \mathbf{v}\top \mathbf{P} \mathbf{v} = \alpha \langle \mathbf{u}, \mathbf{w} \rangle_{\mathbf{P}} + \beta \langle \mathbf{v}, \mathbf{w} \rangle_{\mathbf{P}}]. This is true for any matrix stem:[\mathbf{P}].
 
 Any stem:[\mathbf{P}] which has to induce an inner product should satisfy these three properties:
 
@@ -82,4 +88,14 @@ Any stem:[\mathbf{P}] which has to induce an inner product should satisfy these 
 
 
 Such a stem:[\mathbf{P}] is called as positive definite matrix. One such stem:[\mathbf{P}] is the diagonal matrix with positive entries.
+
+=== Example 03 ===
+Let's see an example of inner product on the vector space of random variables.
+
+Let's define the inner product between two random variables as stem:[\langle X, Y \rangle \equiv \mathbb{E}[XY\]]. This represents stem:[\text{Cov}(X,Y)] if stem:[X] and stem:[Y] has zero mean. This operator is a valid inner product if it satisfies all the properties of inner product.
+
+* Non-negativity: stem:[\langle X, X \rangle \geq 0 \, \forall X \in \mathbb{V}]. By definition, stem:[\langle X, X \rangle = \mathbb{E}[X^2\] \geq 0] since the expectation of a non-negative random variable is always stem:[\geq 0].
+* Positive-definiteness: stem:[\langle X, X\rangle =0] if and only if stem:[ X =0], i.e, stem:[X] takes only 0 with probability 1.  stem:[\langle X, X\rangle =0 \iff \mathbb{E}[X^2\]=0 \iff P(\{X^2=0\})=1] as the random variable is non-negative (by property 4 of the properties of expectation). This implies stem:[P(\{X=0\})=1].
+* Symmetry:  stem:[\langle X, Y \rangle = \langle Y, X \rangle = \mathbb{E}[XY\] ].
+* Linearity: stem:[\langle \alpha X + \beta Y, Z \rangle = \mathbb{E}[( \alpha X + \beta Y)Z\] = \mathbb{E}[\alpha XZ + \beta YZ\] = \alpha \mathbb{E}[XZ\] + \beta \mathbb{E}[YZ\] = \alpha \langle X, Z \rangle + \beta \langle Y, Z \rangle].
 

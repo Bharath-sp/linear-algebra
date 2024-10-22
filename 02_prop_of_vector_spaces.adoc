@@ -32,12 +32,19 @@ NOTE: The span of the empty set stem:[S] is defined to be stem:[\{\mathbf{0}\}].
 
 Linear span of a set is always closed under stem:[\+] and stem:[\cdot]. This follows directly from the definition. Then the triplet stem:[(L(S), +, \cdot)] forms a valid vector space. This space is a subset of the original vector space stem:[\mathbb{V}]. The operations stem:[+, \cdot] are the same as in the original space. Hence, it is called as a *subspace* of the original space.
 
-A set closed under linear combination (an operation which is a combination of stem:[+] and stem:[\cdot]) is called a linear set or linear variety. So the set stem:[L(S)] is a linear set.
+=== Linear Set ===
+A set stem:[S \subseteq \mathbb{V}] is called a linear set (or linear subspace) if for any two vectors stem:[\mathbf{v, w} \in S] and any scalar stem:[c \in \mathbb{R}], the following holds:
+
+. stem:[\mathbf{v} + \mathbf{w} \in S].
+. stem:[c\mathbf{v} \in S].
+. stem:[S] contains the zero vector.
+
+A set closed under linear combination and containing the zero vector is called a linear set or linear variety. So the set stem:[L(S)] is a linear set. These sets form a linear subspace of a vector space.
 
 == Spanning Set ==
 We can have a set of vectors stem:[S] which has lesser number of vectors than the space stem:[\mathbb{V}]. But the linear span of stem:[S] gives us the set stem:[\mathbb{V}]. Such sets are called spanning sets. Given only these set of vectors, we can re-build our whole vector space stem:[\mathbb{V}]. For example,
 
-Let's take stem:[\mathbb{V}=\mathbb{R}^2] and stem:[S=\{(1,2), (2,1)\}]. Here stem:[S \ne \mathbb{V}]. But we can see stem:[L(S)= \mathbb{V}]. So the set stem:[S] is a spanning set. Such set spans the entire original vector space.
+Let's take stem:[\mathbb{V}=\mathbb{R}^2] and stem:[S=\{(1,2), (2,1)\}]. Here stem:[S \ne \mathbb{V}]. But we can see stem:[L(S)= \mathbb{V}]. So the set stem:[S] is a spanning set. Such set spans the entire original vector space. There can be many spanning sets for a given vector space.
 
 IMPORTANT: Any superset of a spanning set is also a spanning set.
 
@@ -113,7 +120,7 @@ and so on. In general, say we have a vector stem:[\mathbf{w}], which can be repr
 Which is a contradiction to our definition of linear independence. Hence we can say that the set of vectors stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n \}] is linearly dependent.
 
 == Basis ==
-A spanning set which has linearly independent set of vectors gives the best efficiency of representing the original vector space stem:[\mathbb{V}]. Such sets are called as basis of stem:[\mathbb{V}]. Consider a subset of stem:[\mathbb{V}], say stem:[S = \{\mathbf{v}_1, \dots, \mathbf{v}_n \} ] of vectors. The set stem:[S] is said to be basis of stem:[\mathbb{V}] if it has the following two properties:
+A spanning set which has linearly independent set of vectors gives the best efficient way of representing the entire original vector space stem:[\mathbb{V}] with few vectors. Such sets are called as basis of stem:[\mathbb{V}]. Consider a subset of stem:[\mathbb{V}], say stem:[S = \{\mathbf{v}_1, \dots, \mathbf{v}_n \} ] of vectors. The set stem:[S] is said to be basis of stem:[\mathbb{V}] if it has the following two properties:
 
 * stem:[S] spans stem:[\mathbb{V}], i.e, stem:[S] is a spanning set.
 * stem:[S] is linearly independent.
@@ -126,13 +133,15 @@ Consider stem:[\mathbb{V} = \mathbb{R}^2].
 * The set of vectors stem:[\{(1,2), (2,1)\}] is a spanning set, and linearly independent. Hence the set is a basis of stem:[\mathbb{V}].
 * The set of vectors stem:[\{(1,0), (0,1)\}] is a spanning set, and linearly independent. Hence this set is also a basis of stem:[\mathbb{V}].
 
+NOTE: The vectors don't have to be perpendicular to say they are linearly independent. If we are not able to represent a vector in terms of the other, then they are linearly independent.
+
 There can be many basis for a vector space stem:[\mathbb{V}].
 
 == Dimension of a Vector Space ==
 
 *Theorem 1:* Any spanning set (with linearly dependent or independent vectors) will always have equal or more number of elements than any basis, i.e., size of the spanning set is stem:[\geq] to the size of the basis set.
 
-Say the spanning set has stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_p\}] and basis set has stem:[\{\mathbf{b}_1, \dots, \mathbf{b}_q\}] (none of the vectors are common). Now we need to show that stem:[p \geq q].
+Say the spanning set has stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_p\}] and basis set has stem:[\{\mathbf{b}_1, \dots, \mathbf{b}_q\}] (none of the vectors are common between the two sets). Now we need to show that stem:[p \geq q].
 
 *Theorem 2:* Any basis of a vector space will have the same cardinality, i.e., the same number of elements.
 
@@ -166,7 +175,7 @@ A vector by itself doesn't have a dimension. A subspace/space has a dimension. F
 What's the largest linearly independent set in stem:[\{\mathbf{0}\}]? The only subsets in it are the empty set and the whole set. But any set containing the zero vector is linearly dependent; conversely, the empty set is certainly linearly independent (because we can't find a zero linear combination with non zero coefficients out of its elements). So the only linearly independent set in stem:[\{\mathbf{0}\}] is the empty set that has zero elements.
 ====
 
-If the basis has finite number of elements, then it is a finite-dimensional vector space. If there is no spanning set with finite number of elements, then it is called infinite-dimensional vector space.
+If the basis has finite number of elements, then it is a finite-dimensional vector space. If there is no spanning set with finite number of elements, then it is called infinite-dimensional vector space. Here we will discuss only about the finite-dimensional vector spaces.
 
 *Examples:*
 

@@ -1,0 +1,140 @@
+= Projections =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Definition ==
+Given a set of vectors stem:[S \subseteq \mathbb{V}] and stem:[\mathbf{v} \in \mathbb{V}], then we can talk about projection of stem:[\mathbf{v}] onto stem:[S], denoted by stem:[\pi_S(\mathbf{v})]. Projection can be defined as the set of all vectors in stem:[S] that are closest to stem:[\mathbf{v}].
+
+[stem]
+++++
+\pi_S(\mathbf{v}) = \arg \min_{\mathbf{s} \in S} \| \mathbf{v} - \mathbf{s} \|
+++++
+
+Here our objective is to minimize the distance between stem:[\mathbf{v}] and a variable vector stem:[\mathbf{s}]. Projection is defined as a set of vectors because more than one stem:[\mathbf{s} \in S] can be closest to stem:[\mathbf{v}].
+
+In Euclidean space, say stem:[S] is the set of all points in this unit disc. And stem:[\mathbf{v} = (2,2)^\top]. We measure distance between each point (each vector) in stem:[S] and stem:[\mathbf{v}]. And pick those points for which the distance is minimum. Such points are called as projections of stem:[\mathbf{v}] onto stem:[S].
+
+image::.\images\projections_01.png[align='center']
+
+TIP: When the set stem:[S] contains only one point, then projection of stem:[\mathbf{v}] onto stem:[S] will be that single point.
+
+Projection refers to mapping a vector onto a subspace of a vector space. The most common projection is onto a subspace of lower dimension.
+
+== Projection onto One-dimensional Subspace ==
+When we say projection of a vector stem:[\mathbf{v}] onto another vector stem:[\mathbf{w}], we mean the projection of stem:[\mathbf{v}] onto the linear span of stem:[\mathbf{w}]. In the Euclidean stem:[\mathbb{R}^2] space, this can be seen as
+
+image::.\images\projections_02.png[align='center']
+
+Fix a vector space stem:[(\mathbb{V}, + , \cdot, \langle \cdot, \cdot \rangle)] with inner product induced norm. And say the dimension of this vector space is stem:[N], where stem:[N>1].
+
+Let's project stem:[\mathbf{v}] onto the linear span of stem:[\mathbf{w}]. Here stem:[S = \text{Linear Span}(\{\mathbf{w}\})]. This forms a one-dimensional subspace of the corresponding vector space. Basis of this subspace is stem:[\{\mathbf{w}\}].
+
+*Theorem:* The vector stem:[\pi_S(\mathbf{v}) - \mathbf{v}] is orthogonal to stem:[\mathbf{w}], i.e, stem:[\langle \pi_S(\mathbf{v}) - \mathbf{v}, \mathbf{w} \rangle = 0].
+
+*Proof:*
+
+[stem]
+++++
+\begin{align*}
+\pi_S(\mathbf{v}) & = \arg \min_{\mathbf{s} \in S} \| \mathbf{v} - \mathbf{s} \| \\
+& =  \mathbf{w} \left( \arg \min_{\lambda \in \mathbb{R}} \| \mathbf{v} - \lambda \mathbf{w} \| \right) \\
+& =  \mathbf{w} \left( \arg \min_{\lambda \in \mathbb{R}} \| \mathbf{v} - \lambda \mathbf{w} \|^2 \right) && \text{since norm } \geq 0 \\
+& =  \mathbf{w} \left( \arg \min_{\lambda \in \mathbb{R}} \langle \mathbf{v} - \lambda \mathbf{w}, \mathbf{v} - \lambda \mathbf{w} \rangle \right) \\
+& =  \mathbf{w} \left( \arg \min_{\lambda \in \mathbb{R}} \lambda^2 \| \mathbf{w} \|^2  + \| \mathbf{v} \|^2 - 2\lambda \langle \mathbf{v}, \mathbf{w} \rangle \right) && \text{linearity property }  \\
+\end{align*}
+++++
+
+On differentiating the objective function and setting it to 0.
+
+[stem]
+++++
+\begin{align*}
+\frac{d }{d\lambda}  \lambda^2 \| \mathbf{w} \|^2  + \| \mathbf{v} \|^2 - 2\lambda \langle \mathbf{v}, \mathbf{w} \rangle & = 0 \\
+2 \lambda^* \| \mathbf{w} \|^2 -2 \langle \mathbf{v}, \mathbf{w} \rangle & = 0 \\
+\lambda^* \| \mathbf{w} \|^2 & =  \langle \mathbf{v}, \mathbf{w} \rangle \\
+\lambda^*  & =  \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} 
+\end{align*}
+++++
+
+Therefore, the stem:[\mathbf{s}] that minimize the distance from stem:[\mathbf{v}] is
+
+[stem]
+++++
+\mathbf{s} = \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} \mathbf{w} = \langle \mathbf{v} , \frac{\mathbf{w}}{\| \mathbf{w} \|} \rangle \frac{\mathbf{w} }{\| \mathbf{w} \|} = \pi_{S}(\mathbf{v})
+++++
+
+This vector is our projection point stem:[\pi_S(\mathbf{v})]. And this is the formula to find the projection of stem:[\mathbf{v}] onto stem:[S] (linear span of stem:[\mathbf{w}]). In such cases, there exists a projection point and it is unique.
+
+Continuing with our proof, we need to prove that stem:[\langle \pi_S(\mathbf{v}) - \mathbf{v}, \mathbf{w} \rangle = 0].
+
+[stem]
+++++
+\begin{align*}
+& = \langle \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} \mathbf{w} - \mathbf{v}, \mathbf{w} \rangle \\
+& = \langle \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} \mathbf{w}, \mathbf{w} \rangle - \langle \mathbf{v}, \mathbf{w} \rangle \\
+& = \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2}  \langle \mathbf{w}, \mathbf{w} \rangle - \langle \mathbf{v}, \mathbf{w} \rangle = 0
+\end{align*}
+++++
+
+The projection point stem:[\pi_{S}(\mathbf{v})] is still an stem:[n-] dimensional vector and not a scalar. However, we no longer require stem:[n] coordinates to represent the projection, but only a single coordinate (stem:[\lambda]) if we want to express it with respect to the basis vector stem:[\mathbf{w}].
+
+== Projection Matrix ==
+Since projection is a linear mapping, there exists a projection matrix stem:[\mathbf{P}_{\pi}], such that stem:[\pi_S(\mathbf{v}) = \mathbf{P}_{\pi} \mathbf{v} ].
+
+Given a vector stem:[\mathbf{v}], its projection onto the one-dimensional subspace formed by the linear span of stem:[\mathbf{w}] is given by
+
+[stem]
+++++
+\pi_S(\mathbf{v}) = \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} \mathbf{w}
+++++
+
+Where stem:[S = \text{Linear Span}(\{\mathbf{w}\})]. Though the following is valid for any vector space, let's restrict ourselves to the Euclidean vector space. 
+
+[stem]
+++++
+\pi_S(\mathbf{v}) = \frac{\mathbf{w}^\top \mathbf{v}}{\| \mathbf{w} \|^2} \mathbf{w} = \mathbf{w} \frac{\mathbf{w}^\top \mathbf{v}}{\| \mathbf{w} \|^2} = \frac{\mathbf{w} \mathbf{w}^\top}{\| \mathbf{w} \|^2} \mathbf{v}
+++++
+
+We see that the projection matrix is then
+
+[stem]
+++++
+\mathbf{P}_{\pi} = \frac{\mathbf{w} \mathbf{w}^\top}{\| \mathbf{w} \|^2}
+++++
+
+This is a symmetric matrix of rank 1. This matrix projects any vector stem:[\mathbf{v}\in \mathbb{R}^n] onto the line through the origin with direction stem:[\mathbf{w}].
+
+=== Example ===
+Find the projection matrix stem:[\textbf{P}_\pi] onto the line through the origin spanned by 
+stem:[\mathbf{w} =\begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}].
+
+Projection matrix stem:[\mathbf{P}_\pi]
+[stem]
+++++
+\mathbf{P}_\pi=\frac{\mathbf{w}\mathbf{w}^\top}{\|\mathbf{w}\|^{2}} = \frac{1}{9} \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}
+\begin{bmatrix} 1 & 2 & 2 \end{bmatrix} = \frac{1}{9} \begin{bmatrix} 1 & 2 & 2 \\ 2 & 4 & 4 \\ 2 & 4 & 4 \end{bmatrix}
+++++
+
+Let's choose stem:[\mathbf{v}=\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}]. The projection of stem:[\mathbf{v}] onto the line is
+[stem]
+++++
+\pi_S(\mathbf{v})=\mathbf{P}_\pi \mathbf{v}= \frac{1}{9} \begin{bmatrix} 1 & 2 & 2 \\ 2 & 4 & 4 \\ 2 & 4 & 4 \end{bmatrix} 
+\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} = \frac{1}{9} \begin{bmatrix} 5 \\ 10 \\ 10 \end{bmatrix} \in 
+span(\begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix} ) 
+++++
+
+This is the projection of stem:[\mathbf{v}] onto the linear span of stem:[\mathbf{w}].
+
+== Uniqueness and Existence ==
+Projection can sometimes result in no solution or many solutions. Let's consider the Euclidean space.
+
+* Left graph: Let stem:[S] be the union of set of all points in the x-axis and y-axis. And stem:[\mathbf{v}=(1,1)^\top]. Then stem:[\pi_S(\mathbf{v}) = \{(1,0)^\top, (0,1)^\top\}]. Here we have many solutions. So projection need not be unique.
+* Right graph: Let stem:[S] be the set of points in the unit disc excluding the boundary points, i.e., set of all vectors whose length is strictly less than 1. And stem:[\mathbf{v}=(2,2)^\top]. Then stem:[\pi_S(\mathbf{v}) = \phi]. Here we have no solution. So projection doesn't exist.
++
+image::.\images\projections_03.png[align='center']
+
+* When the set on which we are projecting is a linear set (linear subspace), then projection always exists and it is unique.

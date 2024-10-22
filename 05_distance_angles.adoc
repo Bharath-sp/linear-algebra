@@ -1,0 +1,85 @@
+= Distance and Angles =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Distance ==
+Consider a vector space (any vector space) with an inner product and a norm. We can define distance between two vectors. Distance is a binary operator stem:[\text{dist}(\cdot, \cdot)] which takes in two vectors and gives a non-negative scalar such that the following properties are satisfied:
+
+. Non-negativity: stem:[\text{dist}(\mathbf{v}, \mathbf{w}) \geq 0 \hspace{1cm} \forall \mathbf{v}, \mathbf{w} \in \mathbb{V} ].
+. Positive definiteness: stem:[\text{dist}(\mathbf{v}, \mathbf{w}) = 0 \text{ iff } \mathbf{v} = \mathbf{w} \hspace{1cm} \forall \mathbf{v}, \mathbf{w} \in \mathbb{V} ].
+. Symmetry: stem:[\text{dist}(\mathbf{v}, \mathbf{w}) = \text{dist}(\mathbf{w}, \mathbf{v}) \hspace{1cm} \forall \mathbf{v}, \mathbf{w} \in \mathbb{V}].
+. Triangle inequality: stem:[\text{dist}(\mathbf{u}, \mathbf{w}) \leq \text{dist}(\mathbf{u}, \mathbf{v}) + \text{dist}(\mathbf{v}, \mathbf{w}) \hspace{1cm} \forall \mathbf{u, v, w} \in \mathbb{V}].
+
+The default distance in a vector space is the norm induced distance, stem:[\text{dist}(\mathbf{v}, \mathbf{w}) \equiv \| \mathbf{v} - \mathbf{w} \|]. From this, we can see that norm of a vector is the distance between the vector and the vector stem:[\mathbf{0}].
+
+We can define other distance as well. Distance is also known as metric.
+
+In the vector space of zero mean random variables with default inner product and norm, the default distance is
+
+[stem]
+++++
+\begin{align*}
+\text{dist}(X, Y) \equiv \| X-Y \| = \sqrt{\langle X-Y, X-Y \rangle} & = \sqrt{\mathbb{E}[(X-Y)(X-Y)]} \\
+& = \sqrt{\mathbb{E}[X^2] + \mathbb{E}[Y^2] - 2\mathbb{E}[XY] }
+\end{align*}
+++++
+
+This is a non-negative quantity as we have stem:[\sqrt{\mathbb{E}[(X-Y)^2\]}].
+
+== Angle ==
+Consider a vector space (any vector space) with an inner product and a norm. We can define angle between any two vectors. Angle is a binary operator stem:[\angle \cdot, \cdot] which takes in two vectors and gives angle between 0 and stem:[2\pi].
+
+The default angle is the angle induced by inner product and norm
+
+[stem]
+++++
+\cos \angle \mathbf{v}, \mathbf{w} \equiv \frac{\langle  \mathbf{v}, \mathbf{w} \rangle }{\| \mathbf{v} \| \| \mathbf{w} \| }
+++++
+
+This is well-defined as we know the RHS lies between -1 and 1. This follows from Cauchy-Schwartz inequality. Intuitively stem:[\langle  \mathbf{v}, \mathbf{w} \rangle] measures how aligned the vectors are. If the vectors are aligned, their inner produt is more. If they are misaligned, their inner product is less.
+
+In the vector space of zero mean random variables with default inner product and norm, the default angle is
+
+[stem]
+++++
+\cos \angle X, Y \equiv \frac{\mathbb{E}[XY] }{ \sqrt{\mathbb{E}[X^2]} \sqrt{\mathbb{E}[Y^2]} } = \rho
+++++
+
+This is correlation coefficient. The angle between two random variables can be found by stem:[\cos^{-1}(\rho)].
+
+=== Orthogonality ===
+Two vectors in a vector space (any vector space) are orthogonal if and only if the angle between them is stem:[90^\circ].
+
+[stem]
+++++
+\angle \mathbf{v}, \mathbf{w} = 90^\circ \iff \cos \angle \mathbf{v}, \mathbf{w} = 0 \iff \langle  \mathbf{v}, \mathbf{w} \rangle = 0
+++++
+
+We can also say that the two vectors are orthogonal when their inner product is zero.
+
+Some properties of orthogonality and the zero vector:
+
+* stem:[\mathbf{0}] is orthogonal to every vector in stem:[\mathbb{V}].
+* stem:[\mathbf{0}] is the only vector in stem:[\mathbb{V}] that is orthogonal to itself.
+
+In the vector space of zero mean random variables with usual inner product, norm, and angle, two random variables are orthogonal when stem:[\rho=0], which means they are uncorrelated. Independent RVs are also uncorrelated, therefore they are also orthogonal. But not vice-versa, i.e., there could be orthogonal RVs that are dependent.
+
+But for Gaussian RVs, orthogonality also implies statistical independence.
+
+=== Orthogonal Basis ===
+A basis in which every vector in it is orthogonal to the other vector. Such a basis is known as orthogonal basis.
+
+== Convergence ==
+Once we have the notion of distance, we can talk about the notion of convergence (or limits) of sequence of vectors. Let stem:[\{\mathbf{v}_1, \mathbf{v}_2, \dots,  \mathbf{v}_m, \dots\}] be an infinite sequence of vectors. We say this sequence converges to a vector stem:[\mathbf{v}] if
+
+For every tolerance stem:[\epsilon >0], there exists a stage stem:[N] in the sequence beyond which stem:[\text{dist}(\mathbf{v}, \mathbf{v}_m) \leq \epsilon \hspace{1cm} \forall m \geq N]. Then we say the sequence of vectors converges to stem:[\mathbf{v}].
+
+== Others Spaces ==
+* An inner product space which is `complete` (a complete set) with default norm and distance is a called a Hilbert space.
+* A vector space (without an inner product) with only a norm defined is known as normed vector space.
+* A vector space (without an inner product) with only a metric (distance) defined is known as metric space.
+
