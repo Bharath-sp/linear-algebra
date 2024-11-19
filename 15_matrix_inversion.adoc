@@ -1,0 +1,242 @@
+= Matrix Inversion =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Matrix Inversion ==
+A matrix stem:[\mathbf{A}_{m \times n}] is invertible if and only if stem:[m = n= rank(\mathbf{A})]. In such case, the null space and the left null space are stem:[\{\mathbf{0}\}]. The column space and the row space are spanning the entire spaces.
+
+* If stem:[m > n] and stem:[rank(\mathbf{A}) = n], then the transformation is one-to-one.
+* If stem:[m < n] and stem:[rank(\mathbf{A}) = m], then the transformation is onto.
+* If the stem:[rank(\mathbf{A}) = m = n], then the transformation is bijective.
+* If stem:[rank(\mathbf{A}) < m] and stem:[rank(\mathbf{A}) < n], i.e., stem:[rank(\mathbf{A}) < \min(m,n)] then the transformation is neither one-to-one nor onto.
+
+== One-to-One Mapping Matrix ==
+Suppose stem:[m > n] and stem:[rank(\mathbf{A}) = n]. This says that the number of LI columns and number of LI rows is stem:[n]. We have only stem:[n] columns. Thus the matrix has *full column rank*. These stem:[n] LI vectors can span stem:[\mathbb{R}^n] space which is the column space of stem:[\mathbf{A}]. Thus stem:[rank(\mathbf{A}) = dim(\mathcal{C}(A))].
+
+The property of the matrix is that for any stem:[\mathbf{x}_1, \mathbf{x}_2 \in \mathbb{R}^n], stem:[\mathbf{Ax}_1 = \mathbf{b}_1] and stem:[\mathbf{Ax}_2 = \mathbf{b}_2] implies that stem:[\mathbf{x}_1 = \mathbf{x}_2]. Since the mapping is not onto, there can be a vector stem:[\mathbf{b} \in \mathbb{R}^m] for which we cannot even find a single vector stem:[\mathbf{x} \in \mathbb{R}^n] that maps to stem:[\mathbf{b}].
+
+In such a case, if we want to talk about the inverse, i.e., mapping from stem:[\mathbf{b}] to stem:[\mathbf{x}], what should be the property of such stem:[\mathbf{x}]?
+
+image::.\images\one_to_one_matrix.png[align='center', 700, 400]
+
+The stem:[\mathbf{x}] should be in such a way that stem:[\mathbf{Ax}] should be closest to stem:[\mathbf{b}].
+
+[latexmath#eq-1,reftext=Equation 1]
+++++
+\begin{equation}
+\mathbf{A}^{-1} \mathbf{b} \equiv \arg \min_{\mathbf{x} \in \mathbb{R}^n } \| \mathbf{Ax} - \mathbf{b} \|
+\end{equation}
+++++
+
+Scan all the stem:[\mathbf{x} \in \mathbb{R}^n ] and pick the one for which stem:[\| \mathbf{Ax} - \mathbf{b} \|] is the minimum. That stem:[\mathbf{x}] when multiplied with stem:[\mathbf{A}] goes as close as possible to stem:[\mathbf{b}]. Since norm is non-negative, the minimizer of stem:[\| \mathbf{Ax} - \mathbf{b} \|] and stem:[\| \mathbf{Ax} - \mathbf{b} \|^2] will be the same. Such stem:[\mathbf{x}] is the least squares solution. 
+
+[stem]
+++++
+\begin{align*}
+\arg \min_{\mathbf{x} \in \mathbb{R}^n } \frac{1}{2} \| \mathbf{Ax} - \mathbf{b} \|^2 & = \arg \min_{\mathbf{x} \in \mathbb{R}^n } \frac{1}{2} (\mathbf{Ax} - \mathbf{b} )^\top (\mathbf{Ax} - \mathbf{b} ) \\
+& = \arg \min \frac{1}{2} (\mathbf{x}^\top \mathbf{A}^\top - \mathbf{b}^\top) (\mathbf{Ax} - \mathbf{b} ) \\
+& = \arg \min \frac{1}{2} (\mathbf{x}^\top \mathbf{A}^\top \mathbf{Ax} - \mathbf{b}^\top \mathbf{Ax} - \mathbf{x}^\top \mathbf{A}^\top \mathbf{b} + \mathbf{b}^\top\mathbf{b}) \\
+& = \arg \min \frac{1}{2} (\mathbf{x}^\top \mathbf{A}^\top \mathbf{Ax} - 2\mathbf{x}^\top \mathbf{A}^\top \mathbf{b} + \mathbf{b}^\top\mathbf{b}) \\
+& = \arg \min \frac{1}{2} \mathbf{x}^\top \mathbf{A}^\top \mathbf{Ax} - \mathbf{x}^\top \mathbf{A}^\top \mathbf{b} \\
+\end{align*}
+++++
+
+[NOTE]
+====
+Solving the quadratic by completing the squares:
+
+If we have stem:[x^2 + x+1], we write it as stem:[x^2 + x + (\frac{1}{2})^2 + 1 - (\frac{1}{2})^2 \implies (x+\frac{1}{2})^2 + \frac{3}{4}]. The minimizer of this function is simply stem:[x = - \frac{1}{2}].
+====
+
+Our goal is to minimize stem:[f(\mathbf{x}) = \frac{1}{2} \mathbf{x}^\top \mathbf{A}^\top \mathbf{Ax} - \mathbf{x}^\top \mathbf{A}^\top \mathbf{b}]. Rewriting the linear term as stem:[- \mathbf{x}^\top \mathbf{A}^\top \mathbf{b} = - (\mathbf{A}^\top \mathbf{b})^\top \mathbf{x}]. So we have stem:[f(\mathbf{x}) = \frac{1}{2} \mathbf{x}^\top \mathbf{A}^\top \mathbf{Ax} - (\mathbf{A}^\top \mathbf{b})^\top \mathbf{x}].
+
+Add and subtract the term stem:[\frac{1}{2} (\mathbf{A}^\top \mathbf{b})^\top (\mathbf{A}^\top \mathbf{A})^{-1} (\mathbf{A}^\top \mathbf{b})], assuming stem:[\mathbf{A}^\top \mathbf{A}] is invertible. Then we get
+
+[stem]
+++++
+f(\mathbf{x}) = \frac{1}{2} \left( \mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b} \right)^\top \mathbf{A}^\top \mathbf{A} \left(\mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b} \right) + \text{const}
+++++
+
+The `term` (leaving out the constant) is always non-negative because
+
+[stem]
+++++
+\left( \mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b} \right)^\top \mathbf{A}^\top \mathbf{A} \left(\mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b} \right) = \|\mathbf{A}(\mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b}) \|^2
+++++
+
+So the function stem:[f(\mathbf{x})] is minimized when the term equals 0. Let stem:[\mathbf{y} = \mathbf{A}(\mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b})]. Then we are looking for stem:[\mathbf{y}^\top \mathbf{y} = 0], which happens if and only if stem:[\mathbf{y} = \mathbf{0}].
+
+Then stem:[\mathbf{A}(\mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b}) =  \mathbf{0} \implies \mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b}] should be a vector in the null space of stem:[\mathbf{A}]. From our definition of stem:[\mathbf{A}], we know that stem:[dim(\mathcal{C}(A)) = n]. From the rank-nullity theorem
+
+[stem]
+++++
+dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) = n
+++++
+
+which implies stem:[dim(\mathcal{N}(\mathbf{A})) =0]. The null space has only stem:[\{\mathbf{0}\}] vector. Thus stem:[\mathbf{x} - (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b} = \mathbf{0}]. Then stem:[\mathbf{x} = (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b}]. This is the only stem:[\mathbf{x}] for which the term takes the value 0. Hence this is the only minimizer.
+
+[stem]
+++++
+\mathbf{A}^{-1} \mathbf{b} = (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b}
+++++
+
+====
+So when stem:[m > n] and stem:[rank(\mathbf{A}) = n], the inverse matrix of stem:[\mathbf{A}] is defined as stem:[(\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top]. This takes stem:[\mathbf{b}] and gives us that stem:[\mathbf{x}] for which stem:[\mathbf{Ax}] is closest to stem:[\mathbf{b}].
+====
+
+This is a one-sided inverse, and it is called as *left inverse*, denoted by stem:[\mathbf{A}^l]. When we pre-multiply stem:[\mathbf{A}],
+
+[stem]
+++++
+\mathbf{A}^l\mathbf{A} = (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{A} = \mathbf{I}
+++++
+
+image::.\images\one_to_one_matrix_03.png[align='center', 700, 400]
+
+* When we take a stem:[\mathbf{x}_1 \in \mathbb{R}^n], transform it, we get the vector stem:[\mathbf{Ax}_1] in stem:[\mathbb{R}^m]. On transforming it back, this inverse matrix gives us the perfect inverse stem:[\mathbf{A}^l\mathbf{Ax}_1 = \mathbf{x}_1].
+
+* When we take a stem:[\mathbf{b} \in \mathbb{R}^n], transform it, we get a vector stem:[\mathbf{A}^l\mathbf{b}] in stem:[\mathbb{R}^n]. On transforming it back, we won't get the perfect inverse stem:[\mathbf{A}\mathbf{A}^l\mathbf{b} \ne \mathbf{b}]. It gets us to a point in stem:[\mathbb{R}^m] that is closest to stem:[\mathbf{b}].
+
+Different view point: 
+
+From the fundamental theorem of linear algebra, we know that any vector stem:[\mathbf{b} \in \mathbb{R}^m] can be uniquely expressed as the sum of one vector from the column space and one vector from the left null space because these two subspaces are orthogonal complements of each other. We project stem:[\mathbf{b}] onto the column space and onto the left null space. These two projections added up give stem:[\mathbf{b}].
+
+image::.\images\one_to_one_matrix_02.png[align='center', 300, 300]
+
+The projection of stem:[\mathbf{b}] onto the column space is considered as our required stem:[\mathbf{Ax}]. For this point, we can exactly find the inverse. But we can't find the inverse for the projection of stem:[\mathbf{b}] onto the left null space. This is the error that we leave out in stem:[\mathbf{b}]. And we keep only the component of stem:[\mathbf{b}] which is the projection of it onto the column space.
+
+[latexmath#eq-2,reftext=Equation 2]
+++++
+\begin{equation}
+\pi_{\mathcal{C}(\mathbf{A})}(\mathbf{b}) = \mathbf{AA}^{-1} \mathbf{b}
+\end{equation}
+++++
+
+Then the vector stem:[\mathbf{Ax} - \mathbf{b}] is orthogonal to the column space of stem:[\mathbf{A}]. Then it should be in the left null space
+
+[stem]
+++++
+\begin{align*}
+\mathbf{A}^\top (\mathbf{Ax} - \mathbf{b}) & = \mathbf{0} \\
+\mathbf{A}^\top (\mathbf{AA}^{-1} \mathbf{b} - \mathbf{b}) & = \mathbf{0} \implies \mathbf{A}^\top \mathbf{AA}^{-1} \mathbf{b} = \mathbf{A}^\top \mathbf{b} \\
+\mathbf{A}^{-1} \mathbf{b} = (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b} 
+\end{align*}
+++++
+
+Assuming stem:[\mathbf{A}^\top \mathbf{A}] is invertible. Thus <<eq-1>> and <<eq-2>> give us the same result.
+
+IMPORTANT: A matrix (or the transformation) is one-to-one if and only if stem:[\mathcal{N}(\mathbf{A}) = \{\mathbf{0}\}]. In other words, a matrix is one-to-one if stem:[\mathcal{R}(\mathbf{A}) = V].
+
+
+== Onto Mapping Matrix ==
+Suppose stem:[m < n] and stem:[rank(\mathbf{A}) = m]. This says that the number of LI columns and number of LI rows is stem:[m]. We have only stem:[m] rows. Thus the matrix has *full row rank*. These stem:[m] LI vectors can span stem:[\mathbb{R}^m] space which is the row space of stem:[\mathbf{A}]. Thus stem:[rank(\mathbf{A}) = dim(\mathcal{R}(A))].
+
+The property of the matrix is that, it can map several stem:[\mathbf{x}'s \in \mathbb{R}^n] to the same stem:[\mathbf{b} \in \mathbb{R}^m]. In such a case, if we want to talk about the inverse, i.e., mapping from stem:[\mathbf{b}] to stem:[\mathbf{x}], what should be the property of such stem:[\mathbf{x}]? Since the mapping is onto, we can ensure that stem:[\mathbf{A}^{-1}] maps stem:[\mathbf{b}] back to one of those stem:[\mathbf{x}]'s. But how do we select a particular stem:[\mathbf{x}]? 
+
+It is up to us to decide a good stem:[\mathbf{x}].
+
+image::.\images\onto_matrix_01.png[align='center', 600, 400]
+
+We may have stem:[\mathbf{x}_1] transformed to stem:[\mathbf{b}]. But when we do map back, we may map stem:[\mathbf{b}] to stem:[\mathbf{x}_2]. This is the error. We choose to map back to that stem:[\mathbf{x}] which is closest to stem:[\mathbf{0}].
+
+[latexmath#eq-3,reftext=Equation 3]
+++++
+\begin{equation}
+\mathbf{A}^{-1} \mathbf{b} \equiv \arg \min_{\mathbf{x} \in \mathbb{R}^n } \| \mathbf{x} \|^2 \text{  such that } \mathbf{Ax} = \mathbf{b}
+\end{equation}
+++++
+
+The condition stem:[\mathbf{Ax} = \mathbf{b}] is mandatory, the other condition is up to us to define. The standard way is to choose stem:[\mathbf{x}] which is closest to stem:[\mathbf{0}], and such stem:[\mathbf{x}] is known as minimum normed solution.
+
+This is a constrained optimization problem, solving this gives us
+
+[stem]
+++++
+\mathbf{A}^{-1} \mathbf{b} = \mathbf{A}^\top (\mathbf{A} \mathbf{A}^\top)^{-1} \mathbf{b}
+++++
+
+====
+So when stem:[m < n] and stem:[rank(\mathbf{A}) = m], the inverse matrix of stem:[\mathbf{A}] is defined as stem:[\mathbf{A}^\top (\mathbf{A} \mathbf{A}^\top)^{-1}]. This takes stem:[\mathbf{b}] and gives us that stem:[\mathbf{x}] for which stem:[\mathbf{Ax} = \mathbf{b}] and stem:[\mathbf{x}] is closest to stem:[\mathbf{0}].
+====
+
+This is a one-sided inverse, and it is called as *right inverse*, denoted by stem:[\mathbf{A}^r]. When we post-multiply stem:[\mathbf{A}],
+
+[stem]
+++++
+\mathbf{A}\mathbf{A}^r = \mathbf{A} \mathbf{A}^\top (\mathbf{A} \mathbf{A}^\top)^{-1} = \mathbf{I}
+++++
+
+image::.\images\onto_matrix_02.png[align='center', 600, 400]
+
+* Taking a stem:[\mathbf{b} \in \mathbb{R}^m], we can go to a stem:[\mathbf{A}^r \mathbf{b} = \mathbf{x}_1 \in \mathbb{R}^n]. On transforming it back, this inverse matrix gives us the perfect inverse stem:[\mathbf{A} \mathbf{A}^r \mathbf{b} = \mathbf{b}].
+
+* Taking an stem:[\mathbf{x} \in \mathbb{R}^n], we can go to a stem:[\mathbf{b} \in \mathbb{R}^m]. But this stem:[\mathbf{b}] cannot be exactly mapped back to the source stem:[\mathbf{x}], stem:[\mathbf{A}^r \mathbf{Ax} \ne \mathbf{x}]. The matrix stem:[\mathbf{A}^r] maps the vector stem:[\mathbf{b}] to an stem:[\mathbf{x}] which is closest to stem:[\mathbf{0}].
+
+IMPORTANT: A matrix (or the transformation) is onto if and only if stem:[\mathcal{N}(\mathbf{A}^\top) = \{\mathbf{0}\}]. In other words, a matrix is onto if stem:[\mathcal{C}(\mathbf{A}) = W].
+
+== Neither One-to-One nor Onto ==
+If stem:[rank(\mathbf{A}) < m] and stem:[rank(\mathbf{A}) < n], then the transformation is neither one-to-one nor onto.
+
+* There are some stem:[\mathbf{b}'s \in \mathbb{R}^m] for which we cannot find even a single stem:[\mathbf{x} \in \mathbb{R}^n] such that stem:[\mathbf{Ax} = \mathbf{b}]. In such case, we need to get an stem:[\mathbf{x}] such that stem:[\mathbf{Ax}] is nearest to stem:[\mathbf{b}]. So our stem:[\mathbf{x}] should be such that 
++
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n} \| \mathbf{Ax} - \mathbf{b}\|^2
+++++
+* There are some stem:[\mathbf{x}'s \in \mathbb{R}^n] which map to the same stem:[\mathbf{b} \in \mathbb{R}^m]. So stem:[\mathbf{b}] maps back to several stem:[\mathbf{x}]'s. In such case, we need to get an stem:[\mathbf{x}] that is closest to stem:[\mathbf{0}].
++
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n } \| \mathbf{x} \|^2 \text{  such that } \mathbf{Ax} = \mathbf{b}
+++++
++
+And by definition, we see that for such stem:[\mathbf{x}], the first objective function stem:[\| \mathbf{Ax} - \mathbf{b}\|] is 0. We sum both the objectives and we should get an stem:[\mathbf{x}] which
+
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \| \mathbf{x} \|^2 + \frac{1}{2} \| \mathbf{Ax} - \mathbf{b}\|^2 
+++++
+
+Here stem:[\mathbf{Ax} \ne \mathbf{b}], then the second objective function is not 0. Then the need of trade-off arises because in many cases, it's not possible to simultaneously achieve both a minimal norm solution and a least squares solution.
+
+One way to handle this is to give a very low weightage stem:[\delta] to the first objective function, i.e., we give more weightage to finding stem:[\mathbf{x}] that is the least squares solution that the minimum normed solution. This weight should be a positive number. If it was a negative number, we end up with the solution stem:[\mathbf{x}] whose norm is the maximum. If it was 0, we end up solving only the least squares problem.
+
+Then we define the inverse of stem:[\mathbf{A}] as
+
+[stem]
+++++
+\mathbf{A}^{-1} \mathbf{b} = \lim_{\delta \downarrow 0} \arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{\delta}{2} \| \mathbf{x} \|^2 + \frac{1}{2} \| \mathbf{Ax} - \mathbf{b}\|^2 
+++++
+
+This is a function of stem:[\delta]. For each stem:[\delta], we get an stem:[\mathbf{x}] as the solution.
+
+This inverse can be seen as the generalization of the above two inverses:
+
+* In the one-to-one case we have stem:[\mathbf{Ax} \ne \mathbf{b}]. As the weightage given to the minimum normed solution is very small,  we end up with the least square solution that has the minimum norm.
+* In the onto case we have stem:[\mathbf{Ax} = \mathbf{b}], then the second term is 0. So we end up with the minimum normed solution.
+
+Solving this gives us
+
+[stem]
+++++
+\begin{align*}
+& = \arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \mathbf{x}^\top \mathbf{A}^\top \mathbf{Ax} + \frac{\delta}{2} \| \mathbf{x} \|^2 - \mathbf{x}^\top \mathbf{A}^\top \mathbf{b} + \text{const} \\
+& = \arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \mathbf{x}^\top (\mathbf{A}^\top \mathbf{A} + \delta \mathbf{I}) \mathbf{x} - \mathbf{x}^\top \mathbf{A}^\top \mathbf{b} \\
+\mathbf{A}^{-1} \mathbf{b} & = (\mathbf{A}^\top \mathbf{A} + \delta \mathbf{I})^{-1} \mathbf{A}^\top \mathbf{b}
+\end{align*}
+++++
+
+This is the general inverse stem:[\mathbf{A}^+] (also known as Pseudo inverse) of the matrix stem:[\mathbf{A}]. This inverse gives us the minimum normed least squares solution. But this is a function of stem:[\delta], so we choose
+
+[stem]
+++++
+\mathbf{A}^+ \equiv \lim_{\delta \downarrow 0} (\mathbf{A}^\top \mathbf{A} + \delta \mathbf{I})^{-1} \mathbf{A}^\top 
+++++
+
+* For any stem:[\delta >0], stem:[\mathbf{A}^\top \mathbf{A} + \delta \mathbf{I}] is always invertible. To show that a matrix is invertible, we need to show that stem:[rank(\mathbf{A}) = m = n]. As this is a square matrix, we have stem:[m=n]. Then if we show that the null space is only stem:[\mathbf{0}], we are essentially showing the column rank is full, this implies stem:[r_c = n = rank(\mathbf{A})]. So we need to only show that null space is only stem:[\mathbf{0}] (Homework).
+
+* For each value of stem:[\delta], we get a sequence of matrices. The limiting matrix in the sequence is taken as the pseudo-inverse. We can show that this limit always exists.

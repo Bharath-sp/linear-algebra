@@ -1,0 +1,169 @@
+= Operations Over Matrices =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Diagonal Matrices ==
+Let stem:[\mathbf{A}] be a stem:[n \times n] square matrix, i.e., it is a linear transformation that takes stem:[\mathbb{R}^n \to \mathbb{R}^n]. It is an operator which takes a vector and outputs a vector in the same space. Let's assume that the basis of both the original space and the range space is the same, stem:[\{\mathbf{b}_1, \dots, \mathbf{b}_n\}].
+
+Let stem:[\mathbf{A}] also be a diagonal matrix. What kind of transformation does it represent? It scales each dimension. For example,
+
+[stem]
+++++
+\begin{bmatrix}
+2 & 0 \\ 
+0 & 3 \\
+\end{bmatrix} \begin{bmatrix} \alpha_1 \\ \alpha_2 \end{bmatrix} = \begin{bmatrix} 2\alpha_1 \\ 3\alpha_2 \end{bmatrix}
+++++
+
+where stem:[\alpha_1] and stem:[\alpha_2] are the coefficients of the basis vectors of the original space, i.e, for any vector stem:[\mathbf{v} = \alpha_1 \mathbf{b}_1 + \alpha_2 \mathbf{b}_2 \in \mathbb{V}]
+
+* Here stem:[(\alpha_1, \alpha_2)] is with respect to the basis stem:[B_1]: stem:[\alpha_1 \mathbf{b}_1 + \alpha_2 \mathbf{b}_2].
+* And stem:[(2\alpha_1, 3\alpha_2)] is with respect to the basis stem:[B_2]: stem:[2\alpha_1 \mathbf{b}_1 + 3\alpha_2 \mathbf{b}_2].
+
+So the transformation is stem:[\mathcal{L}(\alpha_1 \mathbf{b}_1 + \alpha_2 \mathbf{b}_2) = 2\alpha_1 \mathbf{b}_1 + 3\alpha_2 \mathbf{b}_2 = \alpha_1 (2\mathbf{b}_1) + \alpha_2 (3\mathbf{b}_2) ]. This operation is equivalent to scaling all the vectors stem:[\mathbf{v} \in \mathbb{V}] (or) can also be seen as scaling the basis vectors.
+
+If the diagonal entries are stem:[>1], it expands the basis vectors. If the diagonal entries are stem:[<1], it contracts the basis vectors. So diagonal matrices scale the axes.
+
+== Orthogonal Matrices ==
+A square matrix stem:[n \times n] is said to be orthogonal if its columns are unit vectors and each column is orthogonal to the other column, stem:[\mathbf{c}_i \perp \mathbf{c}_j] for all stem:[i \ne j] and norm of the vector stem:[\| \mathbf{c}_i \| = 1]. We can also define it with rows: A square matrix is said to be orthogonal if its rows are unit vectors and each row is orthogonal to the other row.
+
+[stem]
+++++
+\mathbf{A} = \begin{bmatrix} \vdots & \vdots & \vdots \\ \mathbf{c}_1 & \dots & \mathbf{c}_n  \\ \vdots & \vdots & \vdots \end{bmatrix}_{n \times n}
+++++
+
+This is a transformation from stem:[\mathbb{R}^n \to \mathbb{R}^n]. Let's consider the matrix be relative to the standard bases of stem:[\mathbb{R}^n] (for both the domain and the range vector space). Then,
+
+[stem]
+++++
+\begin{bmatrix} \vdots & \vdots & \vdots \\ \mathbf{c}_1 & \dots & \mathbf{c}_n  \\ \vdots & \vdots & \vdots \end{bmatrix} \begin{bmatrix} \alpha_1 \\ \vdots \\ \alpha_n \end{bmatrix} = \alpha_1 \mathbf{c}_1 + \dots + \alpha_n \mathbf{c}_n
+++++
+
+* Here stem:[(\alpha_1, \dots, \alpha_n)] is with respect to the standard basis : stem:[\alpha_1 (1,0, \dots, 0) + \dots + \alpha_n (0,0, \dots, 1) = (\alpha_1, \dots, \alpha_n)]. Let's consider stem:[(\alpha_1, \dots, \alpha_n) = (1, \dots, 0)].
+* And the result will be stem:[\mathbf{c}_1]. This is with respect to the standard basis vectors, so it is the same vector.
+
+So the transformation is stem:[\mathcal{L}(1,0, \dots, 0) = \mathbf{c}_1]. Similarly we can show that stem:[\mathcal{L}(0,1, \dots, 0) = \mathbf{c}_2 \dots], and stem:[\mathcal{L}(0,0, \dots, 1) = \mathbf{c}_n]. And we know by definition stem:[\mathbf{c}_i \perp \mathbf{c}_j].
+
+image::.\images\orthogonal_matrix_01.png[align='center']
+
+Orthogonal matrices rotate the axes. The scale of the vectors remain the same. The rotation interpretation holds only when the basis vectors of the original space are orthogonal. If not, the rotation interpretation doesn't hold.
+
+NOTE: If we choose wrong bases, unnecessarily our transformations look complicated, i.e, our matrix looks complicated.
+
+== Operations Over Matrices ==
+Let's define some basic operations on matrices.
+
+=== Addition of Matrices ===
+When we have two matrices stem:[\mathbf{M}_1] and stem:[\mathbf{M}_2] of the same size, we can define the addition of two matrices. The result is a matrix obtained by adding corresponding entries in the matrices. We know that each matrix can be seen as a linear transformation (linear map). Say we have a transformation stem:[\mathcal{L}_1] corresponding to stem:[\mathbf{M}_1] and stem:[\mathcal{L}_2] corresponding to stem:[\mathbf{M}_2].
+
+Is the sum of the matrices of the two maps equal to the matrix of the sum of two linear maps?
+
+The sum of the two linear maps is defined as stem:[(\mathcal{L}_1 + \mathcal{L}_2 )(\mathbf{v}) \equiv \mathcal{L}_1(\mathbf{v}) + \mathcal{L}_2(\mathbf{v}) ]. The transformation stem:[\mathcal{L}_1(\mathbf{v}) + \mathcal{L}_2(\mathbf{v})] will be associated with a matrix, say stem:[\mathbf{M}_3]. So is it true that,
+
+[stem]
+++++
+\begin{align*}
+\mathbf{M}_1 + \mathbf{M}_2 & = \mathbf{M}_3 && \text{entry wise addition}\\
+\mathbf{M}_3 & \iff \mathcal{L}_1(\mathbf{v}) + \mathcal{L}_2(\mathbf{v}) ?
+\end{align*}
+++++
+
+Proof:
+
+Let's take square matrices and the bases of all the linear transformations the same, the standard bases vectors of stem:[\mathbb{R}^n].
+
+[stem]
+++++
+\mathbf{M}_1 = \begin{bmatrix} a_{11} & \dots & a_{1n} \\ 
+\vdots & \dots & \vdots  \\ 
+a_{n1} & \dots & a_{nn} \end{bmatrix}_{n \times n} \text{ and } 
+\mathbf{M}_2 = \begin{bmatrix} b_{11} & \dots & b_{1n} \\ 
+\vdots & \dots & \vdots  \\ 
+b_{n1} & \dots & b_{nn} \end{bmatrix}_{n \times n}
+++++
+
+Given a matrix, we find the linear transformation through matrix-vector multiplication by each standard basis. For stem:[\mathbf{M}_1]
+
+[stem]
+++++
+\begin{bmatrix} a_{11} & \dots & a_{1n} \\ 
+\vdots & \dots & \vdots  \\ 
+a_{n1} & \dots & a_{nn} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix} = \begin{bmatrix} a_{11} \\ a_{21} \\ \vdots \\ a_{n1} \end{bmatrix}
+++++
+
+Both the input and output vectors are with respect to the standard bases. So stem:[\mathcal{L}_1(1,0, \dots, 0) = (a_{11}, \dots, a_{n1})]. On doing for other basis vectors, stem:[\dots \mathcal{L}_1(0,0, \dots, 1) = (a_{1n}, \dots, a_{nn})].
+
+Similarly, for stem:[\mathbf{M}_2] we get, stem:[\mathcal{L}_2(1,0, \dots, 0) = (b_{11}, \dots, b_{n1}), \dots,  \mathcal{L}_2(0,0, \dots, 1) = (b_{1n}, \dots, b_{nn})]. Now we need to find the matrix associated with the transformation stem:[\mathcal{L}_1(\mathbf{v}) + \mathcal{L}_2(\mathbf{v})].
+
+We need to find the matrix stem:[\mathbf{M}_3] with respect to the standard bases of stem:[\mathbb{R}^n]. So we can evaluate each basis vector and put the result as a column of stem:[\mathbf{M}_3].
+
+[stem]
+++++
+\begin{align*}
+\mathcal{L}_1(1,0, \dots, 0) + \mathcal{L}_2(1,0, \dots, 0) & = (a_{11}, \dots, a_{n1}) + (b_{11}, \dots, b_{n1}) = (a_{11}+ b_{11}, \dots, a_{n1} + b_{n1}) \\
+\vdots \\
+\mathcal{L}_1(0,0, \dots, 1) + \mathcal{L}_2(0,0, \dots, 1) & = (a_{1n}, \dots, a_{nn}) + (b_{1n}, \dots, b_{nn}) = (a_{1n}+ b_{1n}, \dots, a_{nn} + b_{nn}) \\
+\end{align*}
+++++
+
+The matrix associated with the transformation stem:[\mathcal{L}_1(\mathbf{v}) + \mathcal{L}_2(\mathbf{v})] is
+
+[stem]
+++++
+\mathbf{M}_3 = \begin{bmatrix} a_{11}+ b_{11} & \dots & a_{1n}+ b_{1n} \\ 
+\vdots & \dots & \vdots  \\ 
+a_{n1} + b_{n1} & \dots & a_{nn} + b_{nn} \end{bmatrix}
+++++
+
+which is the addition of corresponding entries in the matrices stem:[\mathbf{M}_1] and stem:[\mathbf{M}_2]. Then
+
+[stem]
+++++
+\mathbf{M}(\mathcal{L}_1) + \mathbf{M}(\mathcal{L}_2) = \mathbf{M}(\mathcal{L}_1 + \mathcal{L}_2)
+++++
+
+The sum of the matrices of the two maps equal to the matrix of the sum of two linear maps. Assumption is that the same bases are used for all three linear maps stem:[\mathcal{L}_1, \mathcal{L}_2, \mathcal{L}_1 + \mathcal{L}_2].
+
+=== Scalar Multiplication of a Matrix ===
+The product of a scalar stem:[\lambda] and a matrix stem:[\mathbf{M}_1] is the matrix obtained by multiplying each entry in the matrix by the scalar stem:[\lambda \mathbf{M}_1]. The resulting matrix corresponds to the matrix of a scalar times a linear map.
+
+Let stem:[\mathcal{L}_1] be a linear map. Then stem:[\lambda \mathbf{M}(\mathcal{L}_1) = \mathbf{M}(\lambda \mathcal{L}_1) ]. The scalar multiplication of a matrix associated with stem:[\mathcal{L}_1] is equal to the matrix associated with scalar times of the linear map. The assumption is that the same bases are used for
+both linear maps stem:[\mathcal{L}_1] and stem:[\lambda \mathcal{L}_1].
+
+=== Product of Matrices ===
+Suppose stem:[\mathbf{A}] is stem:[m \times n] and stem:[\mathbf{C}] is stem:[n \times p] matrix. Then stem:[\mathbf{AC}] is defined to be the stem:[m \times p] matrix whose entry in row stem:[i], column stem:[j] is given by
+
+[stem]
+++++
+(\mathbf{AC})_{ij} = \sum_{r=1}^n \mathbf{A}_{ir} \mathbf{C}_{rj}
+++++
+
+Note that we define the product of two matrices only when the number of columns of the first matrix equals the number of rows of the second matrix. For example,
+
+[stem]
+++++
+\begin{bmatrix} 1 & 2\\ 
+3 & 4\\ 
+5 & 6 \end{bmatrix} \begin{bmatrix} 6 & 5 & 4 & 3\\ 
+2 & 1 & 0 & -1 \end{bmatrix} = 
+\begin{bmatrix} 10 & 7 & 4 & 1\\ 
+26 & 19 & 12 & 5 \\ 
+42 & 31 & 20 & 9\end{bmatrix}
+++++
+
+Doing the matrix multiplication this way, the resulting matrix corresponds to the matrix of the composition of two linear maps. Consider linear maps stem:[\mathcal{L}_1 : \mathbb{U} \to \mathbb{V}] and stem:[\mathcal{L}_2: \mathbb{V} \to \mathbb{W}]. The composition stem:[\mathcal{L}_2 (\mathcal{L}_1 (\mathbf{v}))], denoted as stem:[\mathcal{L}_2 \mathcal{L}_1] is a linear map from stem:[\mathbb{U}] to stem:[\mathbb{W}]. Therefore
+
+[stem]
+++++
+\mathbf{M}(\mathcal{L}_1) \mathbf{M}(\mathcal{L}_2) = \mathbf{M}(\mathcal{L}_2 \mathcal{L}_1)
+++++
+
+The product of the matrix associated with stem:[\mathcal{L}_1] and stem:[\mathcal{L}_2] is equal to the matrix associated with the composition of two linear maps. The assumption is that the
+
+* The same basis of stem:[\mathbb{V}] is used in considering stem:[\mathcal{L}_1] and stem:[\mathcal{L}_2].
+* The same basis of stem:[\mathbb{W}] is used in considering stem:[\mathcal{L}_2] and stem:[\mathcal{L}_2 \mathcal{L}_1].
+* The same basis of stem:[\mathbb{U}] is used in considering stem:[\mathcal{L}_1] and stem:[\mathcal{L}_2 \mathcal{L}_1].

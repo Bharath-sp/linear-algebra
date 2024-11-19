@@ -30,6 +30,40 @@ In the vector space of zero mean random variables with default inner product and
 
 This is a non-negative quantity as we have stem:[\sqrt{\mathbb{E}[(X-Y)^2\]}].
 
+=== Examples ===
+In the Euclidean vector space, we can define several ways to define the distance between two vectors. Let's consider the stem:[\mathbb{R}^2] space.
+
+*Manhattan distance:*
+
+Manhattan distance is the sum of the distance of each component. The distance between two vectors,say stem:[(x_1^{(1)}, x_2^{(1)})] and stem:[(x_1^{(2)}, x_2^{(2)})]. 
+
+[stem]
+++++
+d = |x_1^{(1)}- x_1^{(2)}| + |x_2^{(1)}- x_2^{(2)}|
+++++
+
+This is just as taking the Manhattan norm of the difference vector. For the below example, the Manhattan distance is stem:[4 + 2=6].
+
+*Euclidean distance:* Euclidean distance is the shortest distance between two points.
+
+[stem]
+++++
+d = \sqrt{ (x_1^{(1)}- x_1^{(2)})^2 + (x_2^{(1)}- x_2^{(2)})^2 } = 4.47
+++++
+
+*Minkowski distance:* Minkowski distance is the generalization of Manhattan and Euclidean distance. stem:[p=1] gives Manhattan distance, stem:[p=2] gives Euclidean distance.
+
+[stem]
+++++
+d = \sqrt[p]{ |x_1^{(1)}- x_1^{(2)}|^p + |x_2^{(1)}- x_2^{(2)}|^p }
+++++
+
+image::.\images\distance_example.png[align='center', 500, 300]
+
+In Minkowski distance, the components with large difference are emphasized more. In the above example, the difference between stem:[x_1] components is 4 and the difference between stem:[x_2] components is 2. When stem:[p>>2], the difference in the stem:[x_1] components is importantly treated.
+
+When stem:[p] grows infinitely, the Minkowski distance approaches the difference between the stem:[x_1] components and the limit reaches 4 in this example.
+
 == Angle ==
 Consider a vector space (any vector space) with an inner product and a norm. We can define angle between any two vectors. Angle is a binary operator stem:[\angle \cdot, \cdot] which takes in two vectors and gives angle between 0 and stem:[2\pi].
 
@@ -82,4 +116,154 @@ For every tolerance stem:[\epsilon >0], there exists a stage stem:[N] in the seq
 * An inner product space which is `complete` (a complete set) with default norm and distance is a called a Hilbert space.
 * A vector space (without an inner product) with only a norm defined is known as normed vector space.
 * A vector space (without an inner product) with only a metric (distance) defined is known as metric space.
+
+== Orthogonal Complement ==
+If stem:[U] is a subset of stem:[V], where stem:[V] is an inner product space, then the orthogonal complement of stem:[U], denoted by stem:[U^{\perp}] is the set of all vectors in stem:[V] that are orthogonal to every vector in stem:[U].
+
+[stem]
+++++
+U^{\perp} = \{ \mathbf{v} \in V: \langle \mathbf{v}, \mathbf{u} \rangle = 0 \, \text{ for every } \mathbf{u} \in U \}
+++++
+
+NOTE: stem:[U] is just a subset of stem:[V], not necessarily a subspace. However, stem:[U^{\perp}] is always a subspace of stem:[V].
+
+image::.\images\ortho_complement_02.png[align='center', 300, 200]
+
+When stem:[U] is a subspace, to show that a vector stem:[\mathbf{v} \in V] is orthogonal to all the vectors in stem:[U], it is enough to show that stem:[\mathbf{v}] is orthogonal to the basis vectors of stem:[U].
+
+*Proof:*
+
+Any vector stem:[\mathbf{u} \in U] can be written as stem:[\mathbf{u} = \sum_{i=1}^n \lambda_i \mathbf{b}_i], where stem:[\{\mathbf{b}_1, \dots, \mathbf{b}_n\}] are the basis vectors of stem:[U]. Then
+
+[stem]
+++++
+\begin{align*}
+\langle \mathbf{v}, \mathbf{u} \rangle & = 0 \\
+\langle  \mathbf{v}, \sum_{i=1}^n \lambda_i \mathbf{b}_i \rangle & = 0 \\
+\sum_{i=1}^n \lambda_i \langle \mathbf{v}, \mathbf{b}_i \rangle & = 0 && \text{by linearity property of dot product}
+\end{align*}
+++++
+
+If stem:[\mathbf{v}] is orthogonal to all the basis vectors of stem:[U], then it implies stem:[\mathbf{v}] is orthogonal to all the vectors in stem:[U].
+
+*Theorem 01:*
+
+====
+When stem:[U] is a subspace of stem:[V], then both stem:[U] and stem:[U^\perp] are subspaces of stem:[V]. The sum of stem:[U] and stem:[U^\perp] will span the whole space stem:[V].
+
+[stem]
+++++
+V = U + U^\perp
+++++
+====
+
+Here stem:[+] denotes the set addition. The set addition stem:[U + U^\perp] is defined as the set of all vectors stem:[\{\mathbf{u} + \mathbf{w} \, | \, \forall \mathbf{u} \in U, \mathbf{w} \in U^\perp\}], i.e, all possible pair-wise vector addition.
+
+*Proof:*
+
+Suppose stem:[\mathbf{v} \in V]. Let stem:[\mathbf{e}_1, \dots, \mathbf{e}_m] be an orthonormal basis of stem:[U]. Then the vector can be expressed as
+
+[stem]
+++++
+\mathbf{v} = \underbrace{\langle \mathbf{v}, \mathbf{e}_1 \rangle \mathbf{e}_1 + \dots + \langle \mathbf{v}, \mathbf{e}_m \rangle \mathbf{e}_m}_{\mathbf{u}} + \underbrace{\mathbf{v} -  \langle \mathbf{v}, \mathbf{e}_1 \rangle \mathbf{e}_1 - \dots - \langle \mathbf{v}, \mathbf{e}_m \rangle \mathbf{e}_m}_{\mathbf{w}}
+++++
+
+Let stem:[\mathbf{u}] and stem:[\mathbf{w}] be defined as in the equation above. Clearly, stem:[\mathbf{u} \in U]. Because stem:[\mathbf{e}_1, \dots, \mathbf{e}_m] is an orthonormal list, for each stem:[j=1, \dots, m], we have
+
+[stem]
+++++
+\langle \mathbf{w}, \mathbf{e}_j \rangle = \langle \mathbf{v}, \mathbf{e}_j \rangle - \langle \mathbf{v}, \mathbf{e}_j \rangle = 0
+++++
+
+Thus stem:[\mathbf{w}] is orthogonal to all the vectors stem:[\mathbf{e}_1, \dots, \mathbf{e}_m] and hence its span, i.e., stem:[\mathbf{w} \in U^\perp]. Thus we have written stem:[\mathbf{v} = \mathbf{u} + \mathbf{w}], where stem:[\mathbf{u} \in U] and stem:[\mathbf{w} \in U^\perp].
+
+*Theorem 02:*
+
+====
+stem:[U] and stem:[U^\perp] are subspaces of stem:[V] and stem:[V = U + U^\perp]. Then stem:[U + U^\perp] is a direct sum if and only if stem:[U \cap U^\perp = \{\mathbf{0}\}]. Then we can write stem:[U + U^\perp = U \oplus U^\perp].
+
+Note: stem:[V = U \oplus U^\perp] is read as stem:[V] is the direct sum of stem:[U] and stem:[U^\perp]
+====
+
+Let stem:[\mathbf{v} \in U \cap U^\perp], which means stem:[\mathbf{v}] is present in both the spaces. When we take a vector from each space, then it should be true that their inner product is 0. So stem:[\langle \mathbf{v}, \mathbf{v} \rangle = 0]. This happens if and only if stem:[\mathbf{v} = \mathbf{0}]. Hence stem:[U \cap U^\perp = \{\mathbf{0}\}].
+
+Then stem:[V = U + U^\perp]. Every vector stem:[\mathbf{v} \in V] can be uniquely written as a sum of vectors, one from stem:[U] and one from stem:[U^\perp].
+
+[NOTE]
+====
+A vector in stem:[\mathbf{v} \in V] can be written in a unique way as stem:[\mathbf{u} + \mathbf{w}], where stem:[\mathbf{u} \in U] and stem:[\mathbf{w} \in U^\perp] if and only if stem:[U \cap U^\perp = \{\mathbf{0}\}]. If we have a non-zero vector stem:[\mathbf{v} \in U \cap U^\perp], then
+
+[stem]
+++++
+\begin{align*}
+\mathbf{v} & = \mathbf{v} + \mathbf{0} && \mathbf{v} \in U \text{ and } \mathbf{0} \in U^\perp \\
+\mathbf{v} & = \mathbf{0} + \mathbf{v} && \mathbf{0} \in U \text{ and } \mathbf{v} \in U^\perp \\
+\end{align*}
+++++
+
+We get two representations of stem:[\mathbf{v}].
+====
+
+stem:[V = U + U^\perp] and stem:[U \cap U^\perp = \{\mathbf{0}\} \iff V = U \oplus U^\perp]. Thus we say stem:[U] and stem:[U^\perp] partition the space stem:[V].
+
+*Theorem 03:*
+
+====
+Suppose stem:[U] is a subspace of stem:[V]. Then stem:[dim(V) = dim(U) + dim(U^{\perp})].
+====
+
+This follows from the fact that stem:[U + U^\perp] is a direct sum if and only if stem:[dim(U + U^\perp) = dim(U) + dim(U^{\perp})]. Given stem:[U + U^\perp] is a direct sum, we then have stem:[dim(V) = dim(U) + dim(U^{\perp})].
+
+IMPORTANT: Full proof in Page 194 in Sheldon Axler.
+
+The space stem:[U^{\perp}] is called complement because its dimension is always stem:[dim(V) - dim(U)].
+
+=== Examples ===
+
+* Let our vector space be stem:[\mathbb{R}^2]. Consider a subspace spanned by the x-axis, stem:[U] be a set of all possible vectors in the x-axis. The orthogonal complement of stem:[U] is the set of all possible vectors in the y-axis, i.e., span induced by the y-axis. Any vector in y-axis is orthogonal to all the vectors in stem:[U].
+
+* If stem:[U] is a line in stem:[\mathbb{R}^3], then stem:[U^{\perp}] is the plane containing the origin that is perpendicular to stem:[U]. If stem:[U] is the subspace spanned by x-axis, then stem:[U^{\perp}] is the set of all vectors in the stem:[yz] plane.
+
+image::.\images\partitions_r3.png[align='center', 700, 500]
+
+Any vector in yz plane is orthogonal to all the vectors in x-axis. The dimension of stem:[U] is 1, and the dimension of stem:[U^{\perp}] is 2. This sums up to the total dimension of the space stem:[V].
+
+[stem]
+++++
+\begin{align*}
+U & = \left\{ \lambda \begin{bmatrix} 
+1 \\ 
+0 \\
+0
+\end{bmatrix} \, \big| \, \lambda \in \mathbb{R} \right\}  \\
+\\
+U^\perp & = \left\{ \lambda \begin{bmatrix} 
+0 \\ 
+1 \\
+0
+\end{bmatrix} + \mu \begin{bmatrix} 
+0 \\ 
+0 \\
+1
+\end{bmatrix} \, \big| \, \lambda, \mu \in \mathbb{R} \right\}  \\
+\end{align*}
+++++
+
+By adding elements in these two sets, we can get any vector in stem:[\mathbb{R}^3]. Their intersection is stem:[\{\mathbf{0}\}]. Then subspaces stem:[U] and stem:[U^\perp] forms a *partition* of stem:[\mathbb{R}^3]. In general, if subspaces stem:[V_1] and stem:[V_2] partitions stem:[V], then
+
+[stem]
+++++
+dim(V) = dim(V_1) + dim(V_2)
+++++
+
+When we have two subspaces stem:[V_1] and stem:[V_2] whose intersection is not just stem:[\{\mathbf{0}\}] but some non-empty set. In such cases,
+
+[stem]
+++++
+dim(V) = dim(V_1) + dim(V_2) - dim(V_1 \cap V_2)
+++++
+
+
+
+
 

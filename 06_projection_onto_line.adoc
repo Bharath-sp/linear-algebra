@@ -1,4 +1,4 @@
-= Projections =
+= Projection Onto a Line =
 :doctype: book
 :author: Bharath Kumar S P
 :email: bharath030195@gmail.com
@@ -25,13 +25,13 @@ TIP: When the set stem:[S] contains only one point, then projection of stem:[\ma
 Projection refers to mapping a vector onto a subspace of a vector space. The most common projection is onto a subspace of lower dimension.
 
 == Projection onto One-dimensional Subspace ==
-When we say projection of a vector stem:[\mathbf{v}] onto another vector stem:[\mathbf{w}], we mean the projection of stem:[\mathbf{v}] onto the linear span of stem:[\mathbf{w}]. In the Euclidean stem:[\mathbb{R}^2] space, this can be seen as
+Fix a vector space stem:[(\mathbb{V}, + , \cdot, \langle \cdot, \cdot \rangle)] with inner product induced norm. And say the dimension of this vector space is stem:[n], where stem:[n>1]. For example, the Euclidean stem:[\mathbf{R}^n] space where stem:[\mathbf{v}, \mathbf{w} \in \mathbb{R}^n].
+
+When we say projection of a vector stem:[\mathbf{v}] onto another vector stem:[\mathbf{w}], we mean the projection of stem:[\mathbf{v}] onto the linear span of stem:[\mathbf{w}]. Here stem:[S = \text{Linear Span}(\{\mathbf{w}\})]. This forms a one-dimensional subspace of the corresponding vector space. Basis of this subspace is stem:[\{\mathbf{w}\}].
+
+In the Euclidean stem:[\mathbb{R}^2] space, this can be seen as
 
 image::.\images\projections_02.png[align='center']
-
-Fix a vector space stem:[(\mathbb{V}, + , \cdot, \langle \cdot, \cdot \rangle)] with inner product induced norm. And say the dimension of this vector space is stem:[N], where stem:[N>1].
-
-Let's project stem:[\mathbf{v}] onto the linear span of stem:[\mathbf{w}]. Here stem:[S = \text{Linear Span}(\{\mathbf{w}\})]. This forms a one-dimensional subspace of the corresponding vector space. Basis of this subspace is stem:[\{\mathbf{w}\}].
 
 *Theorem:* The vector stem:[\pi_S(\mathbf{v}) - \mathbf{v}] is orthogonal to stem:[\mathbf{w}], i.e, stem:[\langle \pi_S(\mathbf{v}) - \mathbf{v}, \mathbf{w} \rangle = 0].
 
@@ -60,14 +60,18 @@ On differentiating the objective function and setting it to 0.
 \end{align*}
 ++++
 
-Therefore, the stem:[\mathbf{s}] that minimize the distance from stem:[\mathbf{v}] is
+This is the coordinate of the projection of stem:[\mathbf{v}] onto the span of stem:[\mathbf{w}]. If stem:[\mathbf{w}] is a unit vector, then the coordinate is just stem:[\langle \mathbf{v}, \mathbf{w} \rangle].
+
+The stem:[\mathbf{s}^*] that minimize the distance from stem:[\mathbf{v}] is
 
 [stem]
 ++++
-\mathbf{s} = \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} \mathbf{w} = \langle \mathbf{v} , \frac{\mathbf{w}}{\| \mathbf{w} \|} \rangle \frac{\mathbf{w} }{\| \mathbf{w} \|} = \pi_{S}(\mathbf{v})
+\mathbf{s}^* = \frac{\langle \mathbf{v}, \mathbf{w} \rangle}{\| \mathbf{w} \|^2} \mathbf{w} = \langle \mathbf{v} , \frac{\mathbf{w}}{\| \mathbf{w} \|} \rangle \frac{\mathbf{w} }{\| \mathbf{w} \|} = \pi_{S}(\mathbf{v})
 ++++
 
-This vector is our projection point stem:[\pi_S(\mathbf{v})]. And this is the formula to find the projection of stem:[\mathbf{v}] onto stem:[S] (linear span of stem:[\mathbf{w}]). In such cases, there exists a projection point and it is unique.
+This vector is our projection point stem:[\pi_S(\mathbf{v})]. And this is the formula to find the projection of stem:[\mathbf{v}] onto stem:[S] (linear span of stem:[\mathbf{w}]). The projection stem:[\pi_{S}(\mathbf{v})] is an element of stem:[S], i.e., a multiple of the vector stem:[\mathbf{w}]. Hence, stem:[\pi_{S}(\mathbf{v}) =\lambda^* \mathbf{w}].
+
+The projection point stem:[\pi_{S}(\mathbf{v})] is still an stem:[n-] dimensional vector and not a scalar. However, we no longer require stem:[n] coordinates to represent the projection, but only a single coordinate (stem:[\lambda]) if we want to express it with respect to the basis vector stem:[\mathbf{w}].
 
 Continuing with our proof, we need to prove that stem:[\langle \pi_S(\mathbf{v}) - \mathbf{v}, \mathbf{w} \rangle = 0].
 
@@ -80,7 +84,7 @@ Continuing with our proof, we need to prove that stem:[\langle \pi_S(\mathbf{v})
 \end{align*}
 ++++
 
-The projection point stem:[\pi_{S}(\mathbf{v})] is still an stem:[n-] dimensional vector and not a scalar. However, we no longer require stem:[n] coordinates to represent the projection, but only a single coordinate (stem:[\lambda]) if we want to express it with respect to the basis vector stem:[\mathbf{w}].
+Hence, the projection is also known as orthogonal projection. The orthogonal projections of high-dimensional data onto a lower-dimensional subspace retain as much information as possible and minmize the difference/error between the original data and the corresponding projection.
 
 == Projection Matrix ==
 Since projection is a linear mapping, there exists a projection matrix stem:[\mathbf{P}_{\pi}], such that stem:[\pi_S(\mathbf{v}) = \mathbf{P}_{\pi} \mathbf{v} ].
@@ -109,8 +113,7 @@ We see that the projection matrix is then
 This is a symmetric matrix of rank 1. This matrix projects any vector stem:[\mathbf{v}\in \mathbb{R}^n] onto the line through the origin with direction stem:[\mathbf{w}].
 
 === Example ===
-Find the projection matrix stem:[\textbf{P}_\pi] onto the line through the origin spanned by 
-stem:[\mathbf{w} =\begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}].
+Find the projection of stem:[\mathbf{v}=(1,1,1)] onto the linear span of stem:[\mathbf{w} = (1,2,2)]
 
 Projection matrix stem:[\mathbf{P}_\pi]
 [stem]
@@ -119,7 +122,7 @@ Projection matrix stem:[\mathbf{P}_\pi]
 \begin{bmatrix} 1 & 2 & 2 \end{bmatrix} = \frac{1}{9} \begin{bmatrix} 1 & 2 & 2 \\ 2 & 4 & 4 \\ 2 & 4 & 4 \end{bmatrix}
 ++++
 
-Let's choose stem:[\mathbf{v}=\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}]. The projection of stem:[\mathbf{v}] onto the line is
+stem:[\mathbf{v}=\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}]. The projection of stem:[\mathbf{v}] onto the line is
 [stem]
 ++++
 \pi_S(\mathbf{v})=\mathbf{P}_\pi \mathbf{v}= \frac{1}{9} \begin{bmatrix} 1 & 2 & 2 \\ 2 & 4 & 4 \\ 2 & 4 & 4 \end{bmatrix} 

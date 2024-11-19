@@ -41,6 +41,8 @@ A set stem:[S \subseteq \mathbb{V}] is called a linear set (or linear subspace) 
 
 A set closed under linear combination and containing the zero vector is called a linear set or linear variety. So the set stem:[L(S)] is a linear set. These sets form a linear subspace of a vector space.
 
+To verify that a set stem:[S] forms a subspace of stem:[V], we need to check these three conditions. These three conditions imply all the conditions of a vector space.
+
 == Spanning Set ==
 We can have a set of vectors stem:[S] which has lesser number of vectors than the space stem:[\mathbb{V}]. But the linear span of stem:[S] gives us the set stem:[\mathbb{V}]. Such sets are called spanning sets. Given only these set of vectors, we can re-build our whole vector space stem:[\mathbb{V}]. For example,
 
@@ -199,50 +201,3 @@ dim(S) = dim{(\text{LinearSpan(S))}}
 ++++
 
 The linear span of the vectors in set stem:[S] gives the entire stem:[\mathbb{R}^2]. The dimensionality of stem:[\mathbb{R}^2] is 2. Therefore, the dimensionality of set stem:[S] is 2.
-
-== Partitions of a Space ==
-Say we have a vector space stem:[\mathbb{V}], which can be written as stem:[\mathbb{V}=\mathbb{V}_1 + \mathbb{V}_2].
-
-Here stem:[\mathbb{V}, \mathbb{V}_1, \mathbb{V}_2] are all linear sets, and stem:[+] denotes the set addition. The set addition stem:[\mathbb{V}_1 + \mathbb{V}_2] is defined as the set of all vectors stem:[\{v_1 + v_2 \, | \, \forall v_1 \in \mathbb{V}_1, v_2 \in \mathbb{V}_2\}], i.e, we add the elements of stem:[\mathbb{V}_1] with the elements of stem:[\mathbb{V}_2] - all possible pair-wise vector addition.
-
-For example, we can write stem:[\mathbb{R}^2] (which is a set of all possible points in stem:[\mathbb{R}^2]) as addition of two linear sets.
-
-[stem]
-++++
-\begin{align*}
-\mathbb{V}_1 & = \left\{ \lambda \begin{bmatrix} 
-1 \\ 
-0 \\
-0
-\end{bmatrix} \, \big| \, \lambda \in \mathbb{R} \right\}  \\
-\\
-\mathbb{V}_2 & = \left\{ \lambda \begin{bmatrix} 
-0 \\ 
-1 \\
-0
-\end{bmatrix} + \mu \begin{bmatrix} 
-0 \\ 
-0 \\
-1
-\end{bmatrix} \, \big| \, \lambda, \mu \in \mathbb{R} \right\}  \\
-\end{align*}
-++++
-
-image::.\images\partitions_r3.png[align='center', 600, 400]
-
-By adding elements in these two sets, we can get any vector in stem:[\mathbb{R}^3]. The sets stem:[\mathbb{V}_1] and stem:[\mathbb{V}_2] forms a partition of stem:[\mathbb{R}^3], i.e, their intersection is stem:[\{\mathbf{0}\}] (the additive identity vector) and they together form the entire stem:[\mathbb{R}^3]. For such sets, we can see that
-
-[stem]
-++++
-dim(\mathbb{V}) = dim(\mathbb{V}_1) + dim(\mathbb{V}_2)
-++++
-
-NOTE: The sets stem:[\mathbb{V}_1] and stem:[\mathbb{V}_2] are in some sense complementary to each other, i.e., their intersection is just stem:[\{\mathbf{0}\}]. This complementary is in linear combination sense.
-
-In general, when we have two sets stem:[\mathbb{V}_1] and stem:[\mathbb{V}_2] whose intersection is not just stem:[\{\mathbf{0}\}] but some non-empty set. In such cases,
-
-[stem]
-++++
-dim(\mathbb{V}) = dim(\mathbb{V}_1) + dim(\mathbb{V}_2) - dim(\mathbb{V}_1 \cap \mathbb{V}_2)
-++++
-

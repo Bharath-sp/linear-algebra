@@ -1,0 +1,200 @@
+= Subspaces of a Matrix =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Subspaces of a Matrix ==
+Motivated by the use of the behaviour of columns of stem:[\mathbf{A}], we can define the following subspaces of a matrix. These are the four fundamental subspaces of a matrix. Let stem:[\mathbf{A}] be a stem:[m \times n] matrix representing linear transformation stem:[\mathcal{L}] from stem:[\mathbb{R}^n \to \mathbb{R}^m].
+
+=== Column Space of stem:[\mathbf{A}] ===
+
+It is the span of columns of stem:[\mathbf{A}], denoted by stem:[\mathcal{C}(\mathbf{A})]. By definition, it is a vector space. It may span the whole stem:[\mathbb{R}^m], but however, it is always a subspace of stem:[\mathbb{R}^m].
+
+[stem]
+++++
+\mathcal{C}(\mathbf{A}) \subseteq \mathbb{R}^m
+++++
+
+Invertibility of a transformation can be analyzed completely using the consequences of linear combination of columns of stem:[\mathbf{A}], i.e., if the columns of stem:[\mathbf{A}] form a basis for stem:[\mathbb{R}^m], then we can say that the transformation is invertible.
+
+Invertibility can also be analyzed using the operation of inner product. To do so, we need the following spaces:
+
+=== Null Space of stem:[\mathbf{A}] ===
+
+The set of all vectors stem:[\mathbf{v} \in V] which map to additive identity element in stem:[W]. Therefore, null space of the matrix stem:[\mathbf{A}] that is associated with this linear transformation is the set of all vectors stem:[\mathbf{v}] such that stem:[\mathbf{A} \mathbf{v} = \mathbf{0}]. It is denoted by stem:[\mathcal{N}(\mathbf{A})].
+
+[stem]
+++++
+\mathcal{N}(\mathbf{A}) \equiv \{\mathbf{v} \in \mathbb{R}^n \, | \, \mathbf{A}\mathbf{v} = \mathbf{0} \}
+++++
+
+Here the coordinates of the vector stem:[\mathbf{v} = \{v_1, \dots, v_n\}] is with respect to the basis with which the matrix stem:[\mathbf{A}] is associated.
+
+As we can see this definition is based on the definition of inner product. Moreover, stem:[\mathcal{N}(\mathbf{A})] is closed under addition and scalar multiplication, and it also has stem:[\mathbf{0}] vector. It is a linear set. So it is a valid subspace of stem:[\mathbb{R}^n].
+
+[stem]
+++++
+\mathcal{N}(\mathbf{A}) \subseteq \mathbb{R}^n
+++++
+
+To check it is a linear set, we need to verify that linear combination of any two vectors in stem:[\mathcal{N}(\mathbf{A})] is also an element of stem:[\mathcal{N}(\mathbf{A})]. Let stem:[\mathbf{v}_1, \mathbf{v}_2 \in \mathcal{N}(\mathbf{A})], then we know that stem:[\mathbf{A}\mathbf{v}_1 = \mathbf{A}\mathbf{v}_2 = \mathbf{0} ]. Let stem:[\lambda_1 \mathbf{v}_1 + \lambda_2 \mathbf{v}_2] be a vector.
+
+[stem]
+++++
+\mathbf{A} (\lambda_1 \mathbf{v}_1 + \lambda_2 \mathbf{v}_2 ) = \lambda_1 \mathbf{A}\mathbf{v}_1 + \lambda_2 \mathbf{A}\mathbf{v}_2 = \mathbf{0}
+++++
+
+The null space of stem:[\mathbf{A}] consists of the vectors that are orthogonal to all the rows of stem:[\mathbf{A}].
+
+=== Row Space of stem:[\mathbf{A}] ===
+It is the span of rows of stem:[\mathbf{A}], denoted by stem:[\mathcal{R}(\mathbf{A})]. It can also be seen as span of columns of stem:[\mathbf{A}^\top]. Therefore, it is also known as column space of stem:[\mathbf{A}^\top]. By definition, it is a subspace of stem:[\mathbb{R}^n].
+
+[stem]
+++++
+\mathcal{R}(\mathbf{A}) = \mathcal{C}(\mathbf{A}^\top) \subseteq \mathbb{R}^n
+++++
+
+So the null space and the row space are in the same space stem:[\mathbb{R}^n]. They are subspaces of stem:[\mathbb{R}^n]. And we know that each vector in the null space of stem:[\mathbf{A}] is orthogonal to all the vectors that spanned the row space, i.e., it is orthogonal to all the vectors in the row space of stem:[\mathbf{A}].
+
+=== Null Space of stem:[\mathbf{A}^\top] ===
+It is set of all vectors stem:[\mathbf{w} \in \mathbb{R}^m] that map to the zero vector, i.e., a set of all vectors stem:[\mathbf{w}] such that stem:[\mathbf{A}^\top \mathbf{w} = \mathbf{0}]. It is denoted by stem:[\mathcal{N}(\mathbf{A}^\top)]. This is also known as left null space of stem:[\mathbf{A}].
+
+[stem]
+++++
+\mathcal{N}(\mathbf{A}^\top) \equiv \{\mathbf{w} \in \mathbb{R}^m \, | \, \mathbf{A}^\top \mathbf{w} = \mathbf{0} \}
+++++
+
+This forms a subspace of stem:[\mathbb{R}^m].
+
+[stem]
+++++
+\mathcal{N}(\mathbf{A}^\top) \subseteq \mathbb{R}^m
+++++
+
+The null space of stem:[\mathbf{A}^\top] consists of all the vectors that are orthogonal to all the rows of stem:[\mathbf{A}^\top] (or) can also be said as columns of stem:[\mathbf{A}].
+
+image::.\images\subspace_matrix_01.png[align='center', 700, 500]
+
+== Fundamental Theorem of Linear Algebra ==
+Let stem:[\mathbf{A}] be a stem:[m \times n] matrix representing linear transformation stem:[\mathcal{L}] from stem:[\mathbb{R}^n \to \mathbb{R}^m].
+
+We know that stem:[\mathcal{C}(\mathbf{A}), \mathcal{N}(\mathbf{A}^\top)] are subspaces of stem:[\mathbb{R}^m]. Every vector in stem:[\mathcal{N}(\mathbf{A}^\top)] is orthogonal to every vector in stem:[\mathcal{C}(\mathbf{A})]. The fundamental theorem of linear algebra states that stem:[\mathcal{N}(\mathbf{A}^\top)] is orthogonal complement of stem:[\mathcal{C}(\mathbf{A})].
+
+[stem]
+++++
+\mathcal{C}(\mathbf{A})^\perp = \mathcal{N}(\mathbf{A}^\top)
+++++
+
+This implies stem:[dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A}^\top)) = m].
+
+Similarly, we know that stem:[\mathcal{R}(\mathbf{A}), \mathcal{N}(\mathbf{A})] are subspaces of stem:[\mathbb{R}^n]. Every vector in stem:[\mathcal{N}(\mathbf{A})] is orthogonal to every vector in stem:[\mathcal{R}(\mathbf{A})]. The fundamental theorem of linear algebra states that stem:[\mathcal{N}(\mathbf{A})] is orthogonal complement of stem:[\mathcal{R}(\mathbf{A})].
+
+[stem]
+++++
+\mathcal{R}(\mathbf{A})^\perp = \mathcal{N}(\mathbf{A})
+++++
+
+This implies stem:[dim(\mathcal{R}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) = n].
+
+*Proof:*
+
+The fundamental theorem of linear algebra says that the subspaces stem:[\mathcal{C}(\mathbf{A})] and stem:[\mathcal{N}(\mathbf{A}^\top)] are orthogonal complements of each other. The orthogonality can be easily seen from the definition that every vector in stem:[\mathcal{N}(\mathbf{A}^\top)] is orthogonal to all the vectors in stem:[\mathcal{C}(\mathbf{A})], stem:[\mathcal{C}(\mathbf{A}) \perp \mathcal{N}(\mathbf{A}^\top)].
+
+But we need to prove the complementarity in terms of dimensions, i.e., the dimensions of the two spaces add up to the dimension of stem:[V].
+
+[stem]
+++++
+dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A}^\top)) = m
+++++
+
+If for any two subspaces, (1) and (2) hold, they are known as orthogonal complements of each other. To prove the complementarity, we need to prove the rank-nullity theorem.
+
+=== Rank-Nullity Theorem ===
+The rank-nullity theorem states that
+
+[stem]
+++++
+dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) = n \hspace{1cm} \mathcal{C}(\mathbf{A}) \subseteq \mathbb{R}^m, \mathcal{N}(\mathbf{A}) \subseteq \mathbb{R}^n
+++++
+
+Using this result, we can also state that
+
+[stem]
+++++
+dim(\mathcal{R}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A}^\top)) = m \hspace{1cm} \mathcal{R}(\mathbf{A}) \subseteq \mathbb{R}^n, \mathcal{N}(\mathbf{A}^\top) \subseteq \mathbb{R}^m
+++++
+
+*Proof:*
+
+We know that stem:[\mathcal{C}(\mathbf{A}) \subseteq \mathbb{R}^m] and stem:[\mathcal{N}(\mathbf{A}) \subseteq \mathbb{R}^n]. Let's assume that the basis of the subspace stem:[\mathcal{N}(\mathbf{A})] is stem:[\{\mathbf{n}_1, \dots, \mathbf{n}_p\}], where stem:[0 \leq p \leq n] because the null space is the subspace of stem:[\mathbb{R}^n]. Then the dimension of stem:[\mathcal{N}(\mathbf{A})] is stem:[p].
+
+This set may not span the entire stem:[\mathbb{R}^n]. So let's add some LI vectors to it so that it spans the entire stem:[\mathbb{R}^n].
+
+The basis of stem:[\mathbb{R}^n] is stem:[\{\mathbf{n}_1, \dots, \mathbf{n}_p, \mathbf{v}_1, \dots, \mathbf{v}_{n-p}\}]. Let stem:[\mathbf{x} \in \mathbb{R}^n], then we can express stem:[\mathbf{x}] uniquely as
+
+[stem]
+++++
+\begin{align*}
+\mathbf{x} & = \lambda_1 \mathbf{n}_1 + \dots +  \lambda_p \mathbf{n}_p + \mu_1 \mathbf{v}_1 + \dots + \mu_{n-p} \mathbf{v}_{n-p} \\
+\mathbf{Ax} & = \underbrace{\lambda_1 \mathbf{A}\mathbf{n}_1 + \dots +  \lambda_p \mathbf{A} \mathbf{n}_p}_{\mathbf{0}} + \mu_1 \mathbf{A} \mathbf{v}_1 + \dots + \mu_{n-p} \mathbf{A} \mathbf{v}_{n-p} \\
+
+\mathbf{Ax} & = \mu_1 \mathbf{A} \mathbf{v}_1 + \dots + \mu_{n-p} \mathbf{A} \mathbf{v}_{n-p} \\
+\end{align*}
+++++
+
+Since stem:[\{\mathbf{n}_1, \dots, \mathbf{n}_p\}] is the basis of the null space, all these vectors get mapped to stem:[\mathbf{0}] by definition.
+
+When we transform the vector stem:[\mathbf{x}] by stem:[\mathbf{A}], we get a general vector in the column space of stem:[A], i.e., stem:[\mathbf{Ax} \in \mathcal{C}(A)]. The above result says that this vector can be written as the linear combination of stem:[S = \{\mathbf{A} \mathbf{v}_1, \dots, \mathbf{A} \mathbf{v}_{n-p}\}]. This set spans the column space of stem:[\mathbf{A}]. To prove that this set forms a basis, we need to show that the vectors stem:[\mathbf{A} \mathbf{v}_1, \dots, \mathbf{A} \mathbf{v}_{n-p}] are LI.
+
+Let's prove this by contradiction. Let the set stem:[S] be a linearly dependent set. Then there exists coefficients stem:[\rho_1, \dots, \rho_{n-p}] not all zero such that
+
+[stem]
+++++
+\begin{align*}
+\rho_1 \mathbf{A} \mathbf{v}_1 + \dots + \rho_{n-p} \mathbf{A} \mathbf{v}_{n-p} & = \mathbf{0} \\
+\iff \mathbf{A} (\rho_1 \mathbf{v}_1 + \dots + \rho_{n-p} \mathbf{v}_{n-p}) & = \mathbf{0} \\
+\iff \rho_1 \mathbf{v}_1 + \dots + \rho_{n-p} \mathbf{v}_{n-p} & \in \mathcal{N}(A)
+\end{align*}
+++++
+
+This can't happen because the vectors stem:[\mathbf{v}_1, \dots, \mathbf{v}_{n-p}] and their linear combinations are not in the null space of stem:[A].
+
+If they were in the null space, we would have written each of these as a linear combination of stem:[\mathbf{n}_1, \dots, \mathbf{n}_p]. Since the vectors stem:[\{\mathbf{n}_1, \dots, \mathbf{n}_p, \mathbf{v}_1, \dots, \mathbf{v}_{n-p}\}] forms a basis, they are all LI, and none of the vectors can be written as the linear combination of other vectors. Thus we have contradiction here.
+
+Thus the vectors stem:[\mathbf{v}_1, \dots, \mathbf{v}_{n-p}] are LI and they form the basis of stem:[\mathcal{C}(\mathbf{A})]. The dimension of stem:[\mathcal{C}(\mathbf{A})] is then stem:[n-p]. The dimension of stem:[\mathcal{N}(\mathbf{A})] is stem:[p]. Hence the rank-nullity theorem is proved.
+
+* Let's call the dimensionality of stem:[\mathcal{C}(\mathbf{A})] as the column rank of stem:[\mathbf{A}]: the number of linearly independent columns of stem:[\mathbf{A}]. Denoted by stem:[r_c].
+* Let's call the dimensionality of stem:[\mathcal{R}(\mathbf{A})] as the row rank of stem:[\mathbf{A}]: the number of linearly independent rows of stem:[\mathbf{A}]. Denoted by stem:[r_r].
+
+Then we have from the rank-nullity theorem, stem:[dim(\mathcal{N}(\mathbf{A})) = n - r_c] and stem:[dim(\mathcal{N}(\mathbf{A}^\top)) = m - r_r]. From the subspaces, we know that at most
+
+[stem]
+++++
+\begin{align*}
+dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A}^\top)) & \leq  m \implies r_c + (m - r_r) \leq  m \implies r_c \leq r_r\\
+dim(\mathcal{R}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) & \leq  n \implies  r_r + (n - r_c) \leq  n \implies r_r \leq r_c\\
+\end{align*}
+++++
+
+NOTE: We have used the rank-nullity theorem to write the first equation after the imply symbol.
+
+This happens if and only if that stem:[r_c = r_r].
+
+====
+This shows that for any matrix stem:[\mathbf{A}_{m \times n}], the number of linearly independent columns is the same as the number of linearly independent rows, stem:[r_c = r_r =r]. This stem:[r] is known as the rank of stem:[\mathbf{A}].
+====
+
+On substituting stem:[r_c = r_r], we get
+
+[stem]
+++++
+\begin{align*}
+dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A}^\top)) & = m \\
+dim(\mathcal{R}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) & =  n
+\end{align*}
+++++
+
+This proves that stem:[\mathcal{C}(\mathbf{A})] and stem:[\mathcal{N}(\mathbf{A}^\top)] are orthogonal complements of each other. And stem:[\mathcal{R}(\mathbf{A})] and stem:[\mathcal{N}(\mathbf{A})] are orthogonal complements of each other. Thus the fundamental theorem of linear algebra is proved.

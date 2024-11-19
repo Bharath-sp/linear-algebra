@@ -1,0 +1,199 @@
+= Inverse Transformations =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Introduction ==
+Say we have a linear transformation stem:[\mathcal{L}] from stem:[\mathbb{R}^n \to \mathbb{R}^n ]. When does the inverse transformation stem:[\mathcal{L}^{-1}] exist? If there exists an inverse transformation, does it also a linear transformation? If so, we call the matrix corresponding to stem:[\mathcal{L}^{-1}] as stem:[\mathbf{M}^{-1}]. In inversion problem, we would be given stem:[\mathbf{A}] and stem:[\mathbf{b}], we need to find stem:[\mathbf{x}].
+
+image::.\images\inversion_01.png[align='center', 600, 400]
+
+== Inverse of Diagonal Matrices ==
+
+*Case 1:*
+
+Let stem:[\mathbf{A}] be a stem:[2 \times 2] diagonal matrix. We are given stem:[\mathbf{b}], we need to find stem:[\mathbf{x}].
+
+[stem]
+++++
+\begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}
+++++
+
+This gives us two simultaneous equations to solve stem:[2x_1 =1] and stem:[3x_2 = 2]. Solving these gives us stem:[x_1 = \frac{1}{2}] and stem:[x_2 = \frac{2}{3}]. Let's guess stem:[\mathbf{A}^{-1}] as:
+
+[stem]
+++++
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{3} \end{bmatrix} \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}
+++++
+
+If it is the inverse, it should satisfy stem:[\mathbf{Ax} = \mathbf{AA^{-1}b}]. It should satisfy stem:[\mathbf{AA^{-1}} = \mathbf{A^{-1}A} = \mathbf{I}] and stem:[\mathbf{(A^{-1})^{-1}} = \mathbf{A}].
+
+This transformation is
+
+* one-to-one: For a given stem:[\mathbf{x}], we get a unique stem:[\mathbf{b}]. No two different stem:[\mathbf{x}]'s map to the same stem:[\mathbf{b}].
+* onto: For any given stem:[\mathbf{b}], there exists at least one stem:[\mathbf{x}] such that stem:[\mathbf{Ax} = \mathbf{b}].
+
+So this transformation has inverse and it can be represented by a matrix stem:[\mathbf{A}^{-1}].
+
+*Case 2:*
+
+Let's consider rectangular (but almost diagonal) matrices. Let stem:[\mathbf{A} = \begin{bmatrix} 2 & 0 & 0 \\ 0 & 3 & 0 \end{bmatrix}]. Say we are also given stem:[\mathbf{b}]. We need to find stem:[\mathbf{x}].
+
+[stem]
+++++
+\begin{bmatrix} 2 & 0 & 0 \\ 0 & 3 & 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}
+++++
+
+This gives us two simultaneous equations to solve stem:[2x_1 =b_1] and stem:[3x_2 = b_2]. This gives us unique stem:[x_1 = \frac{b_1}{2}] and stem:[x_2 = \frac{b_2}{3}]. But we can never recover stem:[x_3]. We can't say which stem:[x_3] created the stem:[\mathbf{b}] vector. 
+
+As there is no constraint on stem:[x_3], it could be anything. So stem:[\mathbf{x} = \left(\frac{b_1}{2}, \frac{b_2}{3}, k \right)], where stem:[k] can be any number. This results in uncountable numbers of vectors each of which gives the stem:[\mathbf{b}] vector on multiplying it with stem:[\mathbf{A}].
+
+Since we are not able to recover the complete stem:[\mathbf{x}], the inverse matrix stem:[\mathbf{A}^{-1}] doesn't exist here. But if we ignore a few dimensions, in this case if we ignore the subspace corresponding to stem:[x_3], we can uniquely recover stem:[\mathbf{x}]. Therefore, we can construct stem:[\mathbf{A}^{-1}] as
+
+[stem]
+++++
+\mathbf{A}^{-1} = \begin{bmatrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{3} \\ 0 & 0 \end{bmatrix} \implies \begin{bmatrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{3} \\ 0 & 0 \end{bmatrix} \begin{bmatrix} b_1 \\ b_2 \end{bmatrix} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{b_1}{2}\\ \frac{b_2}{3} \\ 0 \end{bmatrix}
+++++
+
+We can put any number for the third row. 0 is preferred as it fixes the value for stem:[x_3] for any stem:[\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}]. This is a good inverse for stem:[\mathbf{A}] because it can recover stem:[\mathbf{x}] (whatever it can recover) for *any* given stem:[\mathbf{b}]. So for rectangular matrices that are almost diagonal, we can construct the inverse matrix by just inverting the diagonal entries and ignoring the dimensions that cannot be recovered.
+
+This transformation is
+
+* Not one-to-one: Two different stem:[\mathbf{x}]'s can map to the same stem:[\mathbf{b}].
+* onto: For any given stem:[\mathbf{b}], there exists at least one stem:[\mathbf{x}] such that stem:[\mathbf{Ax} = \mathbf{b}].
+
+But inversion is still possible by ignoring the third dimension stem:[x_3] in stem:[\mathbf{x}].
+
+*Case 3:*
+
+Let stem:[\mathbf{B} = \begin{bmatrix} 2 & 0 \\ 0 & 3 \\ 0 & 0 \end{bmatrix}]. We are also given stem:[\mathbf{b}]. We need to find stem:[\mathbf{x}].
+
+[stem]
+++++
+\begin{bmatrix} 2 & 0 \\ 0 & 3 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} b_1 \\ b_2 \\b_3 \end{bmatrix}
+++++
+
+which gives us three equations: stem:[2x_1 = b_1; 3x_2 = b_2; 0 = b_3]. This indicates that some stem:[\mathbf{b}]'s are not even possible. In this case, we cannot find stem:[\mathbf{A}^{-1}] for any stem:[\mathbf{b}] because some stem:[\mathbf{b}]'s cannot be generated by stem:[\mathbf{x}] at all. Those all are false stem:[\mathbf{b}]s, we should ignore them.
+
+We can solve this particular problem when the stem:[b_3] in given stem:[\mathbf{b}] is 0. We can uniquely recover stem:[x_1 = \frac{b_1}{2}] and stem:[x_2 = \frac{b_2}{3}]. Then the inverse of stem:[\mathbf{B}] can be constructed as
+
+[stem]
+++++
+\mathbf{B}^{-1} = \begin{bmatrix} \frac{1}{2} & 0 & 0 \\ 0 & \frac{1}{3} & 0 \end{bmatrix} \implies \begin{bmatrix} \frac{1}{2} & 0 & 0 \\ 0 & \frac{1}{3} & 0 \end{bmatrix} \begin{bmatrix} b_1 \\ b_2 \\ 0 \end{bmatrix} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} \frac{b_1}{2}\\ \frac{b_2}{3} \end{bmatrix}
+++++
+
+This transformation is
+
+* one-to-one: For a given stem:[\mathbf{x}], we get a unique stem:[\mathbf{b}]. No two different stem:[\mathbf{x}]'s map to the same stem:[\mathbf{b}].
+* Not onto: For some stem:[\mathbf{b} \in \mathbb{R}^n] (as this is a transformation from stem:[\mathbb{R}^n \to \mathbb{R}^n]), there exists no stem:[\mathbf{x}] such that stem:[\mathbf{Ax} = \mathbf{b}].
+
+But inversion is still possible in the range of the transformation, i.e., where stem:[b_3=0] in stem:[\mathbf{b}].
+
+*Case 4:*
+
+Let's consider a diagonal matrix whose some of the diagonal entries are themselves zero. Let stem:[\mathbf{C} = \begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}]. We are also given stem:[\mathbf{b}]. We need to find stem:[\mathbf{x}].
+
+[stem]
+++++
+\begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} b_1 \\ b_2 \\b_3 \end{bmatrix}
+++++
+
+This gives stem:[x_1 = b_1, x_2 = b_2 , 0 = b_3]. stem:[b_3] will be zero no matter what stem:[x_3] is.
+This transformation is
+
+* Not one-to-one: Uncountably many stem:[\mathbf{x}]s map to the same stem:[\mathbf{b}].
+* Not onto: For some stem:[\mathbf{b} \in \mathbb{R}^n] (as this is a transformation from stem:[\mathbb{R}^n \to \mathbb{R}^n]), there exists no stem:[\mathbf{x}] such that stem:[\mathbf{Ax} = \mathbf{b}].
+
+But inversion is still possible by ignoring the third dimension stem:[x_3] in stem:[\mathbf{x}] and constraining ourselves to the range of the transformation, i.e., where stem:[b_3=0] in stem:[\mathbf{b}].
+
+*Case 5:*
+
+Consider a matrix whose all entries are zero. This transformation is neither one-to-one nor onto. And we cannot recover any dimension. So inverse of this transformation doesn't exist.
+
+In general, it is easier to invert the diagonal matrices. We have to simply inverse the diagonal numbers.
+
+[stem]
+++++
+\mathbf{A} = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix} \implies \mathbf{A}^{-1} = \begin{bmatrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{3} \end{bmatrix}
+++++
+
+== Inverse of Orthogonal Matrices ==
+We know that a square matrix stem:[\mathbf{A}_{n \times n}] is said to be orthogonal if its columns are unit vectors and each column is orthogonal to the other column, stem:[\mathbf{c}_i \perp \mathbf{c}_j] for all stem:[i \ne j] and norm of the vector stem:[\| \mathbf{c}_i \| = 1]. The inverse of stem:[\mathbf{A}] is just stem:[\mathbf{A}^{-1} = \mathbf{A}^\top].
+
+We can verify that stem:[\mathbf{A}^\top\mathbf{A} = \mathbf{A}\mathbf{A}^\top = \mathbf{I}]. The stem:[{ij}^{th}] entry of the matrix (note that the norm of the column is 1)
+
+[stem]
+++++
+\mathbf{A}^\top\mathbf{A} |_{ij} = l_i^\top l_j = 
+\begin{cases} 
+1 & \text{if } i=j \\
+0 & \text{if } i \ne j
+\end{cases}
+++++
+
+== Properties of Inverse Transformation ==
+Inverse of the transformation exists when the transformation is one-to-one and onto, i.e., it is bijective.
+
+*One-to-One:*
+
+The linear transformation stem:[\mathcal{L}: \mathbb{R}^n \to \mathbb{R}^m] (from stem:[V] to stem:[W]) is one-to-one iff
+
+[stem]
+++++
+\mathcal{L}(\mathbf{v}_1) = \mathbf{w} \text{ and } \mathcal{L}(\mathbf{v}_2) = \mathbf{w} \implies \mathbf{v}_1 = \mathbf{v}_2
+++++
+
+In terms of matrix,
+
+[stem]
+++++
+\begin{align*}
+\iff & \mathbf{M}\boldsymbol{\alpha}_1 = \boldsymbol{\beta} \text{ and } \mathbf{M}\boldsymbol{\alpha}_2 = \boldsymbol{\beta} \implies \boldsymbol{\alpha}_1 = \boldsymbol{\alpha}_2 \\
+\iff & \mathbf{M} (\boldsymbol{\alpha}_1 - \boldsymbol{\alpha}_2) = \mathbf{0} \implies \boldsymbol{\alpha}_1 - \boldsymbol{\alpha}_2 = \mathbf{0}  \\
+\iff & \text{ all columns of } \mathbf{M} \text{ are linearly independent}
+\end{align*}
+++++
+
+NOTE: stem:[\boldsymbol{\alpha}] is a vector having the coefficients of expansion of stem:[\mathbf{v}] and stem:[\boldsymbol{\beta}] has the coefficients of expansion of stem:[\mathbf{w}].
+
+stem:[\boldsymbol{\alpha}_1 - \boldsymbol{\alpha}_2] is a stem:[n \times 1] vector. Then stem:[\mathbf{M} (\boldsymbol{\alpha}_1 - \boldsymbol{\alpha}_2)] is a linear combination of the columns of stem:[\mathbf{M}]. Here linear combination of the columns of stem:[\mathbf{M}] zero implies that the coefficients in the linear combination, the stem:[\boldsymbol{\alpha}] vector, is a zero-vector. This shows that all columns of stem:[\mathbf{M}] are linearly independent. So transformation is one-to-one stem:[\iff] the columns of stem:[\mathbf{M}] are linearly independent.
+
+*Onto:*
+
+The linear transformation stem:[\mathcal{L}: \mathbb{R}^n \to \mathbb{R}^m] (from stem:[V] to stem:[W]) is onto iff for any given stem:[\mathbf{w} \in W], there exists at least one stem:[\mathbf{v}] such that stem:[\mathbf{L}(\mathbf{v}) = \mathbf{w}].
+
+[stem]
+++++
+\iff \exists \text{ a } \mathbf{v} \in V \ni \mathcal{L}(\mathbf{v}) = \mathbf{w} \,\, \forall \mathbf{w} \in W
+++++
+
+In terms of matrix,
+
+[stem]
+++++
+\begin{align*}
+\iff & \exists \text{ a } \boldsymbol{\alpha} \ni \mathbf{M}\boldsymbol{\alpha}= \boldsymbol{\beta} \,\, \forall \boldsymbol{\beta} \in W\\
+\iff & \text{ columns of } \mathbf{M} \text{ span } \mathbb{R}^m
+\end{align*}
+++++
+
+Any vector stem:[\boldsymbol{\beta} \in W] can be written as a linear combination of the columns of stem:[\mathbf{M}]. This shows that the columns of stem:[\mathbf{M}] should span stem:[\mathbb{R}^m]. So transformation is onto stem:[\iff] the columns of stem:[\mathbf{M}] span stem:[\mathbb{R}^m].
+
+From these two, we can say that
+
+* *Iff* the columns of stem:[\mathbf{M}] form a basis of stem:[\mathbb{R}^m], then the linear transformation is one-to-one and onto.
+* *Iff* the columns are LI but don't form a spanning set, then the transformation is just one-to-one.
+* *Iff* the columns form a spanning set but not LI, then the transformation is just onto.
+* *Iff* the columns are not LI and don't form a spanning set, then the transformation is neither one-to-one nor onto.
+
+== Summary ==
+Let's take some cases of specific kinds of stem:[\mathbf{M}] which is a stem:[m \times n] matrix: It is a linear transformation from stem:[\mathbb{R}^n \to \mathbb{R}^m].
+
+* stem:[m > n]: This is the case where span of columns of stem:[\mathbf{M}] can at most be stem:[\mathbb{R}^n]. So columns of stem:[\mathbf{M}] cannot span stem:[\mathbb{R}^m]. In this case any stem:[\mathbf{M}] cannot represent onto transformation. However, stem:[\mathbf{M}] may or may not represent a 1-to-1 transformation based on LI of columns of stem:[\mathbf{M}].
+
+* stem:[m < n]: This is the case where the columns of stem:[\mathbf{M}] can never be LI (because there are more columns than stem:[m] itself). So stem:[\mathbf{M}] cannot represent a 1-1 transformation. However, stem:[\mathbf{M}] may or may not represent an onto transformation based on whether the columns of stem:[\mathbf{M}] span stem:[\mathbb{R}^m] or not.
+
+* stem:[m=n]: Either it is a transformation which is bijective or not 1-1, not onto. In case stem:[m=n] and all columns of stem:[\mathbf{M}] are LI (which also implies that the columns of stem:[\mathbf{M}] span stem:[\mathbb{R}^m]), then the transformation is bijective.

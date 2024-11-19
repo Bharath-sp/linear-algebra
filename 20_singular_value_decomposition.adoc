@@ -1,0 +1,129 @@
+= Singular Value Decomposition =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Motivation ==
+In eigen value decomposition, for a stem:[\mathbf{A}_{n \times n}] matrix, we did stem:[\mathbf{A} = \mathbf{V \Lambda V}^{-1}]. And for symmetric matrices, it was stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top].
+
+image::.\images\evd_for_symmetric.png[align='center', 500, 400]
+
+Suppose we have a matrix stem:[\mathbf{A}_{n \times n}] that is not diagonalizable. In EVD, the basis on the LHS and the RHS are the same. If we allow them to be different, then the matrix stem:[\mathbf{A}] become diagonalizable? If this is the case, we can handle rectangular matrices also.
+
+== Singular Value Decomposition ==
+Let's consider a rectangular stem:[\mathbf{A}_{m \times n}], which is a transformation from stem:[\mathbb{R}^n \rightarrow \mathbb{R}^m]. The basis of both the spaces should be different obviously. The singular value decomposition of a matrix stem:[\mathbf{A}_{m \times n}] is
+
+[stem]
+++++
+\mathbf{A}_{m \times n} = \mathbf{U}_{m \times m} \mathbf{\Sigma}_{m \times n} \mathbf{V}_{n \times n}^\top
+++++
+
+where stem:[\mathbf{V}^\top] and stem:[\mathbf{U}] are orthogonal matrices and stem:[\mathbf{\Sigma}] is a rectangular diagonal matrix (entries are there only in the principal diagonal). The entries of stem:[\mathbf{\Sigma}] are called as singular values.
+
+[stem]
+++++
+\mathbf{Ax} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top \mathbf{x}
+++++
+
+image::.\images\svd_transformation.png[align='center', 500, 400]
+
+Every matrix in the world is diagonalizable, but the problem is we need to choose the right bases on each of the sides. There is a connection with the eigen value decomposition as well.
+
+[stem]
+++++
+\begin{align*}
+\mathbf{A}^\top \mathbf{A} & = (\mathbf{U \Sigma} \mathbf{V}^\top)^\top (\mathbf{U \Sigma} \mathbf{V}^\top) \\
+& = \mathbf{V} \mathbf{\Sigma}^\top \mathbf{U}^\top \mathbf{U \Sigma} \mathbf{V}^\top \\
+& = \mathbf{V} \mathbf{\Sigma}^\top \mathbf{\Sigma} \mathbf{V}^\top && \mathbf{U} \text{ is an orthogonal matrix} \\
+& = \mathbf{V} (\mathbf{\Sigma}^\top \mathbf{\Sigma}) \mathbf{V}^\top
+\end{align*}
+++++
+
+This is in the eigen value decomposition form for symmetric matrices. Then stem:[\mathbf{V}] should have the eigen vectors of stem:[\mathbf{A}^\top \mathbf{A}] (there is no other way). So if stem:[\mathbf{A}] has singular value decomposition,
+
+* Then the matrix stem:[\mathbf{V}] should have the eigen vectors of stem:[\mathbf{A}^\top \mathbf{A}] as it columns.
+* The entries of the matrix stem:[\mathbf{\Sigma}] should be the square root of non-zero entries of eigenvalues of stem:[\mathbf{A}^\top \mathbf{A}], and the remaining principal diagonal entries 0. The square of the singular values are the eigen values of stem:[\mathbf{A}^\top \mathbf{A}].
+
+[stem]
+++++
+\begin{align*}
+\mathbf{A}\mathbf{A}^\top & = (\mathbf{U \Sigma} \mathbf{V}^\top) (\mathbf{U \Sigma} \mathbf{V}^\top)^\top \\
+& = \mathbf{U \Sigma} \mathbf{V}^\top \mathbf{V} \mathbf{\Sigma}^\top \mathbf{U}^\top \\
+& = \mathbf{U} \mathbf{\Sigma}^\top \mathbf{\Sigma} \mathbf{U}^\top && \mathbf{V} \text{ is an orthogonal matrix} \\
+& = \mathbf{U} (\mathbf{\Sigma}^\top \mathbf{\Sigma}) \mathbf{U}^\top
+\end{align*}
+++++
+
+* Then the matrix stem:[\mathbf{U}] should have the eigen vectors of stem:[\mathbf{A} \mathbf{A}^\top] as it columns.
+* The square of the singular values are eigen values of stem:[\mathbf{A}\mathbf{A}^\top]. This is possible only when the non-zero eigen values of stem:[\mathbf{A}^\top \mathbf{A}] and stem:[\mathbf{A}\mathbf{A}^\top] are the same (there can be different number of zero eigen values for these two matrices, that is fine).
+
+So to do singular value decomposition of stem:[\mathbf{A}], we just need to
+
+* Do the eigen value decomposition of stem:[\mathbf{A}^\top \mathbf{A}] to get the stem:[\mathbf{V}] matrix, take the square root of eigen values of stem:[\mathbf{A}^\top \mathbf{A}] and fill the principal diagonal entries of stem:[\mathbf{\Sigma}] and fill the remaining principal diagonal entries with 0. 
+* Do the eigen value decomposition of stem:[\mathbf{A}\mathbf{A}^\top] to get the stem:[\mathbf{U}] matrix.
+
+IMPORTANT: If stem:[\mathbf{A}] is a square non-symmetric matrix, we can do the same trick using the singular value decomposition.
+
+====
+Thorem: Eigenvalues of  stem:[\mathbf{A}^\top \mathbf{A}] and stem:[\mathbf{A}\mathbf{A}^\top] are always equal to greater than 0. Here stem:[\mathbf{A}] can also be a rectangular matrix.
+====
+
+*Proof:*
+
+We know that stem:[\mathbf{A}^\top \mathbf{A}] and stem:[\mathbf{A}\mathbf{A}^\top] are stem:[n \times n] and stem:[m \times m] symmetric matrices, hence they have stem:[n] and stem:[m] eigen values respectively. But they have some non-zero eigen values that are common. May be there could be stem:[r] common non-zero eigen values. The rest of the stem:[n-r] and stem:[m-r] will be zero values in the matrices respectively.
+
+*Case 1:*
+
+Given stem:[\mathbf{M}] is a positive semi-definite matrix which is also symmetric, it has stem:[n] eigen values.
+
+[stem]
+++++
+\begin{align*}
+\mathbf{A}^\top \mathbf{A} \mathbf{v} & = \lambda \mathbf{v} \\
+\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on multiplying } \mathbf{v}^\top \\
+\| \mathbf{Av} \|^2 & = \lambda \| \mathbf{v} \|^2 \\
+\end{align*}
+++++
+
+Which shows that stem:[\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} \geq 0 ] and stem:[\mathbf{v}^\top\mathbf{v} \geq 0]. And from the last equation, we can observe that that all eigen values of stem:[\mathbf{A}^\top \mathbf{A} \geq 0].
+
+* So it turns out that stem:[\mathbf{M} = \mathbf{A}^\top \mathbf{A}] is a positive semi-definite matrix. So all the eigen values of a PSD matrix are always stem:[\geq 0].
+
+Similarly, given that stem:[\mathbf{M} = \mathbf{A} \mathbf{A}^\top] is a positive semi-definite matrix. Then all the eigen values are always stem:[\geq 0].
+
+Conversely, if we have a stem:[\mathbf{A}_{n \times n}] matrix with all eigen values non-negative, is it a PSD matrix? First, since it has all eigen values stem:[\geq 0], it is a symmetric matrix. Then we can prove that it is also a PSD matrix.
+
+[stem]
+++++
+\mathbf{M} \text{ is PSD} \iff \text{ all the eigen values } \geq 0
+++++
+
+
+*Case 2:*
+
+Given stem:[\mathbf{M} = \mathbf{A}^\top \mathbf{A}] is a positive-definite matrix which is also symmetric, it has stem:[n] eigen values.
+
+[stem]
+++++
+\begin{align*}
+\mathbf{\mathbf{A}^\top \mathbf{A}} \mathbf{v} & = \lambda \mathbf{v} \\
+\mathbf{v}^\top \mathbf{\mathbf{A}^\top \mathbf{A}} \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on multiplying } \mathbf{v}^\top \\
+\| \mathbf{Av} \|^2 & = \lambda \| \mathbf{v} \|^2 \\
+\end{align*}
+++++
+
+Since norm will be zero if and only the vector is stem:[\mathbf{v} = \mathbf{0}]. As stem:[\mathbf{v} = \mathbf{0}] is not allowed in this case, stem:[\| \mathbf{Av} \|^2 > 0 \implies \mathbf{v}^\top \mathbf{\mathbf{A}^\top \mathbf{A}} \mathbf{v} > 0] and stem:[\mathbf{v}^\top\mathbf{v} > 0 \implies \mathbf{v}^\top\mathbf{v} > 0]. Hence all the eigen values of a positive definite matrix are always stem:[>0].
+
+Conversely, if we have a stem:[\mathbf{A}_{n \times n}] matrix with all eigen values positive, is it a PD matrix? First, since it has all eigen values stem:[> 0], it is a symmetric matrix. Then we can prove that it is also a PD matrix.
+
+
+[stem]
+++++
+\mathbf{M} \text{ is PD} \iff \text{ all the eigen values } > 0
+++++
+
+
+

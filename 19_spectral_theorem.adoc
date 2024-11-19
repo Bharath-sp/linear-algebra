@@ -1,0 +1,74 @@
+= Spectral Theorem =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+
+== Theorem ==
+A matrix stem:[\mathbf{A}_{n \times n}] is symmetric if and only if stem:[\mathbf{A}] can be written as stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top]. 
+
+Then we can observe that
+
+* The columns of stem:[\mathbf{V}] are eigen vectors. There stem:[n] eigen vectors and they are orthogonal to each other. Entries of stem:[\Lambda] are eigen values.
+* All symmetric matrices are diagonalizable.
+
+NOTE: Non-symmetric matrices can also be diagonalizable and EVD may exist. In such cases, we can represent the matrix only as stem:[\mathbf{A} = \mathbf{V \Lambda V}^{-1}]. Decomposing as stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top] is not possible for non-symmetric matrices.
+
+There is a stronger theorem which can be used to prove the spectral theorem.
+
+Let stem:[\mathbf{A}] be a Hermitian matrix. It is a complex-valued matrix for which stem:[\mathbf{A} = \bar{\mathbf{A}}^\top = \mathbf{A}^*] which indicates conjugate transpose.
+
+Theorem: stem:[\mathbf{A}] is a Hermitian matrix if and only if 
+
+* stem:[\mathbf{A}] has stem:[n] eigen values which is the same as saying all the roots of the CP are real.
+* If stem:[\mathbf{v}_i] is the eigen vector associated with stem:[\lambda_i] and stem:[\mathbf{v}_j] is the eigen vector associated with stem:[\lambda_j], then stem:[\mathbf{v}_i^* \mathbf{v}_j = 0].
+
+*Proof:*
+
+Let stem:[\mathbf{A}_{n \times n}] be a Hermitian matrix. stem:[\mathbf{Av} = \lambda \mathbf{v}]. We need to show that all the roots of the CP are real.
+
+[stem]
+++++
+\begin{align*}
+\mathbf{Av} & = \lambda \mathbf{v} \\
+\iff (\mathbf{Av})^* & = (\lambda \mathbf{v})^* && \text{on taking * on both sides} \\
+\iff \mathbf{v}^* \mathbf{A}^* & = \bar{\lambda} \mathbf{v}^* \\
+\iff \mathbf{v}^* \mathbf{A} & = \bar{\lambda} \mathbf{v}^* && \text{ as it is Hermitian}\\
+\iff \mathbf{v}^* \mathbf{A} \mathbf{v} & = \bar{\lambda} \mathbf{v}^* \mathbf{v} && \text{ multiply } \mathbf{v} \text{ both sides} \\
+\iff \lambda \mathbf{v}^* \mathbf{v} & = \bar{\lambda} \mathbf{v}^* \mathbf{v} \\
+\iff \lambda & = \bar{\lambda} && \mathbf{v} \text{ can't be a zero-vector}
+\end{align*}
+++++
+
+This shows that the eigen values are all real. As the polynomial is of stem:[n] degree, there will stem:[n] real roots stem:[\implies n] eigen values. This happens for Hermitian matrices, then it is obviously true for symmetric matrices.
+
+Let stem:[\mathbf{v}_1] be the eigen vector associated with stem:[\lambda_1] and stem:[\mathbf{v}_2] is the eigen vector associated with stem:[\lambda_2] with stem:[\lambda_1 \ne \lambda_2]. We need to show that stem:[\mathbf{v}_1^* \mathbf{v}_2 = 0].
+
+[stem]
+++++
+\begin{align*}
+\mathbf{Av}_2 & = \lambda_2 \mathbf{v}_2 \\
+\iff \mathbf{v}_2^* \mathbf{A}^* & = \bar{\lambda}_2 \mathbf{v}_2^* \\
+\iff \mathbf{v}_2^* \mathbf{A} & = \bar{\lambda}_2 \mathbf{v}_2^* \\
+\iff \mathbf{v}_2^* \mathbf{Av}_1 & = \bar{\lambda}_2 \mathbf{v}_2^* \mathbf{v}_1 \\
+\iff \lambda_1 \mathbf{v}_2^* \mathbf{v}_1 & = \lambda_2 \mathbf{v}_2^* \mathbf{v}_1 && \text{ as eigen values are real }\\
+\iff \mathbf{v}_2^* \mathbf{v}_1 & = 0 && \text{ because } \lambda_1 \ne \lambda_2
+\end{align*}
+++++
+
+For distinct eigen values, we get distint eigen vectors. And they all satisfy stem:[\mathbf{v}_i^* \mathbf{v}_j = 0]. For symmetric matrices, we say that eigenvectors corresponding to distinct eigenvalues are orthogonal to each other.
+
+Now we have proved that symmetric matrices have stem:[n] eigen values (but they can be distinct or repeated).
+
+* If all stem:[n] eigenvalues are distinct, the corresponding stem:[n] eigenvectors are automatically orthogonal.
+* If there are repeated eigenvalues, it's still possible to choose an orthogonal set of eigenvectors for each distinct eigenvalue, so we get stem:[n] eigenvectors that are orthogonal.
+
+Thus, a symmetric matrix stem:[\mathbf{A}] can be repesented as stem:[\mathbf{V \Lambda V}^{-1}] with normalized eigen vectors. Since the columns of stem:[\mathbf{V}] are orthogonal to each other, stem:[\mathbf{V}^{-1} = \mathbf{V}^\top]. Hence, stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top].
+
+Proving other side is very easy. If stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top], then stem:[\mathbf{A}^\top = \mathbf{V \Lambda V}^\top]. Thus stem:[\mathbf{A} = \mathbf{A}^\top], it is a symmetric matrix.
+
+image::.\images\evd_for_symmetric.png[align='center', 500, 400]
+
+
+

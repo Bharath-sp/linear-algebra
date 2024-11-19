@@ -1,0 +1,271 @@
+= Eigen Value Decomposition =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Eigen Value Decomposition ==
+Given a general matrix stem:[\mathbf{A}_{n \times n}], we need to find stem:[\lambda, \mathbf{v}] for which
+
+[stem]
+++++
+\mathbf{Av} = \lambda \mathbf{v} \iff (\lambda \mathbf{I} - \mathbf{A}) \mathbf{v} = \mathbf{0}
+++++
+
+We should choose stem:[\lambda] that makes the matrix stem:[(\mathbf{A} - \lambda \mathbf{I})] rank strictly less than stem:[n]. Since this is a square matrix, stem:[m=n], making stem:[rank(\lambda\mathbf{I} - \mathbf{A}) < n] also implies stem:[rank(\lambda\mathbf{I} - \mathbf{A}) < m]. This is the case where the transformation is neither 1-to-1 nor onto, i.e, the transformation is not invertible (full, left and right inverse don't exist). 
+
+For such a matrix, the determinant will be 0, i.e., stem:[\text{det}(\lambda \mathbf{I} - \mathbf{A}) = 0].
+
+====
+Theorem: A square matrix is non-invertible if and only if it determinant is 0.
+====
+
+We should choose stem:[\lambda] that makes the matrix stem:[(\lambda \mathbf{I} - \mathbf{A})] non-invertible, but that is equivalent to finding stem:[\lambda]s that make stem:[\text{det}(\lambda \mathbf{I} - \mathbf{A}) = 0].
+
+====
+* stem:[\lambda]s that satisfy this equation are all eigen values.
+* Then for each eigen value, we can compute the eigen vectors. Each eigen value can be associated with one or more eigen vectors.
+* The space spanned by eigenvectors corresponding to a particular eigenvalue stem:[\lambda] is called the eigenspace of that eigenvalue, i.e., it is the set of all vectors that satisfy the equation for a given stem:[\lambda]. Moreover the eigenspace associated with stem:[\lambda] is the null space of the matrix stem:[(\lambda \mathbf{I} - \mathbf{A})].
+====
+
+[stem]
+++++
+\lambda \mathbf{I} - \mathbf{A} = \begin{bmatrix}
+\lambda - a_{11} & a_{12} & \dots & a_{1n} \\ 
+a_{21} & \lambda - a_{22} & \dots & a_{2n} \\ 
+\vdots & \vdots & \dots & \vdots \\
+a_{n1} & a_{n2} & \dots & \lambda - a_{nn} \\
+\end{bmatrix}
+++++
+
+On calculating stem:[\text{det}(\lambda \mathbf{I} - \mathbf{A})], we get a polynomial function in stem:[\lambda]. This polynomial will have a degree of stem:[n] always. And we can see that the coefficient of the term stem:[\lambda^n] will be 1. So this is a special polynomial of stem:[n^{th}] degree with leading coefficient 1. This polynomial is known as *characteristic polynomial*.
+
+[stem]
+++++
+\text{det}(\lambda \mathbf{I} - \mathbf{A}) = n^{th} \text{ degree polynomial in } \lambda = 0
+++++
+
+We know that a polynomial of stem:[n^{th}] degree with leading coefficient 1 will exactly have stem:[n] roots. We need to find the stem:[n] roots of this polynomial to get the eigen values. But some of these roots can be complex, and some of them might be repetition. We consider only real roots for the eigen values.
+
+====
+The *real roots* of this characteristic polynomial are eigen values. At most we get stem:[n] eigen values in the case when all stem:[n] roots are distinct and real.
+====
+
+* When stem:[n] is odd, we definitely get *at least* one eigen value. This is because if a complex root occur, it always occur in pair, i.e., its conjugate will also be a root. Thus such matrices always represent a linear transformation in which at least one direction gets stretched or shrinked. When stem:[n] is even, we may not get even a single eigen value, ie., it may happen that all the roots are complex.
+
+As the leading coefficient of the polynomial is 1, we can factor the polynomial and write it as below. LHS is the actual expanded polynomial and RHS is the factored version of it. We can compare the coefficients on both the sides.
+
+[latexmath#eq-1,reftext=Equation 1]
+++++
+\begin{equation}
+\text{det}(\lambda \mathbf{I} - \mathbf{A})  = (\lambda - \lambda_1) (\lambda - \lambda_2) \dots (\lambda - \lambda_n)
+\end{equation}
+++++
+
+NOTE: Note not all stem:[\lambda_1, \dots, \lambda_n] are the eigen values, there can be some complex roots as well.
+
+=== stem:[n] Real Roots ===
+
+When all the roots are real, stem:[\lambda_1, \dots, \lambda_n] will be eigen values. On substituting stem:[\lambda=0] in <<eq-1>>, we get 
+
+[stem]
+++++
+(-1)^n \lambda_1 \dots \lambda_n = \text{det}(\mathbf{A})
+++++
+
+The product of eigen values is the stem:[\text{det}(\mathbf{A})] (apart from the sign).
+
+Now let's find the coefficient of stem:[\lambda^{n-1}]. From the RHS of <<eq-1>> 
+
+* stem:[(\lambda - \lambda_1) \left[ (\lambda - \lambda_2) \dots (\lambda - \lambda_n) \right\]]: the inner term has stem:[(n-1)] degree. On multiplying this with the first term, we get stem:[-\lambda_1] as the coefficient for one of the stem:[\lambda^{n-1}] terms.
+
+* stem:[(\lambda - \lambda_2) \left[ (\lambda - \lambda_1) \dots (\lambda - \lambda_n) \right\]]: the inner term has stem:[(n-1)] degree. On multiplying this with the first term, we get stem:[-\lambda_2] as the coefficient for one of the stem:[\lambda^{n-1}] terms.
+
+* on keep doing this, we get we get stem:[-\lambda_3, \dots, -\lambda_n] as the coefficients of the stem:[\lambda^{n-1}] terms. That is in the polynomial expansion, we see the terms stem:[-\lambda_1 \lambda^{n-1} -\lambda_2 \lambda^{n-1} - \dots - \lambda_n \lambda^{n-1} ]. So the coefficient of stem:[\lambda^{n-1}] is stem:[-(\lambda_1 + \dots + \lambda_n)].
+
+For the LHS of <<eq-1>>, we need to calculate the determinant. The only cofactor that contributes to stem:[\lambda^{n-1}] is stem:[(\lambda - a_{11})(\lambda - a_{22}) \dots (\lambda - a_{nn})]. And as we did before, in this expansion, we see the terms stem:[-a_1 \lambda^{n-1} -a_2 \lambda^{n-1} - \dots - a_n \lambda^{n-1} ]. So the coefficient of stem:[\lambda^{n-1}] is stem:[-(a_1 + \dots + a_n)]. On equating both, we see
+
+[stem]
+++++
+\lambda_1 + \dots + \lambda_n = a_1 + \dots + a_n
+++++
+
+The sum of the eigen values is the trace of the matrix stem:[\mathbf{A}].
+
+*Example:*
+
+Find the eigen values of stem:[\mathbf{A} = \begin{bmatrix} 1 & 1 & 1 \\  1 & 1 & 1 \\  1 & 1 & 1 \\ \end{bmatrix}]. It is a symmetric matrix, thus it will have only (three) real roots.
+
+* Since the matrix is already rank deficient, 0 will be one of the eigen values. We see that there is only one LI column in stem:[\mathbf{A}], which means stem:[dim(\mathcal{C}(\mathbf{A})) =1]. By the rank-nullity theorem,  we know stem:[dim(\mathcal{C}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) = n]. The dimensionality of the null space is then 2. So there should be two eigen values that are 0. We get two eigen vectors associated with this eigen value.
++
+For eigen value 0, we get the equation stem:[v_1 + v_2 + v_3 = 0], two variables can be selected freely. Any vectors of the form stem:[(-v_2-v_3, v_2, v_3)] will be a eigen vector. We can choose stem:[\mathbf{v}_1 = (-1,1,0)] and stem:[\mathbf{v}_2 = (-1,0,-1)].
+
+* The product of the eigen values is stem:[\text{det}(\mathbf{A})] which is 0 stem:[\implies \lambda_1 \lambda_2 \lambda_3 = 0 ].
+* The sum of the eigen values is the trace of stem:[\mathbf{A}] which is 3 stem:[\implies \lambda_1 + \lambda_2 + \lambda_3 = 3 ].
+
+From the trace property, we can see that the other eigen value is 3. We get three equations stem:[v_1 + v_2 + v_3 = 3v_1, v_1 + v_2 + v_3 = 3v_2, v_1 + v_2 + v_3 = 3v_3]. Solving this gives us stem:[\mathbf{v}_3 = (1,1,1)].
+
+Eigen values for this matrix is stem:[0,0,3]. Similarly if the matrix is stem:[n \times n] with all entries 1, the eigen values will be stem:[0,0, \dots, n], i.e., (stem:[n-1] 0s and stem:[n]).
+
+=== stem:[n] Real and Distinct Roots ===
+Suppose stem:[\lambda_1, \dots, \lambda_n] are real, distinct eigen values. Say stem:[\mathbf{v}_1, \dots, \mathbf{v}_n] are the associated eigen vectors. This set of vectors stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n\}] is always linearly independent. This set spans stem:[\mathbb{R}^n]. Thus they can form a basis for stem:[\mathbb{R}^n].
+
+Hence the given matrix stem:[\mathbf{A}] can be written in the diagonalizable form, which will be respect to the basis stem:[\mathbf{v}_1, \dots, \mathbf{v}_n].
+
+====
+Any set of eigen vectors corresponding to distinct eigen values always form a LI set.
+====
+
+*Proof:*
+
+Let's prove this by contradiction. Suppose the set stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n\}] is linearly dependent. It means that we can satisfy the equation without having all stem:[\rho_1, \dots, \rho_n] as 0, i.e., we can express one vector in terms of the linear combinations of the other vectors. Without loss of generality, let's assume stem:[\rho_1 \ne 0].
+
+[latexmath#eq-2,reftext=Equation 2]
+++++
+\begin{align}
+\rho_1 \mathbf{v}_1 + \rho_2 \mathbf{v}_2 + \dots + \rho_n \mathbf{v}_n = \mathbf{0} \nonumber \\
+\mathbf{v}_1 = - \frac{\rho_2}{\rho_1} \mathbf{v}_2 - \frac{\rho_3}{\rho_1} \mathbf{v}_3 - \dots - \frac{\rho_n}{\rho_1} \mathbf{v}_n \\
+\end{align}
+++++
+
+Now let's assume that the vectors stem:[\{\mathbf{v}_2, \dots, \mathbf{v}_n\}] are LI.
+
+[NOTE]
+====
+If they are not LI, say stem:[\mathbf{v}_2] and stem:[\mathbf{v}_3] are linearly dependent, then stem:[\mathbf{v}_1 ] can be expressed without considering one of them.
+
+[stem]
+++++
+\mathbf{v}_1 = - \frac{\rho_2}{\rho_1} \mathbf{v}_2 - \frac{\rho_4}{\rho_1} \mathbf{v}_4 - \dots - \frac{\rho_n}{\rho_1} \mathbf{v}_n \\
+++++
+
+In such case, our equation will be stem:[\rho_1 \mathbf{v}_1 + \rho_2 \mathbf{v}_2 + \rho_4 \mathbf{v}_4 + \dots + \rho_n \mathbf{v}_n = \mathbf{0}]. This is satisfied without all the coefficients being 0. Then we can proceed in the same way as below.
+====
+
+Let's multiply by stem:[\mathbf{A}] on both the sides, and since stem:[\mathbf{v}_1, \dots, \mathbf{v}_n] are the eigen vectors
+
+[stem]
+++++
+\begin{align*}
+\rho_1 \mathbf{A} \mathbf{v}_1 + \rho_2 \mathbf{A} \mathbf{v}_2 + \dots + \rho_n \mathbf{A} \mathbf{v}_n = \mathbf{0} \\
+\rho_1 \lambda_1 \mathbf{v}_1 + \rho_2 \lambda_2 \mathbf{v}_2 + \dots + \rho_n \lambda_n \mathbf{v}_n = \mathbf{0} \\
+\rho_1 \lambda_1 \left( - \frac{\rho_2}{\rho_1} \mathbf{v}_2 - \dots - \frac{\rho_n}{\rho_1} \mathbf{v}_n \right) + \rho_2 \lambda_2 \mathbf{v}_2 + \dots + \rho_n \lambda_n \mathbf{v}_n = \mathbf{0} \\
+\rho_2 (\lambda_2 - \lambda_1) \mathbf{v}_2 + \rho_3 (\lambda_3 - \lambda_1) \mathbf{v}_3 + \dots + \rho_n (\lambda_n - \lambda_1) \mathbf{v}_n = \mathbf{0}
+\end{align*}
+++++
+
+The vectors stem:[\{\mathbf{v}_2, \dots, \mathbf{v}_n\}] are LI. This means to satify this equation, we need to have all the coefficients equal to 0. Since all the eigen values are distinct, the terms stem:[(\lambda_2 - \lambda_1), \dots, (\lambda_n - \lambda_1)] are not zero. Then it should be that stem:[\rho_2 = \dots = \rho_n = 0].
+
+On substituting these values back in <<eq-2>>, we get stem:[\mathbf{v}_1 = \mathbf{0}]. This is not possible as eigen vector cannot be a zero-vector. This contradicts our assumption that the set stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n\}] is linearly dependent.
+
+== Matrix Construction ==
+Suppose stem:[\lambda_1, \dots, \lambda_n] are real, distinct eigen values. Say stem:[\mathbf{v}_1, \dots, \mathbf{v}_n] are the associated eigen vectors. We get the following stem:[n] vector equations
+
+[stem]
+++++
+\begin{align*}
+\mathbf{Av}_1 & = \lambda_1 \mathbf{v}_1 \\
+\mathbf{Av}_2 & = \lambda_2 \mathbf{v}_2 \\
+\dots \\
+\mathbf{Av}_n & = \lambda_n \mathbf{v}_n \\ 
+\end{align*}
+++++
+
+This can be expressed in a matrix equation as stem:[\mathbf{AV} = \mathbf{V \Lambda}] where 
+
+[stem]
+++++
+\mathbf{V} = \begin{bmatrix}
+\vdots & \vdots & \vdots & \vdots \\ 
+\mathbf{v}_1 & \mathbf{v}_2 & \vdots & \mathbf{v}_n\\ 
+\vdots & \vdots & \vdots & \vdots \\
+\end{bmatrix} \text{ and } \mathbf{\Lambda} = \text{diag}(\lambda_1, \dots, \lambda_n)
+++++
+
+We get
+
+[stem]
+++++
+\mathbf{AV} = \begin{bmatrix}
+\vdots & \vdots & \vdots & \vdots \\ 
+\mathbf{Av}_1 & \mathbf{Av}_2 & \vdots & \mathbf{Av}_n\\ 
+\vdots & \vdots & \vdots & \vdots \\
+\end{bmatrix} \text{ and } \mathbf{V\Lambda} = \begin{bmatrix}
+\vdots & \vdots & \vdots & \vdots \\ 
+\mathbf{\lambda}_1 \mathbf{v}_1 & \mathbf{\lambda}_2 \mathbf{v}_2 & \vdots & \mathbf{\lambda}_n \mathbf{v}_n\\ 
+\vdots & \vdots & \vdots & \vdots \\
+\end{bmatrix}
+++++
+
+We know that the eigen vectors are all LI. Thus the matrix stem:[\mathbf{V}] has full column rank, stem:[rank(\mathbf{V}) = m =n]. The matrix is perfectly invertible. Then on post multiplying stem:[\mathbf{V}^{-1}] on both the sides
+
+[stem]
+++++
+\begin{align*}
+& \mathbf{AVV}^{-1} = \mathbf{V \Lambda V}^{-1} \\
+& \iff \mathbf{A} = \mathbf{V \Lambda V}^{-1} 
+\end{align*}
+++++
+
+This is a factorization that we got for the matrix stem:[\mathbf{A}]. This is known as Eigen Value Decomposition (EVD) of matrix stem:[\mathbf{A}]. This decomposition can be done to matrices stem:[\mathbf{A}_{n \times n}]:
+
+. That has stem:[n] real, distinct eigen values. In this case, we get stem:[n] distinct direction eigen vectors (or)
+. That has non-distinct eigen values, but the space spanned by the eigen vectors associated with each eigenvalue combinely is n-dimensional. In this case also, we get stem:[n] distinct direction eigen vectors. For example, all eigen values can be the same, but each may be associated with a different direction eigen vector.
+
+The converse is also true. If a matrix stem:[\mathbf{A}] can be written as stem:[\mathbf{V \Lambda V}^{-1}], then the columns of stem:[\mathbf{V}] will be eigen vectors for sure and entries of stem:[\mathbf{\Lambda}] will be the eigen values for sure
+
+IMPORTANT: But for a given matrix, if the combined eigen space doesn't span the entire vector space, then the matrix is not diagonalizable. So there is no EVD for this matrix. Look at example 03 in the previous article, the matrix is non-diagonalizable in such case. The eigen space is just the x-axis, it doesn't span the entire stem:[\mathbf{R}^2].
+
+== Example ==
+
+*Example 01:* Find the EVD for the matrix stem:[\mathbf{A} = \begin{bmatrix} 1 & 1 \\  1 & 1 \\ \end{bmatrix}] if it exists.
+
+We have to find stem:[(\lambda, \mathbf{v})] pairs for which stem:[\mathbf{Av} = \lambda\mathbf{v}].
+We can solve the CP to get the eignvalues.
+
+[stem]
+++++
+\begin{bmatrix}
+1 & 1 \\ 
+1 & 1 \\
+\end{bmatrix} \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \lambda \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} \iff 
+\left( \lambda \mathbf{I} - \begin{bmatrix}
+1 & 1 \\ 
+1 & 1 \\
+\end{bmatrix} \right) \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \mathbf{0} \iff 
+\left( \begin{bmatrix}
+\lambda -1 & 1 \\ 
+1 & \lambda-1 \\
+\end{bmatrix} \right) \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0\\  0\\ \end{bmatrix}
+++++
+
+stem:[\text{det}(\lambda \mathbf{I} - \mathbf{A}) = 0], which is stem:[(\lambda-1)^2 = 1]. On solving this, we get stem:[\lambda_1 = 0, \lambda_2 = 2]. We can also use the property to get the eigen values in this case
+
+* The product of the eigen values is stem:[\text{det}(\mathbf{A})] which is 0 stem:[\implies \lambda_1 \lambda_2 = 0 ].
+* The sum of the eigen values is the trace of stem:[\mathbf{A}] which is 3 stem:[\implies \lambda_1 + \lambda_2  = 2 ].
+
+This also gives us the same result. To get the eigen vectors:
+
+* For stem:[\lambda=0]: stem:[\begin{bmatrix} 1 & 1 \\  1 & 1 \\ \end{bmatrix} \begin{bmatrix} v_1 \\  v_2 \\ \end{bmatrix} =  \begin{bmatrix} 0 \\  0 \\ \end{bmatrix}], which gives stem:[v_1 = -v_2]. Any vector of the form stem:[(1,-1)] is the eigen vector. Let's normalize this stem:[(\frac{1}{\sqrt{2}}, \frac{-1}{\sqrt{2}})].
+
+* For stem:[\lambda=2]: stem:[\begin{bmatrix} 1 & 1 \\  1 & 1 \\ \end{bmatrix} \begin{bmatrix} v_1 \\  v_2 \\ \end{bmatrix} =  \begin{bmatrix} 2v_1 \\  2v_2 \\ \end{bmatrix}], which gives stem:[v_1 + v_2 = 2v_1] and stem:[v_1 + v_2 = 2v_2]. Thus stem:[v_1 = v_2]. Any scaling of the vector stem:[(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})] is the eigen vector.
+
+Hence our stem:[\mathbf{V} = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\  \frac{-1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \end{bmatrix} ]. This is infact an orthogonal matrix, thus stem:[\mathbf{V}^{-1} = \mathbf{V}^\top]. Then the matrix stem:[\mathbf{A}] can be decomposed as
+
+[stem]
+++++
+\begin{bmatrix}
+1 & 1 \\ 
+1 & 1 \\
+\end{bmatrix} = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\  \frac{-1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \end{bmatrix} \begin{bmatrix}
+0 & 0 \\ 
+0 & 2 \\
+\end{bmatrix} \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \end{bmatrix}
+++++
+
+
+
+
+

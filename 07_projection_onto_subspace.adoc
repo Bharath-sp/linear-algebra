@@ -1,0 +1,264 @@
+= Projection onto Subspace =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:toc:
+
+== Problem Setting ==
+Fix a vector space stem:[(\mathbb{V}, + , \cdot, \langle \cdot, \cdot \rangle)] with inner product induced norm. And say the dimension of this vector space is stem:[n], where stem:[n>1]. We look at projection of vectors stem:[\textbf{x} \in \mathbb{R}^n] onto a lower-dimensional subspace stem:[U \subseteq \mathbb{R}^n] with stem:[dim(U)=m] where stem:[1 \leq m \leq n].
+
+Assume that stem:[\{\textbf{b}_1, \textbf{b}_2, \dots, \textbf{b}_m\}] is an ordered basis of stem:[U].
+
+NOTE: If stem:[U] is given by a set of spanning vectors, which are not a basis, make sure to determine a basis stem:[\textbf{b}_1, \textbf{b}_2, \dots, \textbf{b}_m] before proceeding.
+
+The projection stem:[\pi_U(\textbf{x})] should be a vector in stem:[U] that is closest to stem:[\textbf{x}], which means the vector connecting stem:[\pi_U(\textbf{x})] and stem:[\mathbf{x}] must be orthogonal to all the vectors, which can also be said as, to all basis vectors of stem:[U]. Therefore, we obtain stem:[m] simultaneous conditions.
+
+[stem]
+++++
+\begin{gather*}
+\langle \textbf{b}_1, \textbf{x}-\pi_U(\textbf{x}) \rangle = \textbf{b}^T_{1}(\textbf{x}-\pi_U(\textbf{x}))=0 \\
+\vdots \\
+\langle \textbf{b}_m, \textbf{x}-\pi_U(\textbf{x}) \rangle = \textbf{b}^T_{m}(\textbf{x}-\pi_U(\textbf{x}))=0
+\end{gather*}
+++++
+
+Any projection stem:[\pi_U(\textbf{x})] is an element of stem:[U]. Therefore, they can be represented as linear combinations of the basis vectors of stem:[U]
+
+[stem]
+++++
+\pi_U(\textbf{x})=\sum_{i=1}^{m} \lambda_{i} \textbf{b}_i = \textbf{B} \boldsymbol{\lambda}
+++++
+
+Where stem:[\textbf{B}= \begin{bmatrix} \vdots & \vdots & \vdots & \vdots \\ 
+\textbf{b}_1 & \textbf{b}_2 & \vdots & \textbf{b}_m \\
+\vdots & \vdots & \vdots & \vdots
+\end{bmatrix}
+\in \mathbb{R}^{n \times m}] and
+stem:[\boldsymbol{\lambda}= \begin{bmatrix} \lambda_{1} \\ \vdots \\\lambda_{m} \end{bmatrix} \in \mathbb{R}^m].
+
+The basis vectors stem:[(\textbf{b}_1, \textbf{b}_2, \dots, \textbf{b}_m)]  form the columns of stem:[\textbf{B}].
+
+Now, we need to find the coordinates stem:[\lambda_{1}, \dots, \lambda_{m}], the projection vector stem:[\pi_{U}(\textbf{x})] onto stem:[U], and the projection matrix stem:[\textbf{P}_\pi] that maps any stem:[\textbf{x}\in \mathbb{R}^{n}] to a vector in stem:[U].
+
+== The Coordinates ==
+We know stem:[\pi_U(\textbf{x})= \textbf{B} \boldsymbol{\lambda}], then
+
+[stem]
+++++
+\begin{gather*}
+\textbf{b}^T_{1}(\textbf{x}-\textbf{B} \boldsymbol{\lambda})=0 \\
+\vdots \\
+\textbf{b}^T_{m}(\textbf{x}-\textbf{B} \boldsymbol{\lambda})=0
+\end{gather*}
+++++
+
+We obtain a homogeneous linear equation system,
+
+[stem]
+++++
+\begin{bmatrix} \textbf{b}^T_{1} \\ \vdots \\ \textbf{b}^T_{m} \end{bmatrix}_{m \times n}
+\begin{bmatrix}  \textbf{x}-\textbf{B}\boldsymbol{\lambda}  \end{bmatrix}_{n \times 1} = \textbf{0}
+\iff
+\textbf{B}^T (\textbf{x}-\textbf{B}\boldsymbol{\lambda}) = \textbf{0}
+\iff
+\textbf{B}^T \textbf{B}\boldsymbol{\lambda} = \textbf{B}^T \textbf{x}
+++++
+
+Since stem:[\textbf{b}_1, \textbf{b}_2, \dots, \textbf{b}_m] are a basis of U and therefore linearly independent. stem:[\textbf{B}^T \textbf{B} \in \mathbb{R}^{m \times m}] is regular and can be inverted. Hence, our coordinates will be:
+
+[stem]
+++++
+\boldsymbol{\lambda} = (\textbf{B}^T \textbf{B})^{-1} \textbf{B}^T \textbf{x}  \hspace{1cm} \in \mathbb{R}^m
+++++
+
+== The Projection Point ==
+We know, stem:[\pi_U(\textbf{x})= \textbf{B} \boldsymbol{\lambda}]. Therefore,
+
+[stem]
+++++
+\pi_U(\textbf{x})=\textbf{B}(\textbf{B}^T \textbf{B})^{-1} \textbf{B}^T \textbf{x}  \hspace{1cm} \in \mathbb{R}^n
+++++
+
+== The Projection Matrix ==
+We can see that the projection matrix that solves stem:[\pi_{U}(\textbf{x})=\textbf{P}_\pi \textbf{x}] must be
+
+[stem]
+++++
+\textbf{P}_\pi=\textbf{B}(\textbf{B}^T \textbf{B})^{-1} \textbf{B}^T  \hspace{1cm} \in \mathbb{R}^{n \times n}
+++++
+
+NOTE: The solution for projecting onto general subspaces includes the 1D case as a special case. If stem:[dim(U)=1], then
+stem:[\textbf{B}^T \textbf{B} \in \mathbb{R}] is a scalar and we can rewrite the projection matrix as below and we get exactly the same that we got for the 1D case.
+
+[stem]
+++++
+\textbf{P}_\pi=\textbf{B}(\textbf{B}^T \textbf{B})^{-1} \textbf{B}^T
+\iff
+\textbf{P}_\pi= \frac{\textbf{B}\textbf{B}^T} {\textbf{B}^T \textbf{B}}
+++++
+
+=== Example ===
+Let stem:[V=\mathbb{R}^3]. For a subspace stem:[U = \text{Span}(\{(1,1,1), (0,1,2)\}) \subseteq \mathbb{R}^3] and stem:[\mathbf{x}=(6,0,0) \in \mathbb{R}^3]. Find the coordinates stem:[\boldsymbol{\lambda}] of stem:[\textbf{x}] on projecting it onto subspace stem:[U], the projection point stem:[\pi_U(\mathbf{x})] and the projection matrix stem:[\mathbf{P}_\pi].
+
+First, we see that the spanning set of stem:[U] is a basis (with linearly independent vectors) and write the basis vectors of stem:[U]  into a matrix stem:[\textbf{B}=\begin{bmatrix} 1 & 0\\ 1 & 1 \\ 1 & 2 \end{bmatrix}].
+
+Second, we compute the matrix stem:[\textbf{B}^T \textbf{B}] and the vector stem:[\textbf{B}^T \textbf{x}] as
+
+[stem]
+++++
+\textbf{B}^T \textbf{B} = \begin{bmatrix} 1 & 1 & 1 \\ 2 & 1 & 2\end{bmatrix} \begin{bmatrix} 1 & 0\\ 1 & 1 \\ 1 & 2 \end{bmatrix}
+= \begin{bmatrix} 3 & 3\\ 3 & 5 \end{bmatrix}, \hspace{1cm}
+\textbf{B}^T \textbf{x} = \begin{bmatrix} 1 & 1 & 1 \\ 2 & 1 & 2\end{bmatrix} \begin{bmatrix} 6\\ 0 \\0 \end{bmatrix}
+= \begin{bmatrix} 6\\ 0\end{bmatrix}
+++++
+
+Third, we solve the normal equation stem:[\textbf{B}^T \textbf{B}\boldsymbol{\lambda} = \textbf{B}^T \textbf{x}] to find
+stem:[\boldsymbol{\lambda}]
+
+[stem]
+++++
+\begin{bmatrix} 3 & 3\\ 3 & 5 \end{bmatrix} \begin{bmatrix} \lambda_{1}\\ \lambda_{2} \end{bmatrix}
+= \begin{bmatrix} 6\\ 0\end{bmatrix}
+\Leftrightarrow
+\boldsymbol{\lambda}= \begin{bmatrix} 5\\ -3 \end{bmatrix}
+++++
+
+Fourth, the projection point stem:[\pi_U(\textbf{x})]
+
+[stem]
+++++
+\pi_U(\textbf{x}) = \textbf{B} \boldsymbol{\lambda} = \begin{bmatrix} 5\\ 2 \\-1 \end{bmatrix}
+++++
+
+The corresponding _projection error_ is the norm of the difference vector between the original vector and its projection onto stem:[U].
+
+[stem]
+++++
+\| \textbf{x}- \pi_U(\textbf{x}) \| = \| \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix} \| = \sqrt{6}
+++++
+
+The projection error is also called the reconstruction error. Fifth, the projection matrix (for any stem:[\textbf{x} \in \mathbb{R}^3]) is given by
+
+[stem]
+++++
+\textbf{P}_\pi=\textbf{B}(\textbf{B}^T \textbf{B})^{-1} \textbf{B}^T = \frac{1}{6}
+\begin{bmatrix} 5 & 2 & -1\\ 2 & 2 & 2 \\ -1 & 2 & 5 \end{bmatrix}
+++++
+
+The projection stem:[\pi_U(\textbf{x})] is still a vector in stem:[\mathbb{R}^3] although they lie in an stem:[2-] dimensional subspace
+stem:[U]. However, to represent the projected vector we only need stem:[2-] coordinates stem:[\lambda_{1},\lambda_{2} ]
+with respect to the basis vectors stem:[\textbf{b}_{1}, \textbf{b}_{2} ] of stem:[U].
+
+[stem]
+++++
+\pi_U(\textbf{x}) = \begin{bmatrix} 5\\ 2 \\-1 \end{bmatrix} =
+5\begin{bmatrix} 1\\ 1 \\1 \end{bmatrix} + (-3)\begin{bmatrix} 0\\ 1 \\2 \end{bmatrix}
+++++
+
+== Orthogonal Basis ==
+We looked at projections of vectors stem:[\textbf{x}] onto a subspace stem:[U] with basis vectors stem:[\{\textbf{b}_1,\dots, \textbf{b}_m \}]. If this basis is an orthogonal basis, then the equations simplify to
+
+[stem]
+++++
+\boldsymbol{\lambda} = \begin{bmatrix} \frac{\textbf{b}_1^T \textbf{x}}{\textbf{b}_1\textbf{b}_1} \\ \vdots \\
+\frac{\textbf{b}_m^T \textbf{x}}{\textbf{b}_m\textbf{b}_m} \end{bmatrix} = 
+\begin{bmatrix} \frac{\textbf{b}_1^T \textbf{x}}{\| \textbf{b}_1 \|^2} \\ \vdots \\
+\frac{\textbf{b}_m^T \textbf{x}}{\| \textbf{b}_m \|^2} \end{bmatrix}
+++++
+
+To see how we get to this, let's say stem:[k=2] and stem:[\textbf{B} =\begin{bmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \\ b_{31} & b_{32} \end{bmatrix}] where stem:[\textbf{b}_1 = \begin{bmatrix} b_{11} \\ b_{21}  \\ b_{31} \end{bmatrix}] and stem:[\textbf{b}_2 = \begin{bmatrix} b_{12} \\ b_{22} \\ b_{32} \end{bmatrix}].
+
+Since the vectors are orthogonal, stem:[\textbf{b}_1 \textbf{b}_2 = \textbf{b}_2 \textbf{b}_1 = 0].
+
+[stem]
+++++
+\textbf{B}^T \textbf{B} = \begin{bmatrix} b_{11} & b_{21} & b_{31} \\ b_{12} & b_{22} & b_{32} \end{bmatrix}
+\begin{bmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \\ b_{31} & b_{32} \end{bmatrix}
+= \begin{bmatrix} \textbf{b}_1 \textbf{b}_1 & 0 \\ 0 & \textbf{b}_2 \textbf{b}_2 \end{bmatrix}
+++++
+
+[stem]
+++++
+\Rightarrow
+(\textbf{B}^T \textbf{B})^{-1} = \frac{1}{(\textbf{b}_1 \textbf{b}_1)(\textbf{b}_2 \textbf{b}_2)}
+\begin{bmatrix} \textbf{b}_2 \textbf{b}_2 & 0 \\ 0 & \textbf{b}_1 \textbf{b}_1 \end{bmatrix}
+= \begin{bmatrix} \frac{1}{\textbf{b}_1 \textbf{b}_1} & 0 \\ 0 & \frac{1}{\textbf{b}_2 \textbf{b}_2} \end{bmatrix}
+= \begin{bmatrix} \frac{1}{\| \textbf{b}_1 \|^2} & 0 \\ 0 & \frac{1}{\| \textbf{b}_2\|^2} \end{bmatrix}
+++++
+
+We know stem:[\boldsymbol{\lambda} = (\textbf{B}^T \textbf{B})^{-1} \textbf{B}^T \textbf{x}]
+
+[stem]
+++++
+\boldsymbol{\lambda} = 
+\begin{bmatrix} \frac{1}{\| \textbf{b}_1 \|^2} & 0 \\ 0 & \frac{1}{\| \textbf{b}_2\|^2} \end{bmatrix}
+\begin{bmatrix} \textbf{b}_1^T  \\  \textbf{b}_2^T \end{bmatrix} \textbf{x}
+=\begin{bmatrix} \frac{\textbf{b}_1^T \textbf{x}}{\| \textbf{b}_1 \|^2}  \\
+\frac{\textbf{b}_2^T \textbf{x}}{\| \textbf{b}_2 \|^2} \end{bmatrix}
+++++
+
+Then we know that stem:[\pi_U(\textbf{x}) = \textbf{B} \boldsymbol{\lambda} =\sum_{i=1}^{m} \lambda_{i} \textbf{b}_i]
+
+[stem]
+++++
+\pi_U(\textbf{x}) = \frac{\textbf{b}_1^T \textbf{x}}{\| \textbf{b}_1 \|^2} \textbf{b}_1 +
+\frac{\textbf{b}_2^T \textbf{x}}{\| \textbf{b}_2 \|^2} \textbf{b}_2
+++++
+
+The expression is the same that we got for projection of stem:[\textbf{x}] onto a line. This can be generalized to
+
+[stem]
+++++
+\pi_U(\textbf{x}) = \frac{\textbf{b}_1^T \textbf{x}}{\| \textbf{b}_1 \|^2} \textbf{b}_1 + \dots +
+\frac{\textbf{b}_m^T \textbf{x}}{\| \textbf{b}_m \|^2} \textbf{b}_m
+++++
+
+Projection of stem:[\textbf{x}] onto stem:[U] with orthogonal basis stem:[\{ \textbf{b}_1,\dots,\textbf{b}_m \} =]
+projection of stem:[\textbf{x}] onto stem:[\textbf{b}_1 + \dots +] projection of stem:[\textbf{x}] onto stem:[\textbf{b}_m].
+
+'''
+
+If this basis is an orthonormal basis, then stem:[\textbf{B}^T \textbf{B}=\textbf{I}]. Our equations further simplify to
+
+. stem:[\boldsymbol{\lambda} = \textbf{B}^T \textbf{x} = \begin{bmatrix} \textbf{b}_1^T \textbf{x} \\ \vdots \\
+\textbf{b}_m^T \textbf{x} \end{bmatrix} ]
+. stem:[\pi_U(\textbf{x}) = \textbf{B}\textbf{B}^T \textbf{x}= (\textbf{b}_1^T \textbf{x}) \textbf{b}_1 + \dots +
+(\textbf{b}_m^T \textbf{x}) \textbf{b}_m]
+. stem:[\textbf{P}_\pi=\textbf{B}\textbf{B}^T ]
+
+This means that we no longer have to compute the inverse which saves computation time.
+
+== Code in Python ==
+[source,python]
+----
+import numpy as np
+
+def proj_n_onto_m(base, x):
+    B=np.array(base).T
+    BTB = B.T.dot(B)
+    BTx = B.T.dot(x)
+    _lambda = np.linalg.solve(BTB, BTx)
+    proj_point = B.dot(_lambda)
+    proj_mat = B.dot(np.linalg.inv(BTB)).dot(B.T)
+    print('Projection matrix:', '\n', proj_mat)
+    print('Projection of x onto the subspace spanned by the base vectors:','\n', proj_point)
+
+if __name__=='__main__':
+    base=[[1,1,1], [0,1,2]]
+    x=[6,0,0]
+    proj_n_onto_m(base,x)
+----
+
+=== Sample Output ===
+[source]
+----
+Projection matrix: 
+ [[ 0.83333333  0.33333333 -0.16666667]
+ [ 0.33333333  0.33333333  0.33333333]
+ [-0.16666667  0.33333333  0.83333333]]
+ 
+Projection of x onto the subspace spanned by the base vectors: 
+ [ 5.  2. -1.]
+----
+

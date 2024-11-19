@@ -1,0 +1,317 @@
+= Change of Basis =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+
+== Problem Formulation ==
+Let stem:[\mathbb{V}] and stem:[\mathbb{W}] be vector spaces of dimensions stem:[n] and stem:[m] respectively. Let stem:[\{\mathbf{v}_1, \dots, \mathbf{v}_n\}] be the basis of stem:[\mathbb{V}]. Let stem:[\{\mathbf{w}_1, \dots, \mathbf{w}_m\}] be the basis of stem:[\mathbb{W}]. Say we have a linear transformation stem:[\mathcal{L}] from stem:[\mathbb{V}] to stem:[\mathbb{W}]. Then stem:[\mathcal{L}(\mathbf{v}) = \mathbf{w}].
+
+We need to find a matrix stem:[\mathbf{A}_{m \times n}] to represent this transformation.
+
+We know that stem:[\mathbf{v}] can be represented by linear combinations of the basis vectors, stem:[\mathbf{v} = \alpha_1 \mathbf{v}_1 + \dots + \alpha_n \mathbf{v}_n]. As the basis vectors are LI, we know that the vector representation is unique, i.e., given a stem:[\mathbf{v}], these stem:[\alpha]'s are unique. Hence there is a bijection between stem:[\mathbf{v}] vector and stem:[\boldsymbol{\alpha}] vector. stem:[\boldsymbol{\alpha}] is a vector containing the coefficients of the expansion of stem:[\mathbf{v}] in terms of basis vectors of stem:[\mathbb{V}].
+
+Similarly, say stem:[\mathbf{w} = \beta_1 \mathbf{w}_1 + \dots + \beta_m \mathbf{w}_m]. There a bijection between stem:[\mathbf{w}] vector and stem:[\boldsymbol{\beta}] vector.
+
+Instead of storing the function stem:[\mathcal{L}], we can store a matrix stem:[\mathbf{A}_L]. There is a bijection between stem:[\mathcal{L}] and stem:[\mathbf{A}]. Hence,
+
+[stem]
+++++
+\mathcal{L}(\mathbf{v}) =\mathbf{w} \iff \mathbf{A}\boldsymbol{\alpha} = \boldsymbol{\beta}
+++++
+
+Proof: For any vector stem:[\mathbf{v} \in \mathbb{V}], 
+
+[stem]
+++++
+\mathcal{L}(\mathbf{v}) = \mathcal{L}\left(\sum_{i=1}^n \alpha_i \mathbf{v}_i \right) = \sum_{i=1}^n \alpha_i \mathcal{L}(\mathbf{v}_i)
+++++
+
+Each stem:[\mathcal{L}(\mathbf{v}_i)] is an element in the space stem:[\mathbb{W}] and can be written as a linear combination of stem:[\{\mathbf{w}_1, \dots, \mathbf{w}_m\}].
+
+[stem]
+++++
+\begin{align*}
+\mathcal{L}(\mathbf{v}_1) &= a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \dots + a_{m1} \mathbf{w}_m = \sum_{j=1}^m a_{j1} \mathbf{w}_j \\
+\mathcal{L}(\mathbf{v}_2) &= a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \dots + a_{m2} \mathbf{w}_m = \sum_{j=1}^m a_{j2} \mathbf{w}_j \\
+\dots \\
+\mathcal{L}(\mathbf{v}_n) &= a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \dots + a_{mn} \mathbf{w}_m = \sum_{j=1}^m a_{jn} \mathbf{w}_j \\
+\end{align*}
+++++
+
+Hence,
+
+[stem]
+++++
+\mathcal{L}(\mathbf{v})  = \sum_{i=1}^n \alpha_i \sum_{j=1}^m a_{ji} \mathbf{w}_j = \sum_{j=1}^m \left( \sum_{i=1}^n  \alpha_i a_{ji} \right) \mathbf{w}_j = \sum_{j=1}^m \beta_j \mathbf{w}_j
+++++
+
+We have got stem:[\sum_{i=1}^n  \alpha_i a_{ji} = \beta_j], where stem:[j=1, \dots, m]. Then we have stem:[m] equations:
+
+[stem]
+++++
+\begin{align*}
+\alpha_1 a_{11} + \alpha_2 a_{12} + \dots + \alpha_n a_{1n} & = \beta_1 \\
+\alpha_1 a_{21} + \alpha_2 a_{22} + \dots + \alpha_n a_{2n} & = \beta_2 \\
+\dots \\
+\alpha_1 a_{m1} + \alpha_1 a_{m2} + \dots + \alpha_n a_{mn} & = \beta_m \\
+\end{align*}
+++++
+
+which can be written in matrix notation as
+
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+a_{11} & a_{12} & \dots & a_{1n} \\ 
+a_{21} & a_{22} & \dots & a_{2n} \\ 
+\vdots & \vdots & \vdots & \vdots \\
+a_{m1} & a_{m2} & \dots & a_{mn}
+\end{bmatrix}_{m \times n} \begin{bmatrix} \alpha_1 \\  \vdots \\ \alpha_n \end{bmatrix} = 
+\begin{bmatrix} \beta_1 \\  \vdots \\ \beta_m \end{bmatrix} \iff
+
+\mathbf{A}\boldsymbol{\alpha} = \boldsymbol{\beta}
+\end{align*}
+++++
+
+Therefore, stem:[\mathbf{A}] is the matrix that represents the transformation stem:[\mathcal{L}].
+
+== Examples ==
+
+=== Example 01 ===
+
+Determine the matrix of stem:[\mathcal{L}] with respect to the bases stem:[B_1] and stem:[B_2] where stem:[\mathcal{L}: \mathbb{R}^3 \to \mathbb{R}^2] given by stem:[\mathcal{L}(x,y,z)= (x+y, y+z)], stem:[B_1 = \{(1,1,1), (1,0,0), (1,1,0)\}] and  stem:[B_2 = \{(2,3), (1,0)\}].
+
+Evaluate each basis vector one by one: 
+
+. stem:[\mathcal{L}(1,1,1) = (2,2)]. Here stem:[\mathbf{v}=(1,1,1)] and stem:[\mathbf{w}=(2,2)]. We need to find an equivalent stem:[\boldsymbol{\alpha}] for stem:[\mathbf{v}] and stem:[\boldsymbol{\beta}] for stem:[\mathbf{w}].
++
+[stem]
+++++
+\begin{align*}
+\alpha_1 (1,1,1) + \alpha_2 (1,0,0) + \alpha_3 (1,1,0) & = (1,1,1) \\
+\alpha_1 + \alpha_2 + \alpha_3 & = 1 \\
+\alpha_1 + \alpha_3 & = 1 \\
+\alpha_1 & = 1 \\
+\end{align*}
+++++
++
+which gives stem:[(\alpha_1, \alpha_2, \alpha_3) = (1,0,0)]. Similarly for stem:[\mathbf{w}],
++
+[stem]
+++++
+\begin{align*}
+\beta_1 (2,3) + \beta_2 (1,0) & = (2,2) \\
+2\beta_1 + \beta_2 = 2 \\
+3\beta_1 = 2 \\
+\end{align*}
+++++
++
+which gives stem:[(\beta_1, \beta_2) = (\frac{2}{3}, \frac{2}{3})]. The matrix stem:[\mathbf{A}] should be stem:[2 \times 3]
++
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\ 
+a_{21} & a_{22} & a_{23} \\
+\end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} = 
+\begin{bmatrix} \frac{2}{3} \\  \frac{2}{3} \end{bmatrix}
+\implies \begin{bmatrix} a_{11} \\ a_{21} \\ \end{bmatrix} = \begin{bmatrix} \frac{2}{3} \\  \frac{2}{3} \end{bmatrix}
+\end{align*} 
+++++
+
+. stem:[\mathcal{L}(1,0,0) = (1,0)]. Here stem:[\mathbf{v}=(1,0,0)] and stem:[\mathbf{w}=(1,0)]. We need to find an equivalent stem:[\boldsymbol{\alpha}] for stem:[\mathbf{v}] and stem:[\boldsymbol{\beta}] for stem:[\mathbf{w}].
++
+[stem]
+++++
+\begin{align*}
+\alpha_1 (1,1,1) + \alpha_2 (1,0,0) + \alpha_3 (1,1,0) & = (1,0,0) \\
+\alpha_1 + \alpha_2 + \alpha_3 & = 1 \\
+\alpha_1 + \alpha_3 & = 0 \\
+\alpha_1 & = 0 \\
+\end{align*}
+++++
++
+which gives stem:[(\alpha_1, \alpha_2, \alpha_3) = (0,1,0)]. Similarly for stem:[\mathbf{w}],
++
+[stem]
+++++
+\begin{align*}
+\beta_1 (2,3) + \beta_2 (1,0) & = (1,0) \\
+2\beta_1 + \beta_2 = 1 \\
+3\beta_1 = 0 \\
+\end{align*}
+++++
++
+which gives stem:[(\beta_1, \beta_2) = (0,1)].
++
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\ 
+a_{21} & a_{22} & a_{23} \\
+\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} = 
+\begin{bmatrix} 0 \\  1 \end{bmatrix}
+\implies \begin{bmatrix} a_{12} \\ a_{22} \\ \end{bmatrix} = \begin{bmatrix} 0 \\  1 \end{bmatrix}
+\end{align*}
+++++
+
+. stem:[\mathcal{L}(1,1,0) = (2,1)]. Here stem:[\mathbf{v}=(1,1,0)] and stem:[\mathbf{w}=(2,1)]. We need to find an equivalent stem:[\boldsymbol{\alpha}] for stem:[\mathbf{v}] and stem:[\boldsymbol{\beta}] for stem:[\mathbf{w}].
++
+It gives stem:[(\alpha_1, \alpha_2, \alpha_3) = (0,0,1)]. For stem:[\mathbf{w}],
++
+[stem]
+++++
+\begin{align*}
+\beta_1 (2,3) + \beta_2 (1,0) & = (2,1) \\
+2\beta_1 + \beta_2 = 2 \\
+3\beta_1 = 1 \\
+\end{align*}
+++++
++
+which gives stem:[(\beta_1, \beta_2) = (\frac{1}{3},\frac{4}{3})].
++
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\ 
+a_{21} & a_{22} & a_{23} \\
+\end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = 
+\begin{bmatrix} \frac{1}{3} \\  \frac{4}{3} \end{bmatrix}
+\implies \begin{bmatrix} a_{13} \\ a_{23} \\ \end{bmatrix} = \begin{bmatrix} \frac{1}{3} \\  \frac{4}{3} \end{bmatrix}
+\end{align*}
+++++
+
+Therefore,
+
+[stem]
+++++
+\begin{align*}
+\mathbf{A} = \begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\ 
+a_{21} & a_{22} & a_{23} \\
+\end{bmatrix} = \begin{bmatrix}
+\frac{2}{3} & 0 & \frac{1}{3} \\ 
+\frac{2}{3} & 1 & \frac{4}{3} \\
+\end{bmatrix} 
+\end{align*}
+++++
+
+is the matrix of stem:[\mathcal{L}] with respect to the bases stem:[B_1] and stem:[B_2]. It takes input vector with respect to stem:[B_1] and the output vector will be with respect to stem:[B_2]. For example, say
+
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+\frac{2}{3} & 0 & \frac{1}{3} \\ 
+\frac{2}{3} & 1 & \frac{4}{3} \\
+\end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} \frac{2}{3} \\  \frac{2}{3} \end{bmatrix}
+\end{align*}
+++++
+
+* Here stem:[(1,0,0)] is with respect to the basis stem:[B_1]: stem:[1 (1,1,1) + 0 (1,0,0) + 0 (1,1,0) = (1,1,1)].
+* And stem:[(\frac{2}{3}, \frac{2}{3})] is with respect to the basis stem:[B_2]: stem:[\frac{2}{3} (2,3) + \frac{2}{3} (1,0) = (2,2)].
+
+So the transformation is stem:[\mathcal{L}(1,1,1) = (2,2)].
+
+=== Example 02 ===
+
+Consider the matrix stem:[\mathbf{A}]. Find stem:[\mathcal{L}: \mathbb{R}^3 \to \mathbb{R}^2] associated with the matrix stem:[\mathbf{A}] relative to stem:[B_1 = \{(1,1,1), (1,0,0), (1,1,0)\}] and  stem:[B_2 = \{(2,3), (1,0)\}].
+
+The matrix stem:[\mathbf{A}] takes input vector with respect to stem:[B_1] and the output vector will be with respect to stem:[B_2]. Evaluate for each standard basis.
+
+. When stem:[\boldsymbol{\alpha} = (1,0,0)]
++
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+\frac{2}{3} & 0 & \frac{1}{3} \\ 
+\frac{2}{3} & 1 & \frac{4}{3} \\
+\end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} \frac{2}{3} \\  \frac{2}{3} \end{bmatrix}
+\end{align*}
+++++
++
+* Here stem:[(1,0,0)] is with respect to the basis stem:[B_1]: stem:[1 (1,1,1) + 0 (1,0,0) + 0 (1,1,0) = (1,1,1)].
+* And stem:[(\frac{2}{3}, \frac{2}{3})] is with respect to the basis stem:[B_2]: stem:[\frac{2}{3} (2,3) + \frac{2}{3} (1,0) = (2,2)].
++
+So the transformation is stem:[\mathcal{L}(1,1,1) = (2,2)].
++
+NOTE: Matrix-vector multiplication can be seen as the evaluation of linear transformation at that vector.
+
+. When stem:[\boldsymbol{\alpha} = (0,1,0)]
++
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+\frac{2}{3} & 0 & \frac{1}{3} \\ 
+\frac{2}{3} & 1 & \frac{4}{3} \\
+\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\  1 \end{bmatrix}
+\end{align*}
+++++
++
+* Here stem:[(0,1,0)] is with respect to the basis stem:[B_1]: stem:[0 (1,1,1) + 1 (1,0,0) + 0 (1,1,0) = (1,0,0)].
+* And stem:[(0, 1)] is with respect to the basis stem:[B_2]: stem:[0 (2,3) + 1 (1,0) = (1,0)].
++
+So the transformation is stem:[\mathcal{L}(1,0,0) = (1,0)].
+
+. When stem:[\boldsymbol{\alpha} = (0,0,1)]
++
+[stem]
+++++
+\begin{align*}
+\begin{bmatrix}
+\frac{2}{3} & 0 & \frac{1}{3} \\ 
+\frac{2}{3} & 1 & \frac{4}{3} \\
+\end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{1}{3} \\ \frac{4}{3} \end{bmatrix}
+\end{align*}
+++++
++
+* Here stem:[(0,0,1)] is with respect to the basis stem:[B_1]: stem:[0 (1,1,1) + 0 (1,0,0) + 1 (1,1,0) = (1,1,0)].
+* And stem:[(\frac{1}{3}, \frac{4}{3})] is with respect to the basis stem:[B_2]: stem:[\frac{1}{3} (2,3) + \frac{4}{3} (1,0) = (2,1)].
++
+So the transformation is stem:[\mathcal{L}(1,1,0) = (2,1)].
+
+The basis of stem:[\mathbb{V}] is stem:[B_1]. And we know how the result of the linear transformation of the basis vectors. Then for any vector stem:[\mathbf{v} = (x,y,z) \in \mathbb{V}]
+
+[stem]
+++++
+\begin{align*}
+\mathbf{v} & = \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \alpha_3 \mathbf{v}_3 \\
+(x,y,z) & = \alpha_1 (1,1,1) + \alpha_2 (1,0,0) + \alpha_3 (1,1,0) \\
+\end{align*}
+++++
+
+Write stem:[\alpha_1, \alpha_2, \alpha_3] in terms of stem:[(x,y,z)]
+
+[stem]
+++++
+\begin{align*}
+\alpha_1 + \alpha_2 + \alpha_3 & = x \\
+\alpha_1 + \alpha_3 & = y \\
+\alpha_1 = z
+\end{align*}
+++++
+
+This gives stem:[\alpha_1 = z; \alpha_2 = x-y; \alpha_3 = y-z ]. Then
+
+[stem]
+++++
+\begin{align*}
+(x,y,z) & = z (1,1,1) + (x-y) (1,0,0) + (y-z) (1,1,0) \\
+\mathcal{L}(x,y,z) & = z \mathcal{L}(1,1,1) + (x-y) \mathcal{L}(1,0,0) + (y-z) \mathcal{L}(1,1,0) && \text{as } \mathcal{L} \text{ is linear} \\
+\mathcal{L}(x,y,z) & = z (2,2) + (x-y) (1,0) + (y-z) (2,1) \\
+\mathcal{L}(x,y,z) & = (2z,2z) + (x-y,0) + (2y-2z,y-z) \\
+\mathcal{L}(x,y,z) & = (x+y, y+z)
+\end{align*}
+++++
+
+

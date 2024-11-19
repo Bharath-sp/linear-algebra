@@ -1,0 +1,100 @@
+= Uses of Eigen Value Decomposition =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Various Uses ==
+If we are able to eigen value decomposition for the matrix stem:[\mathbf{A} = \mathbf{V \Lambda V}^{-1}]. Then there are many advantages.
+
+=== Matrix is Diagonalizable ===
+Then stem:[\mathbf{A}] is a diagonal matrix with respect to the basis stem:[\mathbf{e}_1, \dots, \mathbf{e}_n]. So transforming a vector stem:[\mathbf{x}] is equivalent to
+
+[stem]
+++++
+\mathbf{Ax} = \mathbf{V \Lambda V}^{-1} \mathbf{x}
+++++
+
+image::.\images\evd_uses_01.png[align='center', 500, 400]
+
+=== Powers of Matrix ===
+If stem:[\mathbf{A}] is a diagonalizable, the powers of the stem:[\mathbf{A}] can be calculated easily.
+
+[stem]
+++++
+\mathbf{A}^2 = (\mathbf{V \Lambda V}^{-1})(\mathbf{V \Lambda V}^{-1}) = \mathbf{V \Lambda^2 V}^{-1}
+++++
+
+stem:[\Lambda^2] is just entry-wise square, which is very easy to compute. This works for stem:[p^{th}] power as well, i.e., stem:[\mathbf{A}^p = \mathbf{V \Lambda^p V}^{-1}] for general positive integer powers.
+
+=== Inverse of Matrix ===
+We cannot take inverse for all the matrices. So let's assume the case where all eigen values are non-zero. We know stem:[\mathbf{A} = \mathbf{V \Lambda V}^{-1}] and let stem:[\mathbf{B} = \mathbf{V \Lambda}^{-1} \mathbf{V}^{-1}]. To invert a diagonal matrix, we just need to invert the diagonal entries.
+
+[stem]
+++++
+\begin{align*}
+\mathbf{AB} = (\mathbf{V \Lambda V}^{-1})(\mathbf{V \Lambda}^{-1} \mathbf{V}^{-1}) = \mathbf{I} \\
+\mathbf{BA} = (\mathbf{V \Lambda}^{-1} \mathbf{V}^{-1})(\mathbf{V \Lambda V}^{-1}) = \mathbf{I}
+\end{align*}
+++++
+
+It seems like the stem:[\mathbf{B}] is the inverse of stem:[\mathbf{A}]. So to invert a matrix, we just need to invert the eigen values. Eigen vectors remain *the same* for a matrix and its inverse.
+
+So if EVD exists for stem:[\mathbf{A}], then computing stem:[\mathbf{A}^{-1}, \mathbf{A}^{-2}, \dots ] are very easy. We can find inverse and square it.
+
+=== Rational Powers of Matrix ===
+Say we want to compute stem:[\sqrt{\mathbf{A}}]. The result of stem:[\sqrt{\mathbf{A}}] should be a matrix which when pre or post multiplied by stem:[\sqrt{\mathbf{A}}] should gives stem:[\mathbf{A}]. Let's define stem:[\sqrt{\mathbf{A}} \equiv \mathbf{V \sqrt{\Lambda}} \mathbf{V}^{-1}]. Note square root of a diagonal matrix is just the entry-wise root.
+
+[stem]
+++++
+\sqrt{\mathbf{A}} \sqrt{\mathbf{A}} = (\mathbf{V \sqrt{\Lambda}} \mathbf{V}^{-1}) (\mathbf{V \sqrt{\Lambda}} \mathbf{V}^{-1}) = \mathbf{V \Lambda V}^{-1} = \mathbf{A}
+++++
+
+So if EVD exists for stem:[\mathbf{A}], then computing all the rational powers (positive or negative) like stem:[\mathbf{A}^{\frac{1}{2}}, \mathbf{A}^{-\frac{1}{2}}, \dots ] are very easy.
+
+=== Analytical Function of Matrix ===
+Say we want to compute stem:[e^{\mathbf{A}}].
+
+[stem]
+++++
+\begin{align*}
+e^{\mathbf{A}} & \equiv \mathbf{I} + \mathbf{A} + \frac{\mathbf{A}^2}{2!} + \dots + \frac{\mathbf{A}^n}{n!} + \dots \\
+& = \mathbf{V \Lambda^0 V}^{-1} + \mathbf{V \Lambda V}^{-1} + \frac{1}{2!} \mathbf{V \Lambda^2 V}^{-1} + \dots + \frac{1}{n!} \mathbf{V \Lambda^n V}^{-1} + \dots \\
+& = \mathbf{V} \left( \mathbf{\Lambda}^0  + \mathbf{\Lambda} + \frac{1}{2!} \mathbf{\Lambda}^2 + \dots + \frac{1}{n!} \mathbf{\Lambda}^n \right) \mathbf{V}^{-1} = \mathbf{V} e^{\mathbf{\Lambda}} \mathbf{V}^{-1}
+\end{align*}
+++++
+
+stem:[e^{\mathbf{\Lambda}}] is simply raising stem:[e] to the power of entry-wise elements. In general, for any analytical function of the matrix stem:[\mathbf{A}], stem:[f(\mathbf{A}) = \mathbf{V} f(\mathbf{\Lambda}) \mathbf{V}^{-1}]. Analytical functions are those for which the formal series expansion converges.
+
+=== Optimization of a Quadratic ===
+Say we have a minimization problem as 
+
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \mathbf{x}^\top \mathbf{Px} + \mathbf{q}^\top \mathbf{x}
+++++
+
+Let's assume that matrix stem:[\mathbf{P}] has eigen value decomposition with stem:[\mathbf{V}] as orthogonal matrix, then stem:[\mathbf{P} = \mathbf{V \Lambda V}^\top]. Then
+
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \mathbf{x}^\top \mathbf{V \Lambda V}^\top \mathbf{x} + \mathbf{q}^\top \mathbf{x}
+++++
+
+Assuming stem:[\mathbf{V}^\top \mathbf{x} = \mathbf{y}]. And stem:[\mathbf{x} = \mathbf{Vy} ] as stem:[\mathbf{V}] is invertible. Also assume that stem:[\mathbf{q}^\top \mathbf{V} = \mathbf{w}^\top].
+
+[stem]
+++++
+\begin{align*}
+\arg \min_{\mathbf{y} \in \mathbb{R}^n} \frac{1}{2} \mathbf{y}^\top \mathbf{\Lambda} \mathbf{y} + \mathbf{q}^\top \mathbf{Vy} \\
+\arg \min_{\mathbf{y} \in \mathbb{R}^n} \frac{1}{2} \sum_{i=1}^n \lambda_i y_i^2 + \sum_{i=1}^n w_i y_i \\
+\end{align*}
+++++
+
+Our initial problem was to solve a stem:[n-] dimensional optimization problem. Now our objective is the sum of individual variables. We can solve this problem independently with respect to each stem:[y_1, \dots, y_n], which is the same as solving stem:[n] one-dimensional optimization problem.
+
+And once we get the minimizer stem:[\mathbf{y}], we can get the corresponding stem:[\mathbf{x}] through stem:[\mathbf{x} = \mathbf{Vy}].
+
+

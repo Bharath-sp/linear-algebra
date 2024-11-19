@@ -1,0 +1,152 @@
+= Vector Space of Matrices =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Vector Space ==
+We now have a set of matrices with matrix addition and scalar multiplication of matrix defined. A set of matrices of the same size stem:[m \times n] along with stem:[(+, \cdot)] forms a vector space. Here the vectors are matrices. Since it is vector space, we can also define an inner product.
+
+=== Inner Product ===
+Given a matrix stem:[\mathbf{M}] of size stem:[m \times n], let's convert it to a vector of size stem:[mn \times 1] such that the transformation is linear and it is a bijection. We can consider doing column (or row) order expansion of the matrix. This is a linear and invertible (bijective) transformation.
+
+[stem]
+++++
+\mathbf{C} = \begin{bmatrix} \vdots & \vdots & \vdots \\ \mathbf{c}_1 & \dots & \mathbf{c}_n  \\ \vdots & \vdots & \vdots \end{bmatrix}_{m \times n} = 
+\begin{bmatrix} \vdots \\ \mathbf{c}_1 \\ \vdots \\ \mathbf{c}_n \\ \vdots \end{bmatrix}_{mn \times 1} \hspace{1cm} 
+
+\mathbf{D} = \begin{bmatrix} \vdots & \vdots & \vdots \\ \mathbf{d}_1 & \dots & \mathbf{d}_n  \\ \vdots & \vdots & \vdots \end{bmatrix}_{m \times n} = 
+\begin{bmatrix} \vdots \\ \mathbf{d}_1 \\ \vdots \\ \mathbf{d}_n \\ \vdots \end{bmatrix}_{mn \times 1} 
+++++
+
+Let's define the dot product of these two vectors, stem:[\sum_{i=1}^n \mathbf{c}_i^\top \mathbf{d}_i]. Therefore, the inner product of two matrices can be defined as
+
+[stem]
+++++
+\langle \mathbf{C}, \mathbf{D} \rangle \equiv \sum_{i=1}^n \mathbf{c}_i^\top \mathbf{d}_i = tr(\mathbf{C}^\top \mathbf{D})
+++++
+
+This inner product is known as Frobenius inner product. This is analogous to dot product in the case of Euclidean vectors.
+
+IMPORTANT: Home work: Ensure that the Frobenius inner product is a valid inner product.
+
+This space of matrices with Frobenius inner product is equivalent to the space of stem:[mn] vectors with usual vector addition, scalar multiplication, and dot product (as there is a bijection between each matrix and its column/row order expansion).
+
+Having defined the inner product, we can now talk about orthogonality of two matrices. Two matrices are said to be orthogonal if their Frobenius inner product is 0.
+
+=== Orthogonal Basis ===
+Let's define an orthogonal basis for the space stem:[(\mathbf{M}_{m \times n}, +, \cdot, \langle \cdot, \cdot \rangle)]. Let's consider the stem:[2 \times 2] matrices. Then one of the orthogonal basis of this space is
+
+[stem]
+++++
+\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+++++
+
+* Linearly combining these matrices gives us all the possible stem:[2 \times 2] matrices, i.e., it spans the whole space.
+* Frobenius inner product of any two matrices is 0, i.e., they are all orthogonal to each other stem:[\implies] independent set of vectors.
+
+There are stem:[2 * 2 = 4] matrices in the basis set.
+
+Similarly, for the space of stem:[m \times n] matrices, we can form a basis by making one entry 1 at a time and all the others zero. So there will be stem:[m * n] basis vectors for this space.
+
+From the number of elements in the basis set, we can define the *dimensionality* of the corresponding matrix vector space.
+
+=== Space of Diagonal Matrices ===
+
+Let's take a space stem:[V] of stem:[n \times n] square matrices. Dimensionality of this space is stem:[n^2]. And let's take a space stem:[U] of stem:[n \times n] diagonal matrices, which is a subspace of stem:[V]. Dimensionality of this space is stem:[n]. For stem:[2 \times 2] case, an orthogonal basis of stem:[U] is
+
+[stem]
+++++
+\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+++++
+
+Orthogonal complement of stem:[U] is the set of all matrices whose diagonal entries are zero and off-diagonals can be zero or non-zero. This set is a linear set, i.e., linear combination of any two such matrices gives us the matrix of the same structure. Therefore, it is a subspace of stem:[V]. An orthogonal basis of stem:[U^\perp] is the set of matrices with 1 in one of the off-diagoanl entries at a time. For stem:[2 \times 2] case
+
+[stem]
+++++
+\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}
+++++
+
+forms the basis of stem:[U^\perp]. The dimension of stem:[U^\perp] is 2. In general case, the dimension of the space stem:[U^\perp] is stem:[n^2 -n]. Then we can see that
+
+[stem]
+++++
+dim(V) = dim(U) + dim(U^\perp) \implies n^2 = n + n^2 -n
+++++
+
+=== Space of Symmetric Matrices ===
+Let stem:[V] be the vector space of square matrices. Dimensionality of this space is stem:[n^2]. And let's take a subset of stem:[V] which is a set of all stem:[n \times n] symmetric matrices. This is a subspace of stem:[V] and let's denote it by stem:[U].
+
+NOTE: An stem:[n \times n] matrix stem:[\mathbf{A}] is said to be symmetric if stem:[a_{ij} = a_{ji}] for all stem:[i,j], i.e. stem:[\mathbf{A}^\top = \mathbf{A}].
+
+The set stem:[U] is a linear set. Therefore, it is a subspace of stem:[V]. When stem:[n=2], a basis of stem:[U] is
+
+[stem]
+++++
+\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+++++
+
+They are all orthogonal to each other, therefore linearly independent set of vectors and they span the whole space of symmetric matrices. Hence it is a basis. When stem:[n=3], a basis of stem:[U] is
+
+[stem]
+++++
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}, \begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix},
+\begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}
+++++
+
+So in general, we should have a matrix for each diagonal entry (there are stem:[n] diagonal entries) and one matrix for each pair of off-diagonal entries. The dimension of stem:[U] is
+
+[stem]
+++++
+n + \frac{n^2-n}{2} = \frac{2n+n^2-n}{2} = \frac{n(n+1)}{2}
+++++
+
+Orthogonal complement of stem:[U] is the set of all matrices that are orthogonal to all the vectors in stem:[U]. Since stem:[U] is a subspace, it is enough to say that the orthogonal complement of stem:[U] consists of a set of matrices that are orthogonal to all the basis vectors of stem:[U].
+
+Let stem:[\mathbf{B}_U = \{\mathbf{B}_1, \dots, \mathbf{B}_{\frac{n(n+1)}{2}} \}] be the basis set of stem:[U].
+
+[stem]
+++++
+\begin{align*}
+U^\perp & = \{ \mathbf{A} \in V \, | \, \langle \mathbf{A}, \mathbf{B}_U \rangle = 0\} \\
+\end{align*}
+++++
+
+Let's take the stem:[3 \times 3] case and evaluate the Forbenius inner product between a matrix stem:[\mathbf{A}] and each basis of stem:[U].
+
+[stem]
+++++
+\langle \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix}, \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \rangle = tr \left( \begin{bmatrix} a_{11} & a_{21} & a_{31} \\ a_{12} & a_{22} & a_{32} \\ a_{13} & a_{23} & a_{33} \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \right) = a_{11}
+++++
+
+So for a matrix stem:[\mathbf{A}] to be an element in stem:[U^\perp], the entry stem:[a_{11}] has to be zero. Similarly on evaluating the dot product with other basis (diagonal entry matrix), we get the conditions stem:[a_{22} =0, a_{33}=0]. Now, let's take the matrix for each pair of off-diagonal entries:
+
+[stem]
+++++
+tr \left( \begin{bmatrix} a_{11} & a_{21} & a_{31} \\ a_{12} & a_{22} & a_{32} \\ a_{13} & a_{23} & a_{33} \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \right) = tr \left( \begin{bmatrix} a_{21} & a_{11} & 0 \\ a_{22} & a_{12} & 0 \\ a_{23} & a_{13} & 0 \end{bmatrix}\right) = a_{21} + a_{12}
+++++
+
+For a matrix stem:[\mathbf{A}] to be an element in stem:[U^\perp], the entries stem:[a_{21} + a_{12}] should be zero, which implies stem:[a_{21} = -a_{12}]. So stem:[U^\perp] consists of a set of matrices whose structure should be
+
+[stem]
+++++
+\mathbf{A} = \begin{bmatrix} 0 & a_{12} & a_{13} \\ -a_{12} & 0 & a_{23} \\ -a_{13} & -a_{23} & 0 \end{bmatrix}
+++++
+
+Such matrices are called as *skew-symmetric* matrices. So the orthogonal complement of the space of symmetric matrices is the space of all skew-symetric matrices (both are subspaces of stem:[V]). An orthogonal basis of stem:[U^\perp] is
+
+[stem]
+++++
+\begin{bmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & -1 & 0 \end{bmatrix},
+++++
+
+Which has a matrix for each pair of off-diagonal entries. These three matrices span all the possible skew-symmetric matrices of size stem:[3 \times 3]. For stem:[n=3], it is one matrix for each stem:[12, 13, 23 ]. So it is stem:[{3 \choose 2} ], choosing 2 numbers from stem:[\{1,2,3\}]. The dimension of stem:[U^\perp] is 3.
+
+In general case, the dimension of stem:[U^\perp] is stem:[{n \choose 2} = \frac{n(n-1)}{2}]. Then we can see that
+
+[stem]
+++++
+dim(V) = dim(U) + dim(U^\perp) \implies n^2 = n + \frac{n(n-1)}{2} + \frac{n(n-1)}{2}
+++++

@@ -1,0 +1,206 @@
+= Eigen Value Problem =
+:doctype: book
+:author: Bharath Kumar S P
+:email: bharath030195@gmail.com
+:stem: latexmath
+:eqnums:
+:toc:
+
+== Motivation ==
+
+Motivation 1: For a given linear transformation, when the associated matrix is written relative to a particular basis, the matrix turns out to be a diagonal matrix. Then the transformation just looks like stretching and shrinking. But on choosing a wrong basis for the matrix, we may not get a diagonal matrix. Then the transformation doesn't not look like simple stretching and shrinking, it looks complicated.
+
+So we need to write the matrix associated with the given transformation as a diagonal matrix. To do so, we need to find some directions where the transformation only does scaling.
+
+Motivation 2: 
+
+Say we were trying to solve the general form of quadratic, we need to find the minimizer stem:[\mathbf{x} \in \mathbb{R}^n].
+
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \mathbf{x}^\top \mathbf{Px} + \mathbf{q}^\top \mathbf{x} + \mathbf{r}
+++++
+
+If the matrix stem:[\mathbf{P}] is not full rank, we cannot do completion of squares. So solving such problems is not very easy. But if stem:[\mathbf{P}] is diagonal, then
+
+[stem]
+++++
+\arg \min_{\mathbf{x} \in \mathbb{R}^n} \frac{1}{2} \sum_{i=1}^n x_i^2 p_i + \sum_{i=1}^n q_i x_i = \arg \min_{\mathbf{x} \in \mathbb{R}^n} \sum_{i=1}^n \left( \frac{1}{2} x_i^2 p_i + q_i x_i \right)
+++++
+
+where stem:[\mathbf{r}] is ignored as it doesn't involve stem:[\mathbf{x}]. Now our objective is the sum of individual variables. We can solve this problem independently with respect to stem:[x_1, \dots, x_n].
+
+Diagonal matrices make most of the operations easier. So can we convert a given general matrix into a diagonal matrix? To answer this, we need to check if there are directions in the space along which the vector is changing only in magnitude. If we can find such directions and if they are orthogonal to each other, then the matrix can be converted to a diagonal matrix.
+
+== Eigen Value Problem ==
+Given a general matrix stem:[\mathbf{A}_{n \times n}], i.e., a transformation, we need to find a direction that doesn't change, but only gets stretched or shrinked. Does there exist any stem:[\lambda, \mathbf{v}] for which
+
+[stem]
+++++
+\mathbf{Av} = \lambda \mathbf{v}
+++++
+
+If there are stem:[n] such vectors and they are orthogonal to each other, then the matrix is diagonalizable. If there aren't stem:[n] such orthogonal vectors that satisfy this property, then the matrix stem:[\mathbf{A}] is not diagonalizable. In such case, we need to deal with the complexities, the complexities are not artificial.
+
+NOTE: This equation is always satisfied by stem:[\mathbf{0}] vector. Hence stem:[\mathbf{0}] is the eigen vector for all matrices. So we look only for non-zero vectors.
+
+Such a non-zero vector stem:[\mathbf{v}] is known as an eigen vector, and the scalar stem:[\lambda] associated is the eigen value. They both are always defined in pair. But not unique, the same eigen value can be associated with multiple eigen vectors.
+
+=== Eigen Space ===
+For each eigen value, there can be multiple eigen vectors (including the scaling of those vectors). The set of all vectors corresponding to a fixed eigen value forms a linear set, i.e., it forms a subspace. This space is called as *eigen vector space*. The dimensionality of this space can be 1,2, etc., depending upon the number of non-parallel eigen vectors exists for a fixed eigen value.
+
+To show that the set forms a subspace:
+
+Let stem:[\mathbf{v}_1] and stem:[\mathbf{v}_2] be eigen vectors corresponding to stem:[\lambda_0]. Then
+
+[stem]
+++++
+\begin{align*}
+\mathbf{A} \mathbf{v}_1 & = \lambda_0 \mathbf{v}_1 \\
+\mathbf{A} \mathbf{v}_2 & = \lambda_0 \mathbf{v}_2 \\
+\end{align*}
+++++
+
+We need to show that their linear combination is also an eigen vector corresponding to stem:[\lambda_0].
+
+[stem]
+++++
+\begin{align*}
+\rho_1 \mathbf{A} \mathbf{v}_1 + \rho_2 \mathbf{A} \mathbf{v}_2 & = \rho_1 \lambda_0 \mathbf{v}_1 + \rho_2 \lambda_0 \mathbf{v}_2 \\
+\iff \mathbf{A} (\rho_1 \mathbf{v}_1 + \rho_2 \mathbf{v}_2) & = \lambda_0 (\rho_1 \mathbf{v}_1 + \rho_2 \mathbf{v}_2)
+\end{align*}
+++++
+
+Note we have used the linearity property stem:[T(\alpha \cdot \mathbf{v}) = \alpha \cdot T(\mathbf{v})].
+
+== Examples ==
+
+=== Example 01 ===
+
+Are there any Eigen vector, value pair for this matrix:
+
+[stem]
+++++
+\mathbf{A} = \begin{bmatrix}
+1 & 0 \\ 
+0 & 2 \\
+\end{bmatrix} 
+++++
+
+Suppose there is a stem:[(\mathbf{v}, \lambda)] pair, then such a pair should satisfy stem:[\mathbf{Av} = \lambda \mathbf{v}].
+
+[stem]
+++++
+\begin{bmatrix}
+1 & 0 \\ 
+0 & 2 \\
+\end{bmatrix} \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \lambda \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix}
+++++
+
+which gives us stem:[v_1 = \lambda v_1] and stem:[2v_2 = \lambda v_2]. These two are not linear equations.
+
+[stem]
+++++
+\begin{align*}
+(1-\lambda) v_1 + 0v_2 & = 0 \\
+0 v_1 + (2-\lambda) v_2 & = 0 \\
+\end{align*}
+++++
+
+These two equations can be satisfied for pairs stem:[\lambda = 2, (v_1, v_2) = (0,c)] where stem:[c \ne 0] and stem:[\lambda = 1, (v_1, v_2) = (c,0)] where stem:[c \ne 0]. So
+
+* For eigen value stem:[\lambda = 2], any scaling of stem:[\begin{bmatrix} 0 \\  1\\ \end{bmatrix}] is an eigen vector.
+* For eigen value stem:[\lambda = 1], any scaling of stem:[\begin{bmatrix} 1 \\  0\\ \end{bmatrix}] is an eigen vector.
+
+Here we are able to find 2 vectors that are orthogonal to each other, hence the matrix is diagonalizable (the given matrix is already in the diagonalized form). Here each eigen vector forms a one-dimensional eigen space.
+
+=== Example 02 ===
+
+Are there any eigen vector, value pair for this matrix stem:[\mathbf{A} = \begin{bmatrix} 1 & 1 \\  1 & 1 \\ \end{bmatrix} ]?
+
+Suppose there is a stem:[(\mathbf{v}, \lambda)] pair, then such a pair should satisfy
+
+[stem]
+++++
+\begin{bmatrix}
+1 & 1 \\ 
+1 & 1 \\
+\end{bmatrix} \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \lambda \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} \iff 
+\left( \begin{bmatrix}
+1 & 1 \\ 
+1 & 1 \\
+\end{bmatrix} - \lambda \mathbf{I} \right) \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \mathbf{0} \iff 
+\left( \begin{bmatrix}
+1 -\lambda & 1 \\ 
+1 & 1 - \lambda \\
+\end{bmatrix} \right) \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0\\  0\\ \end{bmatrix}
+++++
+
+We know that stem:[\mathbf{v} \ne \mathbf{0}], then to satisfy this equation, we should have the dimensionality of the null space of the matrix stem:[(\mathbf{A} - \lambda \mathbf{I}) > 0] (because it's the situation where a non-zero vector is mapped to stem:[\mathbf{0}]). Then the column rank of the matrix stem:[(\mathbf{A} - \lambda \mathbf{I})] should not be full, which implies stem:[rank(\mathbf{A} - \lambda \mathbf{I}) < n].
+
+* We should choose stem:[\lambda] that makes the matrix stem:[(\mathbf{A} - \lambda \mathbf{I})] rank strictly less than stem:[n]. The rank of the given matrix is itself is 1. So stem:[\lambda = 0] itself makes the matrix rank deficient. For stem:[\lambda=0], the equation becomes stem:[\mathbf{Av}=\mathbf{0}]. The set of all vectors that satisfy this condition forms the eigen space of stem:[\lambda=0]. This is nothing but the null space of stem:[\mathbf{A}].
++
+[stem]
+++++
+\left( \begin{bmatrix}
+1 & 1 \\ 
+1 & 1 \\
+\end{bmatrix} \right) \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0\\  0\\ \end{bmatrix} \implies v_1 + v_2 = 0 \implies v_1 = -v_2
+++++
++
+Any vector of the form stem:[(1,-1)] satisfies the equation. Hence the eigen space of stem:[\lambda=0] is a one-dimensional space spanned by this vector.
+
+* For stem:[\lambda=2], the matrix stem:[(\mathbf{A} - \lambda \mathbf{I})] remains rank deficient.
++
+[stem]
+++++
+\left( \begin{bmatrix}
+-1 & 1 \\ 
+1 & -1 \\
+\end{bmatrix} \right) \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0\\  0\\ \end{bmatrix} \implies -v_1 + v_2 = 0 \implies v_1 = v_2
+++++
++
+Any vector of the form stem:[(1,1)] satisfies the equation. Hence the eigen space of stem:[\lambda=0] is a one-dimensional space spanned by this vector.
+
+We have two vectors stem:[\mathbf{e}_1 = (1,-1)] and stem:[\mathbf{e}_2 = (1,1)] and they are orthogonal to each other. Thus the given matrix stem:[\mathbf{A}] is diagonalizable. The given transformation just shrinks along stem:[\mathbf{e}_1] (since the eigen value is 0) i.e., all vectors along stem:[\mathbf{e}_1] becomes stem:[\mathbf{0}] and it stretches along stem:[\mathbf{e}_2] (since the eigen value is 2). Then stem:[\mathbf{A}] can be written as
+
+[stem]
+++++
+\mathbf{A} = \begin{bmatrix}
+0 & 0 \\ 
+0 & 2 \\
+\end{bmatrix}
+++++
+
+Note now the matrix is relative to the basis stem:[\mathbf{e}_1] and stem:[\mathbf{e}_2], earlier it was relative to the standard basis.
+
+=== Example 03 ===
+
+Are there any eigen vector, value pair for this matrix stem:[\mathbf{A} = \begin{bmatrix} 1 & 2 \\  0 & 1 \\ \end{bmatrix} ]? Suppose there is a stem:[(\mathbf{v}, \lambda)] pair, then such a pair should satisfy
+
+[stem]
+++++
+\begin{bmatrix}
+1-\lambda & 2 \\ 
+0 & 1-\lambda  \\
+\end{bmatrix} \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0 \\  0\\ \end{bmatrix} \iff \begin{bmatrix}
+\lambda-1 & -2 \\ 
+0 & \lambda-1  \\
+\end{bmatrix} \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0 \\  0\\ \end{bmatrix} 
+++++
+
+We can also solve for stem:[\lambda\mathbf{I} - \mathbf{A} = \mathbf{0}], i.e., the eigen pair will be the same for a matrix stem:[\mathbf{A}] and stem:[-\mathbf{A}]. We should choose stem:[\lambda] that makes this matrix rank deficient.
+
+* For stem:[\lambda=1], it becomes 
++
+[stem]
+++++
+\begin{bmatrix}
+0 & -2 \\ 
+0 & 0  \\
+\end{bmatrix} \begin{bmatrix} v_1 \\  v_2\\ \end{bmatrix} = \begin{bmatrix} 0 \\  0\\ \end{bmatrix} \implies -2v_2 = 0
+++++
++
+Any vector of the form stem:[(c,0)] where stem:[c \ne 0] satisfy this equation. Thus any vector of the form stem:[(1,0)] satisfies the equation. Hence the eigen space of stem:[\lambda=1] is a one-dimensional space spanned by this vector.
+
+We are not able to find any other eigen pair. We have got only one eigen vector, in such case, the given matrix is not diagonalizable.
