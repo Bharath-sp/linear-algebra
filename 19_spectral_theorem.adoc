@@ -4,25 +4,28 @@
 :email: bharath030195@gmail.com
 :stem: latexmath
 :eqnums:
+:toc:
 
 == Theorem ==
 A matrix stem:[\mathbf{A}_{n \times n}] is symmetric if and only if stem:[\mathbf{A}] can be written as stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top]. 
 
 Then we can observe that
 
-* The columns of stem:[\mathbf{V}] are eigen vectors. There stem:[n] eigen vectors and they are orthogonal to each other. Entries of stem:[\Lambda] are eigen values.
+* The columns of stem:[\mathbf{V}] are eigen vectors. There are stem:[n] eigen vectors and they are orthogonal to each other because stem:[\mathbf{V}] is an orthogonal matrix. Entries of stem:[\Lambda] are eigen values.
 * All symmetric matrices are diagonalizable.
 
 NOTE: Non-symmetric matrices can also be diagonalizable and EVD may exist. In such cases, we can represent the matrix only as stem:[\mathbf{A} = \mathbf{V \Lambda V}^{-1}]. Decomposing as stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top] is not possible for non-symmetric matrices.
 
-There is a stronger theorem which can be used to prove the spectral theorem.
+There is a stronger theorem which can be used to prove the spectral theorem. Let stem:[\mathbf{A}] be a Hermitian matrix. It is a complex-valued matrix for which stem:[\mathbf{A} = \bar{\mathbf{A}}^\top = \mathbf{A}^*] which indicates conjugate transpose.
 
-Let stem:[\mathbf{A}] be a Hermitian matrix. It is a complex-valued matrix for which stem:[\mathbf{A} = \bar{\mathbf{A}}^\top = \mathbf{A}^*] which indicates conjugate transpose.
-
+====
 Theorem: stem:[\mathbf{A}] is a Hermitian matrix if and only if 
 
 * stem:[\mathbf{A}] has stem:[n] eigen values which is the same as saying all the roots of the CP are real.
 * If stem:[\mathbf{v}_i] is the eigen vector associated with stem:[\lambda_i] and stem:[\mathbf{v}_j] is the eigen vector associated with stem:[\lambda_j], then stem:[\mathbf{v}_i^* \mathbf{v}_j = 0].
+
+This applies for symmetric matrices also.
+====
 
 *Proof:*
 
@@ -69,6 +72,21 @@ Thus, a symmetric matrix stem:[\mathbf{A}] can be repesented as stem:[\mathbf{V 
 Proving other side is very easy. If stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top], then stem:[\mathbf{A}^\top = \mathbf{V \Lambda V}^\top]. Thus stem:[\mathbf{A} = \mathbf{A}^\top], it is a symmetric matrix.
 
 image::.\images\evd_for_symmetric.png[align='center', 500, 400]
+
+== Summary ==
+* If given a matrix stem:[\mathbf{A}_{n \times n}] is symmetric, then the matrix has stem:[n] real eigen values (distinct or repeated), stem:[n] orthogonal eigenvectors, and it is diagonalizable.
+
+* If a matrix has stem:[n] real eigen values (distinct or repeated), then we can get stem:[n] orthogonal eigenvectors, and stem:[\mathbf{A}] can be diagonalized. Thus, stem:[\mathbf{A}] is a symmetric matrix.
+
+[stem]
+++++
+\mathbf{A} \text{ is symmetric} \iff \text{ all eigen values are real }
+++++
+
+
+
+
+
 
 
 

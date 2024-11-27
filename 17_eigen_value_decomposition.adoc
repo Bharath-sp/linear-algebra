@@ -211,12 +211,27 @@ We know that the eigen vectors are all LI. Thus the matrix stem:[\mathbf{V}] has
 
 This is a factorization that we got for the matrix stem:[\mathbf{A}]. This is known as Eigen Value Decomposition (EVD) of matrix stem:[\mathbf{A}]. This decomposition can be done to matrices stem:[\mathbf{A}_{n \times n}]:
 
-. That has stem:[n] real, distinct eigen values. In this case, we get stem:[n] distinct direction eigen vectors (or)
-. That has non-distinct eigen values, but the space spanned by the eigen vectors associated with each eigenvalue combinely is n-dimensional. In this case also, we get stem:[n] distinct direction eigen vectors. For example, all eigen values can be the same, but each may be associated with a different direction eigen vector.
+. That has stem:[n] real, distinct eigen values. In this case, we get stem:[n] distinct direction eigen vectors, i.e., stem:[n] LI eigen vectors (or)
+. That has stem:[n] real, non-distinct eigen values, but the space spanned by the eigen vectors associated with each eigenvalue combinely is n-dimensional. In this case also, we get stem:[n] distinct direction eigen vectors. For example, all eigen values can be the same, but each may be associated with a different direction eigen vector.
 
 The converse is also true. If a matrix stem:[\mathbf{A}] can be written as stem:[\mathbf{V \Lambda V}^{-1}], then the columns of stem:[\mathbf{V}] will be eigen vectors for sure and entries of stem:[\mathbf{\Lambda}] will be the eigen values for sure
 
 IMPORTANT: But for a given matrix, if the combined eigen space doesn't span the entire vector space, then the matrix is not diagonalizable. So there is no EVD for this matrix. Look at example 03 in the previous article, the matrix is non-diagonalizable in such case. The eigen space is just the x-axis, it doesn't span the entire stem:[\mathbf{R}^2].
+
+*Summary:*
+
+* A matrix stem:[\mathbf{A}_{n \times n}] is diagonalizable (has EVD) if and only if it has stem:[n] linearly independent eigenvectors.
+
+[cols="1,1,1", width=75%]
+|===
+|Matrix Type |Eigenvectors |Diagonalizable?
+
+|Symmetric (or Hermitian) |Orthogonal |Always
+|Distinct eigenvalues |Linearly independent |Always
+|Defective matrix |Fewer than stem:[n] linearly independent |No
+|===
+
+Rectangular matrices are not diagonalizable in the traditional sense because the concept of diagonalizability applies only to square matrices. For rectangular matrices, eigenvalues are not defined in the traditional sense because stem:[\mathbf{Av}] is not in the same vector space as stem:[\mathbf{v}].
 
 == Example ==
 
@@ -265,7 +280,17 @@ Hence our stem:[\mathbf{V} = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt
 \end{bmatrix} \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \end{bmatrix}
 ++++
 
+== Alternate Notation for EVD ==
+The eigen value decomposition of a symmetric matrix stem:[\mathbf{A}_{n \times n}] is stem:[\mathbf{A} = \mathbf{V \Lambda V}^\top]. This can also be written as the sum of stem:[n] matrices.
 
+[stem]
+++++
+\mathbf{A} = \sum_{i=1}^n \lambda_i \mathbf{v}_i \mathbf{v}_i^\top
+++++
+
+stem:[\mathbf{v}_i \mathbf{v}_i^\top] gives us stem:[n \times n] rank 1 matrices. The matrix formed by, say stem:[\mathbf{v}_1 \mathbf{v}_1^\top], just has columns which are linear combinations of stem:[\mathbf{v}_1]. Thus, it is a rank 1 matrix. 
+
+By this notation, stem:[\mathbf{A}] can be viewed as a linear combination of rank 1 matrices.
 
 
 

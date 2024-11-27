@@ -21,7 +21,7 @@ Let's consider a rectangular stem:[\mathbf{A}_{m \times n}], which is a transfor
 \mathbf{A}_{m \times n} = \mathbf{U}_{m \times m} \mathbf{\Sigma}_{m \times n} \mathbf{V}_{n \times n}^\top
 ++++
 
-where stem:[\mathbf{V}^\top] and stem:[\mathbf{U}] are orthogonal matrices and stem:[\mathbf{\Sigma}] is a rectangular diagonal matrix (entries are there only in the principal diagonal). The entries of stem:[\mathbf{\Sigma}] are called as singular values.
+where stem:[\mathbf{V}^\top] and stem:[\mathbf{U}] are orthogonal matrices and stem:[\mathbf{\Sigma}] is a rectangular diagonal matrix (entries are there only in the principal diagonal). The entries of stem:[\mathbf{\Sigma}] are called as singular values of stem:[\mathbf{A}].
 
 [stem]
 ++++
@@ -75,55 +75,92 @@ Thorem: Eigenvalues of  stem:[\mathbf{A}^\top \mathbf{A}] and stem:[\mathbf{A}\m
 
 We know that stem:[\mathbf{A}^\top \mathbf{A}] and stem:[\mathbf{A}\mathbf{A}^\top] are stem:[n \times n] and stem:[m \times m] symmetric matrices, hence they have stem:[n] and stem:[m] eigen values respectively. But they have some non-zero eigen values that are common. May be there could be stem:[r] common non-zero eigen values. The rest of the stem:[n-r] and stem:[m-r] will be zero values in the matrices respectively.
 
-*Case 1:*
-
-Given stem:[\mathbf{M}] is a positive semi-definite matrix which is also symmetric, it has stem:[n] eigen values.
-
 [stem]
 ++++
 \begin{align*}
 \mathbf{A}^\top \mathbf{A} \mathbf{v} & = \lambda \mathbf{v} \\
-\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on multiplying } \mathbf{v}^\top \\
-\| \mathbf{Av} \|^2 & = \lambda \| \mathbf{v} \|^2 \\
+\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on pre-multiplying } \mathbf{v}^\top \\
+\| \mathbf{Av} \|^2 & = \lambda \| \mathbf{v} \|^2 \implies \lambda = \frac{\| \mathbf{Av} \|^2}{\| \mathbf{v} \|^2} \geq 0
 \end{align*}
 ++++
 
-Which shows that stem:[\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} \geq 0 ] and stem:[\mathbf{v}^\top\mathbf{v} \geq 0]. And from the last equation, we can observe that that all eigen values of stem:[\mathbf{A}^\top \mathbf{A} \geq 0].
+Which shows that stem:[\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} \geq 0 ] and stem:[\mathbf{v}^\top\mathbf{v} \geq 0]. And from the last equation as both the numbers are non-negative, we can observe that stem:[\lambda] should be non-negative. This proves that all eigen values of stem:[\mathbf{A}^\top \mathbf{A} \geq 0].
 
-* So it turns out that stem:[\mathbf{M} = \mathbf{A}^\top \mathbf{A}] is a positive semi-definite matrix. So all the eigen values of a PSD matrix are always stem:[\geq 0].
+Similarly,
 
-Similarly, given that stem:[\mathbf{M} = \mathbf{A} \mathbf{A}^\top] is a positive semi-definite matrix. Then all the eigen values are always stem:[\geq 0].
+[stem]
+++++
+\begin{align*}
+\mathbf{A} \mathbf{A}^\top \mathbf{v} & = \lambda \mathbf{v} \\
+\mathbf{v}^\top \mathbf{A} \mathbf{A}^\top \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on pre-multiplying } \mathbf{v}^\top \\
+\| \mathbf{A}^\top \mathbf{v} \|^2 & = \lambda \| \mathbf{v} \|^2 \implies \lambda = \frac{\| \mathbf{A}^\top \mathbf{v} \|^2}{\| \mathbf{v} \|^2} \geq 0
+\end{align*}
+++++
 
-Conversely, if we have a stem:[\mathbf{A}_{n \times n}] matrix with all eigen values non-negative, is it a PSD matrix? First, since it has all eigen values stem:[\geq 0], it is a symmetric matrix. Then we can prove that it is also a PSD matrix.
+Which shows that stem:[\mathbf{v}^\top \mathbf{A} \mathbf{A}^\top \mathbf{v} \geq 0 ] and stem:[\mathbf{v}^\top\mathbf{v} \geq 0]. And from the last equation as both the numbers are non-negative, we can observe that stem:[\lambda] should be non-negative. This proves that all eigen values of stem:[\mathbf{A} \mathbf{A}^\top \geq 0].
+
+== Positive Semi-Definite Matrices ==
+
+We got the condition that stem:[\mathbf{v}^\top \mathbf{A}^\top \mathbf{A} \mathbf{v} \geq 0 ] and stem:[\mathbf{v}^\top \mathbf{A} \mathbf{A}^\top \mathbf{v} \geq 0 ] for all stem:[\mathbf{v}], which indicates that the matrix stem:[\mathbf{A}^\top \mathbf{A}] and stem:[\mathbf{A} \mathbf{A}^\top] are positive semi-definite. These matrices have all eigen values non-negative.
+
+It turns out in general also that all the eigen values of a PSD matrix are always stem:[\geq 0].
+
+Conversely, if we have a stem:[\mathbf{M}_{n \times n}] matrix with all eigen values non-negative, is it a PSD matrix? First, since it has all eigen values stem:[\geq 0], the eigenvalues are real, thus it is a symmetric matrix (by the spectral theorem). Then we can prove that it is also a PSD matrix. We need to show that stem:[\mathbf{x}^\top \mathbf{Mx} \geq 0 ] for all stem:[\mathbf{x}].
+
+[stem]
+++++
+\begin{align*}
+\mathbf{x}^\top \mathbf{Mx} & = \mathbf{x}^\top (\mathbf{V \Lambda V}^\top) \mathbf{x}  && \text{ as } \mathbf{M} \text{ is symmetric} \\
+& = (\mathbf{V}^\top \mathbf{x})^\top \mathbf{\Lambda} (\mathbf{V}^\top \mathbf{x}) \\
+& = \mathbf{y}^\top \mathbf{\Lambda} \mathbf{y} && \text{ let } \mathbf{y}=\mathbf{V}^\top \mathbf{x} \\
+& = \sum_{i=1}^n \lambda_i y_i^2
+\end{align*}
+++++
+
+As the eigenvalues are stem:[\geq 0], then stem:[\sum_{i=1}^n \lambda_i y_i^2 \geq 0 \implies \mathbf{x}^\top \mathbf{Mx} \geq 0] for all stem:[\mathbf{x}]. Hence, stem:[\mathbf{M}] is a PSD matrix.
 
 [stem]
 ++++
 \mathbf{M} \text{ is PSD} \iff \text{ all the eigen values } \geq 0
 ++++
 
+== Positive Definite Matrices ==
 
-*Case 2:*
-
-Given stem:[\mathbf{M} = \mathbf{A}^\top \mathbf{A}] is a positive-definite matrix which is also symmetric, it has stem:[n] eigen values.
+Given stem:[\mathbf{M}] is a positive-definite matrix which is also symmetric, it has stem:[n] eigen values.
 
 [stem]
 ++++
 \begin{align*}
-\mathbf{\mathbf{A}^\top \mathbf{A}} \mathbf{v} & = \lambda \mathbf{v} \\
-\mathbf{v}^\top \mathbf{\mathbf{A}^\top \mathbf{A}} \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on multiplying } \mathbf{v}^\top \\
-\| \mathbf{Av} \|^2 & = \lambda \| \mathbf{v} \|^2 \\
+\mathbf{M} \mathbf{v} & = \lambda \mathbf{v} \\
+\mathbf{v}^\top \mathbf{M} \mathbf{v} & = \lambda \mathbf{v}^\top\mathbf{v} && \text{ on pre-multiplying } \mathbf{v}^\top \\
+\lambda & = \frac{\mathbf{v}^\top \mathbf{M} \mathbf{v} }{\| \mathbf{v} \|^2}
 \end{align*}
 ++++
 
-Since norm will be zero if and only the vector is stem:[\mathbf{v} = \mathbf{0}]. As stem:[\mathbf{v} = \mathbf{0}] is not allowed in this case, stem:[\| \mathbf{Av} \|^2 > 0 \implies \mathbf{v}^\top \mathbf{\mathbf{A}^\top \mathbf{A}} \mathbf{v} > 0] and stem:[\mathbf{v}^\top\mathbf{v} > 0 \implies \mathbf{v}^\top\mathbf{v} > 0]. Hence all the eigen values of a positive definite matrix are always stem:[>0].
+Since stem:[\mathbf{M}] is PD, we know that stem:[\mathbf{v}^\top \mathbf{M} \mathbf{v} > 0 ] for all stem:[\mathbf{v}]. Hence all the eigen values of a positive definite matrix are always stem:[>0].
 
-Conversely, if we have a stem:[\mathbf{A}_{n \times n}] matrix with all eigen values positive, is it a PD matrix? First, since it has all eigen values stem:[> 0], it is a symmetric matrix. Then we can prove that it is also a PD matrix.
-
+Conversely, if we have a stem:[\mathbf{M}_{n \times n}] matrix with all eigen values positive, is it a PD matrix? First, since it has all eigen values stem:[> 0], it is a symmetric matrix. Then with the same argument as before, we can prove that it is also a PD matrix.
 
 [stem]
 ++++
 \mathbf{M} \text{ is PD} \iff \text{ all the eigen values } > 0
 ++++
 
+== Alternate Notation for SVD ==
+The singular value decomposition of a matrix stem:[\mathbf{A}_{m \times n}] is stem:[\mathbf{A} = \mathbf{U \Sigma V}^\top]. This can also be written as the sum of stem:[r] matrices.
+
+[stem]
+++++
+\mathbf{A} = \sum_{i=1}^r \sigma_i \mathbf{u}_i \mathbf{v}_i^\top
+++++
+
+where
+
+* stem:[r = rank(\mathbf{A})] is the number of non-zero singular values.
+* stem:[\sigma_i] is the ith singular value.
+* stem:[\mathbf{u}_i] is the ith column of stem:[U] (a left singular vector).
+* stem:[\mathbf{v}_i] is the ith column of stem:[V] (a right singular vector).
+
+Each stem:[\sigma_i \mathbf{u}_i \mathbf{v}_i^\top] is a stem:[m \times n] rank 1 matrix.
 
 

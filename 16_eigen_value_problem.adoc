@@ -40,7 +40,7 @@ Given a general matrix stem:[\mathbf{A}_{n \times n}], i.e., a transformation, w
 \mathbf{Av} = \lambda \mathbf{v}
 ++++
 
-If there are stem:[n] such vectors and they are orthogonal to each other, then the matrix is diagonalizable. If there aren't stem:[n] such orthogonal vectors that satisfy this property, then the matrix stem:[\mathbf{A}] is not diagonalizable. In such case, we need to deal with the complexities, the complexities are not artificial.
+If there are stem:[n] such vectors and they are LI, then the matrix is diagonalizable. If there aren't stem:[n] such LI vectors that satisfy this property, then the matrix stem:[\mathbf{A}] is not diagonalizable. In such case, we need to deal with the complexities, the complexities are not artificial.
 
 NOTE: This equation is always satisfied by stem:[\mathbf{0}] vector. Hence stem:[\mathbf{0}] is the eigen vector for all matrices. So we look only for non-zero vectors.
 
